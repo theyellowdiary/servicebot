@@ -5,7 +5,7 @@ import Authorizer from "../../utilities/authorizer.jsx";
 import Buttons from "../buttons.jsx";
 import DateFormat from '../../utilities/date-format.jsx';
 import ImageUploader from '../../utilities/image-uploader.jsx';
-import {ServicebotBaseForm, inputField} from "@vbosstech/servicebot-base-form";
+import {ServicebotBaseForm, inputField} from "@eservices/servicebot-base-form";
 import {Field,} from 'redux-form';
 import { required, email, numericality, length } from 'redux-form-validators';
 

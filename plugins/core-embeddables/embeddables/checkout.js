@@ -1,6 +1,6 @@
 import React from "react";
 import cookie from "react-cookie";
-import {Fetcher, inputField, iconToggleField, ServicebotBaseForm} from "@vbosstech/servicebot-base-form";
+import {Fetcher, inputField, iconToggleField, ServicebotBaseForm} from "@eservices/servicebot-base-form";
 import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues} from 'redux-form'
 import {connect} from "react-redux";
 import {RenderWidget, WidgetList, widgets} from "../../../views/components/utilities/widgets";

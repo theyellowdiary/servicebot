@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 import {reduxForm, SubmissionError, stopSubmit} from 'redux-form'
 import {Link, browserHistory} from 'react-router';
 

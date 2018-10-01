@@ -1,9 +1,9 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 import Inputs from "../../utilities/inputs.jsx";
 import {DataForm, DataChild} from "../../utilities/data-form.jsx";
-import {ServicebotBaseForm, priceField, inputField} from "@vbosstech/servicebot-base-form"
+import {ServicebotBaseForm, priceField, inputField} from "@eservices/servicebot-base-form"
 import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues} from 'redux-form'
 import {numericality} from "redux-form-validators";
 

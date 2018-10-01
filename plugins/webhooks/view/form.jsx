@@ -1,5 +1,5 @@
 import React from 'react';
-import {Fetcher, ServicebotBaseForm, inputField} from "@vbosstech/servicebot-base-form";
+import {Fetcher, ServicebotBaseForm, inputField} from "@eservices/servicebot-base-form";
 import Alerts from '../../../views/components/elements/alerts.jsx';
 import {required, url} from 'redux-form-validators'
 import {Field,} from 'redux-form'

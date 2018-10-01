@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 import Inputs from "../../utilities/inputsV2.jsx";
 import { formBuilder } from "../../utilities/form-builder";
 import Buttons from "../buttons.jsx";

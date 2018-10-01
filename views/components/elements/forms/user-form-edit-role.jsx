@@ -3,7 +3,7 @@ import Load from '../../utilities/load.jsx';
 import Inputs from "../../utilities/inputsV2.jsx";
 import { formBuilder } from "../../utilities/form-builder";
 import Buttons from "../../elements/buttons.jsx";
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 let _ = require("lodash");
 
 const FORM_NAME = "userEditRoleForm";

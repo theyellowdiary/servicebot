@@ -1,6 +1,6 @@
 import React from 'react';
 import {isAuthorized} from '../../utilities/authorizer.jsx';
-import consume from "@vbosstech/pluginbot-react/dist/consume";
+import consume from "@eservices/pluginbot-react/dist/consume";
 
 
     let ServiceInstanceField = function (props) {

@@ -1,8 +1,8 @@
 import React from "react";
 import {Field, FormSection} from "redux-form";
 import TagsInput from "react-tagsinput"
-import {inputField, selectField, priceField} from "@vbosstech/servicebot-base-form";
-import consume from "@vbosstech/pluginbot-react/dist/consume";
+import {inputField, selectField, priceField} from "@eservices/servicebot-base-form";
+import consume from "@eservices/pluginbot-react/dist/consume";
 
 const values = require('object.values');
 if (!Object.values) {

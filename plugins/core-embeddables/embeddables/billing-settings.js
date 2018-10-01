@@ -1,5 +1,5 @@
 import React from "react";
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 import { duotoneDark } from 'react-syntax-highlighter/styles/prism';
 import SyntaxHighlighter from 'react-syntax-highlighter/prism';
 import {CopyToClipboard} from 'react-copy-to-clipboard';

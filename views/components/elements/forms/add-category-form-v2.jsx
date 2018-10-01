@@ -1,5 +1,5 @@
 import React from 'react';
-import {ServicebotBaseForm, inputField} from "@vbosstech/servicebot-base-form";
+import {ServicebotBaseForm, inputField} from "@eservices/servicebot-base-form";
 import { required} from 'redux-form-validators'
 import {Field,} from 'redux-form'
 

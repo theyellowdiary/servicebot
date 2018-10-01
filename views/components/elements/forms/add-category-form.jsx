@@ -1,6 +1,6 @@
 import React from 'react';
 import {get, has} from "lodash";
-import {ServicebotBaseForm, inputField} from "@vbosstech/servicebot-base-form";
+import {ServicebotBaseForm, inputField} from "@eservices/servicebot-base-form";
 import {Field,} from 'redux-form';
 import { required, email, numericality, length } from 'redux-form-validators';
 

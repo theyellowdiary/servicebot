@@ -1,6 +1,6 @@
 {
   "version": "0.11.50",
-  "name": "@vbosstech/servicebot",
+  "name": "@eservices/servicebot",
   "license": "GPL-3.0",
   "scripts": {
     "precommit": "lint-staged",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/service-bot/servicebot.git"
+    "url": "https://github.com/vbosstech/servicebot.git"
   },
   "dependencies": {
-    "@vbosstech/pluginbot": "^0.2.0",
-    "@vbosstech/pluginbot-react": "^0.1.2",
-    "@vbosstech/servicebot-base-form": "0.0.38",
-    "@vbosstech/servicebot-billing-settings-embed": "^0.2.75",
-    "@vbosstech/servicebot-checkout-embed": "^0.2.105",
+    "@eservices/pluginbot": "^0.2.0",
+    "@eservices/pluginbot-react": "^0.1.2",
+    "@eservices/servicebot-base-form": "0.0.38",
+    "@eservices/servicebot-billing-settings-embed": "^0.2.75",
+    "@eservices/servicebot-checkout-embed": "^0.2.105",
     "async": "^2.5.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
@@ -116,7 +116,7 @@
     "xss": "^0.3.4"
   },
   "devDependencies": {
-    "@vbosstech/servicebot-client": "^1.0.3",
+    "@eservices/servicebot-client": "^1.0.3",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^6.4.1",

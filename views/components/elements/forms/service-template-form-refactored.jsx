@@ -2,12 +2,12 @@ import React from 'react';
 import {browserHistory, Link} from 'react-router';
 import 'react-tagsinput/react-tagsinput.css';
 import './css/template-create.css';
-import consume from "@vbosstech/pluginbot-react/dist/consume"
+import consume from "@eservices/pluginbot-react/dist/consume"
 import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues} from 'redux-form'
 import {connect} from "react-redux";
-import {iconToggleField, inputField, priceField, ServicebotBaseForm} from "@vbosstech/servicebot-base-form";
+import {iconToggleField, inputField, priceField, ServicebotBaseForm} from "@eservices/servicebot-base-form";
 import {addAlert, dismissAlert, setHasOffering} from "../../utilities/actions";
-// import ServiceBotBaseForm from "./@vbosstech/servicebot-base-form2.jsx";
+// import ServiceBotBaseForm from "./@eservices/servicebot-base-form2.jsx";
 import Load from "../../utilities/load.jsx";
 import {numericality, required} from 'redux-form-validators'
 import {TierBillingForm} from "./tier-billing-form.jsx"

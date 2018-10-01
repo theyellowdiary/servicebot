@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 let _ = require("lodash");
 import {DataForm, DataChild} from "../../utilities/data-form.jsx";
 import Inputs from "../../utilities/inputs.jsx";

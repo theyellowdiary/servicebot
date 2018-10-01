@@ -6,9 +6,9 @@ import Buttons from "../buttons.jsx";
 import Alerts from "../alerts.jsx";
 import {Price} from "../../utilities/price.jsx";
 import DateFormat from "../../utilities/date-format.jsx";
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 let _ = require("lodash");
-import {ServicebotBaseForm,inputField, priceField} from "@vbosstech/servicebot-base-form"
+import {ServicebotBaseForm,inputField, priceField} from "@eservices/servicebot-base-form"
 import {Field} from "redux-form"
 import {numericality, required} from "redux-form-validators";
 

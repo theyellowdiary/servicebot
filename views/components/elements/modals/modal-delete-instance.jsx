@@ -1,7 +1,7 @@
 import React from 'react';
 import cookie from 'react-cookie';
 import {Authorizer, isAuthorized} from "../../utilities/authorizer.jsx";
-import {Fetcher} from "@vbosstech/servicebot-base-form"
+import {Fetcher} from "@eservices/servicebot-base-form"
 import {browserHistory} from 'react-router';
 import Modal from '../../utilities/modal.jsx';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import {Fetcher} from "@vbosstech/servicebot-base-form"
+import {Fetcher} from "@eservices/servicebot-base-form"
 import {browserHistory} from 'react-router';
 import ServiceInstancePaymentFormEdit from '../forms/service-instance-payment-form-edit.jsx'
 import Modal from '../../utilities/modal.jsx';

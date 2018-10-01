@@ -2,7 +2,7 @@ import React from "react";
 import handler from "./widgetHandler";
 import PriceAdjustment from '../../../views/components/utilities/widget-inputs/WidgetPriceAdjustment';
 import WidgetPricingInput from '../../../views/components/utilities/widget-inputs/WidgetPricingInput.jsx';
-import {OnOffToggleField} from "@vbosstech/servicebot-base-form";
+import {OnOffToggleField} from "@eservices/servicebot-base-form";
 let Checkbox = (props) => {
     let {input, configValue, label} = props;
     return (

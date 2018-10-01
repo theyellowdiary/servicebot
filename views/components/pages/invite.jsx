@@ -1,6 +1,6 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
-import {Fetcher} from "@vbosstech/servicebot-base-form";
+import {Fetcher} from "@eservices/servicebot-base-form";
 import UserFormInvite from "../elements/forms/user-form-invite.jsx";
 import Content from '../layouts/content.jsx';
 

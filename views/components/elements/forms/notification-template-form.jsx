@@ -2,7 +2,7 @@
 import React from 'react';
 import {browserHistory} from 'react-router';
 import Load from '../../utilities/load.jsx';
-import {Fetcher} from "@vbosstech/servicebot-base-form"
+import {Fetcher} from "@eservices/servicebot-base-form"
 import {Authorizer, isAuthorized} from "../../utilities/authorizer.jsx";
 import Jumbotron from "../../layouts/jumbotron.jsx";
 import Content from "../../layouts/content.jsx";
