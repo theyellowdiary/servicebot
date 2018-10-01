@@ -2,8 +2,7 @@ import React from 'react';
 import Load from '../utilities/load.jsx';
 import {Link, browserHistory} from 'react-router';
 import Alert from 'react-s-alert';
-import Fetcher from "../utilities/fetcher.jsx"
-import {DataForm, DataChild} from "../utilities/data-form.jsx";
+import {Fetcher} from "servicebot-base-form"
 import {Authorizer, isAuthorized} from "../utilities/authorizer.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import Content from "../layouts/content.jsx";

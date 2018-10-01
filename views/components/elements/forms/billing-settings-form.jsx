@@ -1,14 +1,13 @@
 import React from 'react';
 import {Elements, injectStripe, CardElement, StripeProvider} from 'react-stripe-elements';
-import Fetcher from "../../utilities/fetcher.jsx"
 import {get, has} from "lodash";
-import ServiceBotBaseForm from "./servicebot-base-form.jsx";
-import {inputField} from "./servicebot-base-field.jsx";
+import {ServicebotBaseForm, Fetcher, inputField}from "servicebot-base-form"
 import Alerts from '../alerts.jsx';
 import {required} from 'redux-form-validators'
 import {Field,} from 'redux-form'
 import Collapsible from 'react-collapsible';
 import Buttons from "../buttons.jsx";
+import Load from "../../utilities/load.jsx";
 
 class CardSection extends React.Component {
     render() {
@@ -39,7 +38,7 @@ class BillingForm extends React.Component {
     render() {
         if(!this.props.spk) {
             return (
-                <div>Loading</div>
+                <Load/>
             )
         }
         return (
@@ -118,7 +117,7 @@ class CreditCardForm extends React.Component {
 
     async submissionPrep(values) {
         let token = await this.props.stripe.createToken({...values});
-        console.log(token);
+        
         if (token.error) {
             let message = token.error;
             if(token.error.message) {
@@ -276,7 +275,7 @@ class CreditCardForm extends React.Component {
                         </div>
                         {this.state.showForm &&
                             <div className="service-instance-box-content">
-                                <ServiceBotBaseForm
+                                <ServicebotBaseForm
                                     form={BillingInfo}
                                     initialValues={{...this.state.personalInformation}}
                                     submissionPrep={this.submissionPrep}

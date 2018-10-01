@@ -1,7 +1,7 @@
 .modal-dialog {
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
-  z-index: 1050;
+  z-index: 9954;
 }
 
 .modal-icon{
@@ -36,7 +36,7 @@
 }
 
 .modal-body{
-  padding: 0px;
+  padding: 16px;
 }
 .modal-content{
   background-color: #fafafa;
@@ -154,17 +154,10 @@
   top: 33%;
   left: 50%;
 }
-/*.modal.hidden{*/
-  /*z-index: -9999;*/
-  /*display: fixed !important;*/
-  /*transition: opacity 0.2s ease-out;*/
-  /*opacity: 0;*/
-/*}*/
-/*.modal.in{*/
-  /*display: fixed !important;*/
-  /*transition: opacity 0.2s ease-in;*/
-  /*opacity: 1;*/
-/*}*/
+
+.modal-body .btn, .modal-body .buttons{
+  margin-top: 16px;
+}
 
 .modal-enter{
   opacity: 0;

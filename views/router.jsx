@@ -5,7 +5,7 @@ import PluginbotProvider from "pluginbot-react/dist/provider"
 
 // App
 import App from "./components/app.jsx";
-import Home from "./components/pages/home.jsx";
+// import Home from "./components/pages/home.jsx";
 import AllServices from "./components/pages/all-services.jsx";
 // Dashboard (My Services)
 import MyServices from './components/pages/my-services.jsx';
@@ -42,14 +42,13 @@ import ManageCategories from "./components/pages/manage-categories.jsx";
 import ManageNotificationTemplates from "./components/pages/manage-notification-templates.jsx";
 // Elements
 import NotificationTemplateForm from "./components/elements/forms/notification-template-form.jsx";
-import ServiceTemplateForm from "./components/elements/forms/service-template-form-review.jsx";
 import ServiceTemplateFormLite from "./components/elements/forms/service-template-form-lite.jsx";
 import ServiceInstanceForm from "./components/elements/forms/service-instance-form-example.jsx";
 import Embed from "./components/elements/embed.jsx";
 import Setup from "./components/pages/setup.jsx";
 import GenericNotFound from "./components/pages/notfound.jsx";
-
-
+import Embeddables from "./components/pages/embeddables.jsx";
+import "../public/scss/main.scss";
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 
@@ -64,9 +63,9 @@ class AppRouter extends React.Component {
         return (
             <Router history={browserHistory}>
                 <Route name="Home" path="/" component={App}>
-                    <IndexRoute component={Home}/>
+                    <IndexRoute component={Dashboard}/>
 
-                    <Route name="Home" path="home" component={Home}/>
+                    <Route name="Home" path="home" component={Dashboard}/>
                     <Route name="All Services" path="all-services" component={AllServices}/>
                     <Route name="User Login" path="login" component={Login}/>
                     <Route name="Forgot Password" path="forgot-password" component={ForgotPassword}/>
@@ -118,10 +117,12 @@ class AppRouter extends React.Component {
                     </Route>
                     {/* Query routes */}
                     <Route name="Services" path="manage-subscriptions/:status" component={ManageSubscriptions}/>
+
                     {/* Other */}
                     <Route path="service-templates/lite" component={ServiceTemplateFormLite}/>
-
-                    <Route path="service-templates/:templateId" component={ServiceTemplateForm}/>
+                    <Route name="Embeddables" path={"/embeddables"} component={Embeddables}>
+                        <Route path={":embedName"} component={Embeddables}/>
+                    </Route>
                     <Route name="Manage Subscriptions" path="/service-instance" component={ManageSubscriptions}/>
                     <Route path="service-instances/:instanceId" component={ServiceInstanceForm}/>
                     {this.props.routeDefinition && this.props.routeDefinition.reduce((acc, route, index) => {

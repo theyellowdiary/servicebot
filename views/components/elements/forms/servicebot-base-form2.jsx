@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import Fetcher from "../../utilities/fetcher.jsx";
+import {Fetcher} from "servicebot-base-form";
 import {reduxForm, SubmissionError, stopSubmit} from 'redux-form'
 import {Link, browserHistory} from 'react-router';
 
@@ -128,7 +128,7 @@ class ServiceBotBaseForm extends React.Component {
     componentDidMount() {
         let self = this;
         let initialRequests = self.state.initialRequests;
-        console.log("We got our initial requests", initialRequests)
+
         if (initialRequests && initialRequests.length > 0) {
             let allRequests = initialRequests.map(async requestInfo => {
                 let response = await Fetcher(requestInfo.url, requestInfo.method);
@@ -137,14 +137,16 @@ class ServiceBotBaseForm extends React.Component {
                 }
                 return response;
             });
-            Promise.all(allRequests).then(values => {
+            Promise.all(allRequests).then(async values => {
                 //Check for errors and unauthenticated!
                 let error = values.find(value => value.error);
                 if (!error) {
                     let requestValues = values.reduce((acc, value, currentIndex) =>
                             (value._name ? {...acc, [value._name]: value} : {...acc, ...value}),
                         self.state.initialValues)
-
+                    if(self.props.initializer){
+                        requestValues = await self.props.initializer(requestValues);
+                    }
                     let initialForm = reduxForm({
                         form: self.props.formName || "servicebotForm",
                         initialValues: requestValues,

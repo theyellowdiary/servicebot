@@ -1,5 +1,5 @@
 import React from 'react';
-import Fetcher from "../utilities/fetcher.jsx"
+import {Fetcher} from "servicebot-base-form"
 import DataTable from "../elements/datatable/datatable.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import {Link, browserHistory} from 'react-router';
@@ -102,7 +102,10 @@ class NavNotification extends React.Component{
 
     miniList(unread){
 
-        if(this.state.openNotificationDropdown === true) {
+        let self = this;
+        let {openNotificationDropdown} = this.state;
+
+        if(openNotificationDropdown === true) {
 
             let totalUnread = unread.length;
             if(unread.length && unread.length > 3){
@@ -110,17 +113,20 @@ class NavNotification extends React.Component{
             }
 
             return (
-                <div className="mini-notification-list">
-                    {totalUnread ? <li className="text-center"><strong>{`You have ${totalUnread} unread notifications`}</strong></li> : <span/>}
-                    <ul>
-                        {unread.length ? unread.map(message => (
-                                <li className="unread-message" key={`message-${message.id}`} onClick={()=>{return this.openMessageModel(message)}}
-                                    dangerouslySetInnerHTML={this.createMarkup((message.message))}>
-                                </li>
-                            )) :  <li className="text-center">You have no new notifications</li>
-                        }
-                        <li className="text-center" onClick={this.viewAll}>View All</li>
-                    </ul>
+                <div>
+                    <div className="_backdrop" onClick={()=>{self.setState({openNotificationDropdown: false})}}/>
+                    <div className="app-notification-list">
+                        {totalUnread ? <li className="text-center"><strong>{`You have ${totalUnread} unread notifications`}</strong></li> : <span/>}
+                        <ul>
+                            {unread.length ? unread.map(message => (
+                                    <li className="unread-message" key={`message-${message.id}`} onClick={()=>{return this.openMessageModel(message)}}
+                                        dangerouslySetInnerHTML={this.createMarkup((message.message))}>
+                                    </li>
+                                )) :  <li className="text-center">You have no new notifications</li>
+                            }
+                            <li className={`_view-all`}><button className={`buttons _text`} onClick={this.viewAll}>View All</button></li>
+                        </ul>
+                    </div>
                 </div>
             );
         }else{
@@ -132,18 +138,16 @@ class NavNotification extends React.Component{
         let unread = this.props.notifications.filter(notification => !notification.read);
 
         return (
-            <li className="nav-notification">
-                <div>
-                    <span onClick={this.openNotificationDropdown}>
-                        <i className="fa fa-bell nav-notification-icon" aria-hidden="true"/>
-                        {unread.length ? <span className="nav-notification-indicator"/> : <span/>}
-                        {/*<span className="notification-badge">{unread.length ? unread.length : '0'}</span>*/}
-                    </span>
-                    {this.miniList(unread)}
-                </div>
-                {this.state.openNotificationDropdown && <div className="mini-notification-backdrop" onClick={this.closeNotificationDropdown}/>}
-                {this.state.viewMessage != null && <ModalNotification key="notification-modal" hide={this.closeMessageModel} notification={this.state.viewMessage}/>}
-            </li>
+            <div className="app-notification">
+                <span className="_toggle" onClick={this.openNotificationDropdown}>
+                    <i className="fa fa-bell nav-notification-icon" aria-hidden="true"/>
+                    {unread.length ? <span className="nav-notification-indicator"/> : <span/>}
+                    {/*<span className="notification-badge">{unread.length ? unread.length : '0'}</span>*/}
+                </span>
+                {this.miniList(unread)}
+                {this.state.openNotificationDropdown && <div className="app-notification-backdrop" onClick={this.closeNotificationDropdown}/>}
+                {this.state.viewMessage !== null && <ModalNotification key="notification-modal" hide={this.closeMessageModel} notification={this.state.viewMessage}/>}
+            </div>
         )
     }
 }
@@ -152,7 +156,7 @@ class NavNotification extends React.Component{
 //         super(props);
 //     }
 //     render(){
-//         console.log("RENDING SYSTEMS")
+//
 //         let notifications = this.props.system_notifications.map(notification => {
 //             return (<li key={notification.id}><Notification {...notification} /></li>)
 //         })

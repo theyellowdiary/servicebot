@@ -1,124 +1,707 @@
 let default_notifications = {};
 default_notifications.templates = [
-    {name:"request_service_instance_admin",
-        event_name:"service_instance_requested_for_user",
-        message:"Your service [[name]] has been requested for you. Please login to your account and approve the <a href='https://[[_hostname]]/my-services'>service</a>.",
-        subject:"ServiceBot Instance needs approval",
-        description:"This notification it triggered when a service is requested by an admin on behalf of a user and the user needs to approve it",
-        model:"service-instance",
-        send_email:true
+    {
+        name: "service_cancellation_submitted",
+        event_name: "service_instance_cancellation_requested",
+        message: "Your cancellation request for [[name]] has been submitted. You will receive another notification when it has been approved.",
+        subject: "Service cancellation submitted",
+        description: "Sent when a service cancellation has been requested by a user",
+        model: "service-instance",
+        send_email: true
     },
-    {name:"request_service_instance_user",
-        event_name:"service_instance_requested_by_user",
-        message:"Your service request for [[name]] has been completed. Please login to your account to view and access your <a href='https://[[_hostname]]/service-instance/[[id]]'>service</a>.",
-        subject:"ServiceBot Instance requested",
-        description:"This notification it triggered when a service is requested by a user",
-        model:"service-instance",
-        send_email:true
+    {
+        name: "service_instance_update",
+        event_name: "service_instance_updated",
+        message: "Your subscription to [[name]] has been updated.",
+        subject: "Subscription updated",
+        description: "Sent when a service has been updated",
+        model: "service-instance",
+        send_email: true
     },
-    {name:"request_service_instance_new_user",
-        event_name:"service_instance_requested_new_user",
-        message:"Your service request for [[name]] has been completed. Please click the link to complete user <a href='[[url]]'>registration</a> in order to view your services. Once registered you can access your <a href='https://[[_hostname]]/service-instance/[[id]]'>service</a>.",
-        subject:"ServiceBot Instance requested",
-        description:"This notification it triggered when a service is requested by a new user. They are sent the link to complete registration",
-        model:"service-instance",
-        send_email:true
+    {
+        name: "instance_cancellation_approved",
+        event_name: "service_instance_cancellation_approved",
+        message: "Your cancellation request has been approved.",
+        subject: "Service cancellation request approved",
+        description: "Sent when a service cancellation request has been approved",
+        model: "service-instance-cancellation",
+        send_email: true
     },
-    {name:"service_requires_payment_approval",
-        event_name:"service_instance_charge_added",
-        message:"There are additional charges added to your service, [[name]]. Please login to your account and approve the <a href='https://[[_hostname]]/my-services'>charges</a>.",
-        subject:"ServiceBot Instance has additional charges",
-        description:"This notification it triggered when a service has been updated with a new charge that needs approval",
-        model:"service-instance",
-        send_email:true
+    {
+        name: "instance_cancellation_rejected",
+        event_name: "service_instance_cancellation_rejected",
+        message: "Your cancellation request has been rejected. ",
+        subject: "Service cancellation request rejected",
+        description: "Sent when a service cancellation request has been rejected",
+        model: "service-instance-cancellation",
+        send_email: true
     },
-    {name:"service_cancellation_submitted",
-        event_name:"service_instance_cancellation_requested",
-        message:"Your cancellation request for [[name]] has been submitted. You will receive another notification when it has been approved.",
-        subject:"ServiceBot Instance cancellation submitted",
-        description:"This notification it triggered when a service instance cancellation has been requested by a user",
-        model:"service-instance",
-        send_email:true
+    {
+        name: "password_reset",
+        event_name: "password_reset_request_created",
+        message: `<style>
+            /* -------------------------------------
+                GLOBAL RESETS
+            ------------------------------------- */
+            img {
+            border: none;
+            -ms-interpolation-mode: bicubic;
+            max-width: 100%; }
+
+            #tableWrap {
+            background-color: #f6f6f6;
+            font-family: sans-serif;
+            -webkit-font-smoothing: antialiased;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%; }
+            #tableWrap p {
+            color: black
+        }
+            table {
+            border-collapse: separate;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+            width: 100%; }
+            table td {
+            font-family: sans-serif;
+            font-size: 14px;
+            vertical-align: top; }
+
+            /* -------------------------------------
+                BODY & CONTAINER
+            ------------------------------------- */
+
+            .body {
+            background-color: #f6f6f6;
+            width: 100%; }
+
+            /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+            .container {
+            display: block;
+            Margin: 0 auto !important;
+            /* makes it centered */
+            max-width: 580px;
+            padding: 10px;
+            width: 580px; }
+
+            /* This should also be a block element, so that it will fill 100% of the .container */
+            .content {
+            box-sizing: border-box;
+            display: block;
+            Margin: 0 auto;
+            max-width: 580px;
+            padding: 10px; }
+
+            /* -------------------------------------
+                HEADER, FOOTER, MAIN
+            ------------------------------------- */
+            .main {
+            background: #ffffff;
+            border-radius: 3px;
+            width: 100%; }
+
+            .wrapper {
+            box-sizing: border-box;
+            padding: 20px; }
+
+            .content-block {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+
+            .footer {
+            clear: both;
+            Margin-top: 10px;
+            text-align: center;
+            width: 100%; }
+            .footer td,
+            .footer p,
+            .footer span,
+            .footer a {
+            color: #999999;
+            font-size: 12px;
+            text-align: center; }
+
+            /* -------------------------------------
+                TYPOGRAPHY
+            ------------------------------------- */
+            h1,
+            h2,
+            h3,
+            h4 {
+            color: #000000;
+            font-family: sans-serif;
+            font-weight: 400;
+            line-height: 1.4;
+            margin: 0;
+            Margin-bottom: 30px; }
+
+            h1 {
+            font-size: 35px;
+            font-weight: 300;
+            text-align: center;
+            text-transform: capitalize; }
+
+            .main .wrapper p,
+            ul,
+            ol {
+            font-family: sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            margin: 0;
+            Margin-bottom: 15px; }
+            p li,
+            ul li,
+            ol li {
+            list-style-position: inside;
+            margin-left: 5px; }
+
+            a {
+            color: #3498db;
+            text-decoration: underline; }
+
+            /* -------------------------------------
+                BUTTONS
+            ------------------------------------- */
+            .btn {
+            box-sizing: border-box;
+            width: 100%; }
+            .btn ><span id="selection-marker-start" class="redactor-selection-marker"></span><span id="selection-marker-end" class="redactor-selection-marker"></span><span id="selection-marker-start" class="redactor-selection-marker"></span><span id="selection-marker-end" class="redactor-selection-marker"></span><span id="selection-marker-start" class="redactor-selection-marker"></span><span id="selection-marker-end" class="redactor-selection-marker"></span> tbody > tr > td {
+            padding-bottom: 15px; }
+            .btn table {
+            width: auto; }
+            .btn table td {
+            background-color: #ffffff;
+            border-radius: 5px;
+            text-align: center; }
+            .btn a {
+            background-color: #ffffff;
+            border: solid 1px #3498db;
+            border-radius: 5px;
+            box-sizing: border-box;
+            color: #3498db;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0;
+            padding: 12px 25px;
+            text-decoration: none;
+            text-transform: capitalize; }
+
+            .btn-primary table td {
+            background-color: #3498db; }
+
+            .btn-primary a {
+            background-color: #3498db;
+            border-color: #3498db;
+            color: #ffffff; }
+
+            /* -------------------------------------
+                OTHER STYLES THAT MIGHT BE USEFUL
+            ------------------------------------- */
+            .last {
+            margin-bottom: 0; }
+
+            .first {
+            margin-top: 0; }
+
+            .align-center {
+            text-align: center; }
+
+            .align-right {
+            text-align: right; }
+
+            .align-left {
+            text-align: left; }
+
+            .clear {
+            clear: both; }
+
+            .mt0 {
+            margin-top: 0; }
+
+            .mb0 {
+            margin-bottom: 0; }
+
+            .preheader {
+            color: transparent;
+            display: none;
+            height: 0;
+            max-height: 0;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+            mso-hide: all;
+            visibility: hidden;
+            width: 0; }
+
+            .powered-by a {
+            text-decoration: none; }
+
+            hr {
+            border: 0;
+            border-bottom: 1px solid #f6f6f6;
+            Margin: 20px 0; }
+
+            /* -------------------------------------
+                RESPONSIVE AND MOBILE FRIENDLY STYLES
+            ------------------------------------- */
+            @media only screen and (max-width: 620px) {
+            table[class=body] h1 {
+            font-size: 28px !important;
+            margin-bottom: 10px !important; }
+            table[class=body] p,
+            table[class=body] ul,
+            table[class=body] ol,
+            table[class=body] td,
+            table[class=body] span,
+            table[class=body] a {
+            font-size: 16px !important; }
+            table[class=body] .wrapper,
+            table[class=body] .article {
+            padding: 10px !important; }
+            table[class=body] .content {
+            padding: 0 !important; }
+            table[class=body] .container {
+            padding: 0 !important;
+            width: 100% !important; }
+            table[class=body] .main {
+            border-left-width: 0 !important;
+            border-radius: 0 !important;
+            border-right-width: 0 !important; }
+            table[class=body] .btn table {
+            width: 100% !important; }
+            table[class=body] .btn a {
+            width: 100% !important; }
+            table[class=body] .img-responsive {
+            height: auto !important;
+            max-width: 100% !important;
+            width: auto !important; }}
+
+            /* -------------------------------------
+                PRESERVE THESE STYLES IN THE HEAD
+            ------------------------------------- */
+            @media all {
+            .ExternalClass {
+            width: 100%; }
+            .ExternalClass,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass font,
+            .ExternalClass td,
+            .ExternalClass div {
+            line-height: 100%; }
+            .apple-link a {
+            color: inherit !important;
+            font-family: inherit !important;
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+            text-decoration: none !important; }
+            .btn-primary table td:hover {
+            background-color: #34495e !important; }
+            .btn-primary a:hover {
+            background-color: #34495e !important;
+            border-color: #34495e !important; } }
+
+        </style>
+        <table id="tableWrap" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tbody><tr>
+        <td class="container">
+        <div class="content">
+
+
+        <span class="preheader">Password Reset Request</span>
+<table class="main">
+
+
+    <tbody><tr>
+        <td class="wrapper">
+            <table id="mainTable" border="0" cellpadding="0" cellspacing="0">
+                <tbody><tr>
+                    <td>
+                        <p>Hi there,</p>
+                        <p>You have requested a password reset, click below to set a new password.</p>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                            <tbody>
+                            <tr>
+                                <td align="left">
+                                    <table border="0" cellpadding="0" cellspacing="0">
+                                        <tbody>
+                                        <tr>
+                                            <td> <a href="[[url]]" target="_blank">Reset Password</a> </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td></tr></tbody></table></td></tr></tbody></table>
+</div>
+</td>
+</tr>
+</tbody></table>`,
+        subject: "Password Reset",
+        description: "Sent when a user requests a password reset",
+        model: "user",
+        send_email: true
     },
-    {name:"service_instance_update",
-        event_name:"service_instance_updated",
-        message:"Your Service Instance [[name]] has been updated. You can use this link to view your <a href='https://[[_hostname]]/service-instance/[[id]]'>instance details</a>.",
-        subject:"ServiceBot Instance updated",
-        description:"This notification it triggered when a service instance has been updated",
-        model:"service-instance",
-        send_email:true
+    {
+        name: "registration_admin",
+        event_name: "user_registered",
+        message: "You have gained a new user! [[name]] - [[email]] has signed up.",
+        subject: "New User",
+        description: "Sent for an admin when a new user has signed up",
+        model: "user",
+        send_email: true,
+        send_to_owner: false
     },
-    {name:"instance_cancellation_approved",
-        event_name:"service_instance_cancellation_approved",
-        message:"Your cancellation request has been approved.",
-        subject:"ServiceBot Instance cancellation request approved",
-        description:"This notification it triggered when a service cancellation request has been approved",
-        model:"service-instance-cancellation",
-        send_email:true
+    {
+        name: "user_suspension",
+        event_name: "user_suspended",
+        message: "Your account has been suspended for payment failure.",
+        subject: "Account Suspended",
+        description: "Sent when an account has been suspended",
+        model: "user",
+        send_email: true
     },
-    {name:"instance_cancellation_rejected",
-        event_name:"service_instance_cancellation_rejected",
-        message:"Your cancellation request for has been rejected. For more information, contact your service provider or comment on your <a href='https://[[_hostname]]/service-instance/[[service_instance_id]]'>service</a> and we will get back to you shortly.",
-        subject:"ServiceBot Instance cancellation request rejected",
-        description:"This notification it triggered when a service cancellation request has been rejected",
-        model:"service-instance-cancellation",
-        send_email:true
-    },
-    {name:"password_reset",
-        event_name:"password_reset_request_created",
-        message:"Follow the following link to <a href='[[url]]'>reset your password</a>.",
-        subject:"ServiceBot password reset",
-        description:"This notification it triggered when a user requests a password reset",
-        model:"user",
-        send_email:true
+    {
+        name: "payment_failure",
+        event_name: "payment_failure",
+        message: "Your payment failed. Please log into your account and check your billing settings.",
+        subject: "Service Payment Failure",
+        description: "Sent when a payment has failed to go through. It notifies the user to update their payment method",
+        model: "user",
+        send_email: true
     },
     {name:"invitation",
         event_name:"user_invited",
-        message:"Hello there, \r\nYou have been invited to use the [[_company_name]] ServiceBot System. From here you can request new services, manage your services, and see other service options. Please click the link to begin user <a href='[[url]]'>registration</a>.",
-        subject:"ServiceBot Invitation!",
-        description:"This notification it triggered when a user is invited to they system by an admin",
-        model:"user",
-        send_email:true
-    },
-    {name:"registration_user",
-        event_name:"user_registered",
-        message:"Your registration has been completed! You can now access your account at <a href='https://[[_hostname]]'>here</a>. Thank you for choosing [[_company_name]].",
-        subject:"ServiceBot registration complete",
-        description:"This notification it triggered when registration has been completed",
-        model:"user",
-        send_email:true
-    },
-    {name:"registration_admin",
-        event_name:"user_registered",
-        message:"You have gained a new user! [[name]] - [[email]] has just joined your ServiceBot system.",
-        subject:"New ServiceBot User",
-        description:"This notification it triggered for an admin when a new user has joined the system",
-        model:"user",
-        send_email:true,
-        send_to_owner:false
-    },
-    {name:"user_suspension",
-        event_name:"user_suspended",
-        message:"Your ServiceBot account has been suspended. Please contact your service provider and check the state of your <a href='https://[[_hostname]]/my-services'>account</a>.",
-        subject:"ServiceBot Account Suspended",
-        description:"This notification it triggered when an account has been suspended",
-        model:"user",
-        send_email:true
-    },
-    {name:"payment_failure",
-        event_name:"payment_failure",
-        message:"Your payment failed. Please log into your account and check your <a href='https://[[_hostname]]/billing-settings'>payment plan</a>.",
-        subject:"ServiceBot Payment Failure",
-        description:"This notification it triggered when a payment has failed to go through. It notifies the user to update their payment method",
+        message:`<style>
+      /* -------------------------------------
+          GLOBAL RESETS
+      ------------------------------------- */
+      img {
+        border: none;
+        -ms-interpolation-mode: bicubic;
+        max-width: 100%; }
+
+      #tableWrap {
+        background-color: #f6f6f6;
+        font-family: sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%; }
+        #tableWrap p {
+color: black
+}
+      table {
+        border-collapse: separate;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        width: 100%; }
+        table td {
+          font-family: sans-serif;
+          font-size: 14px;
+          vertical-align: top; }
+
+      /* -------------------------------------
+          BODY & CONTAINER
+      ------------------------------------- */
+
+      .body {
+        background-color: #f6f6f6;
+        width: 100%; }
+
+      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+      .container {
+        display: block;
+        Margin: 0 auto !important;
+        /* makes it centered */
+        max-width: 580px;
+        padding: 10px;
+        width: 580px; }
+
+      /* This should also be a block element, so that it will fill 100% of the .container */
+      .content {
+        box-sizing: border-box;
+        display: block;
+        Margin: 0 auto;
+        max-width: 580px;
+        padding: 10px; }
+
+      /* -------------------------------------
+          HEADER, FOOTER, MAIN
+      ------------------------------------- */
+      .main {
+        background: #ffffff;
+        border-radius: 3px;
+        width: 100%; }
+
+      .wrapper {
+        box-sizing: border-box;
+        padding: 20px; }
+
+      .content-block {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      .footer {
+        clear: both;
+        Margin-top: 10px;
+        text-align: center;
+        width: 100%; }
+        .footer td,
+        .footer p,
+        .footer span,
+        .footer a {
+          color: #999999;
+          font-size: 12px;
+          text-align: center; }
+
+      /* -------------------------------------
+          TYPOGRAPHY
+      ------------------------------------- */
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #000000;
+        font-family: sans-serif;
+        font-weight: 400;
+        line-height: 1.4;
+        margin: 0;
+        Margin-bottom: 30px; }
+
+      h1 {
+        font-size: 35px;
+        font-weight: 300;
+        text-align: center;
+        text-transform: capitalize; }
+
+      .main .wrapper p,
+      ul,
+      ol {
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+        Margin-bottom: 15px; }
+        p li,
+        ul li,
+        ol li {
+          list-style-position: inside;
+          margin-left: 5px; }
+
+      a {
+        color: #3498db;
+        text-decoration: underline; }
+
+      /* -------------------------------------
+          BUTTONS
+      ------------------------------------- */
+      .btn {
+        box-sizing: border-box;
+        width: 100%; }
+        .btn ><span id="selection-marker-start" class="redactor-selection-marker"></span><span id="selection-marker-end" class="redactor-selection-marker"></span><span id="selection-marker-start" class="redactor-selection-marker"></span><span id="selection-marker-end" class="redactor-selection-marker"></span><span id="selection-marker-start" class="redactor-selection-marker"></span><span id="selection-marker-end" class="redactor-selection-marker"></span> tbody > tr > td {
+          padding-bottom: 15px; }
+        .btn table {
+          width: auto; }
+        .btn table td {
+          background-color: #ffffff;
+          border-radius: 5px;
+          text-align: center; }
+        .btn a {
+          background-color: #ffffff;
+          border: solid 1px #3498db;
+          border-radius: 5px;
+          box-sizing: border-box;
+          color: #3498db;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 14px;
+          font-weight: bold;
+          margin: 0;
+          padding: 12px 25px;
+          text-decoration: none;
+          text-transform: capitalize; }
+
+      .btn-primary table td {
+        background-color: #3498db; }
+
+      .btn-primary a {
+        background-color: #3498db;
+        border-color: #3498db;
+        color: #ffffff; }
+
+      /* -------------------------------------
+          OTHER STYLES THAT MIGHT BE USEFUL
+      ------------------------------------- */
+      .last {
+        margin-bottom: 0; }
+
+      .first {
+        margin-top: 0; }
+
+      .align-center {
+        text-align: center; }
+
+      .align-right {
+        text-align: right; }
+
+      .align-left {
+        text-align: left; }
+
+      .clear {
+        clear: both; }
+
+      .mt0 {
+        margin-top: 0; }
+
+      .mb0 {
+        margin-bottom: 0; }
+
+      .preheader {
+        color: transparent;
+        display: none;
+        height: 0;
+        max-height: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        mso-hide: all;
+        visibility: hidden;
+        width: 0; }
+
+      .powered-by a {
+        text-decoration: none; }
+
+      hr {
+        border: 0;
+        border-bottom: 1px solid #f6f6f6;
+        Margin: 20px 0; }
+
+      /* -------------------------------------
+          RESPONSIVE AND MOBILE FRIENDLY STYLES
+      ------------------------------------- */
+      @media only screen and (max-width: 620px) {
+        table[class=body] h1 {
+          font-size: 28px !important;
+          margin-bottom: 10px !important; }
+        table[class=body] p,
+        table[class=body] ul,
+        table[class=body] ol,
+        table[class=body] td,
+        table[class=body] span,
+        table[class=body] a {
+          font-size: 16px !important; }
+        table[class=body] .wrapper,
+        table[class=body] .article {
+          padding: 10px !important; }
+        table[class=body] .content {
+          padding: 0 !important; }
+        table[class=body] .container {
+          padding: 0 !important;
+          width: 100% !important; }
+        table[class=body] .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important; }
+        table[class=body] .btn table {
+          width: 100% !important; }
+        table[class=body] .btn a {
+          width: 100% !important; }
+        table[class=body] .img-responsive {
+          height: auto !important;
+          max-width: 100% !important;
+          width: auto !important; }}
+
+      /* -------------------------------------
+          PRESERVE THESE STYLES IN THE HEAD
+      ------------------------------------- */
+      @media all {
+        .ExternalClass {
+          width: 100%; }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%; }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important; }
+        .btn-primary table td:hover {
+          background-color: #34495e !important; }
+        .btn-primary a:hover {
+          background-color: #34495e !important;
+          border-color: #34495e !important; } }
+
+    </style>
+<table id="tableWrap" border="0" cellpadding="0" cellspacing="0" class="body">
+      <tbody><tr>
+        <td class="container">
+          <div class="content">
+
+            
+            <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+            <table class="main">
+
+              
+              <tbody><tr>
+                <td class="wrapper">
+                  <table id="mainTable" border="0" cellpadding="0" cellspacing="0">
+                    <tbody><tr>
+                      <td>
+                        <p>Hi there,</p>
+                        <p>You have been invited, click below to finish your account.</p>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                          <tbody>
+                            <tr>
+                              <td align="left">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                  <tbody>
+                                    <tr>
+                                      <td> <a href="[[url]]" target="_blank">Complete Registration</a> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        </td></tr></tbody></table></td></tr></tbody></table>
+          </div>
+        </td>
+      </tr>
+    </tbody></table>`,
+        subject:"Invitation",
+        description:"Sent when a user is invited to they system by an admin",
         model:"user",
         send_email:true
     }
 ];
 //Setting the registration_admin role to admin
+//todo: no more hardcoded id...
 default_notifications.templates_to_roles = [
     {
-        notification_template_id:12,
-        role_id:1
+        notification_template_id: 6,
+        role_id: 1
     },
 ];
 module.exports = default_notifications;

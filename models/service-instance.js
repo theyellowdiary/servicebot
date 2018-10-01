@@ -2,6 +2,8 @@
 let File = require("./file");
 let async = require('async');
 let ServiceTemplates = require("./service-template");
+let Tier = require("./tier");
+let PaymentStructureTemplate = require("./payment-structure-template");
 let ServiceTemplateProperties = require("../models/service-template-property");
 let ServiceInstanceProperties = require("./service-instance-property");
 let ServiceInstanceMessages = require("./service-instance-message");
@@ -14,7 +16,9 @@ let promisifyProxy = require("../lib/promiseProxy");
 let User = require('./user');
 let _ = require("lodash");
 let references = [
+    {"model": ServiceTemplates, "referenceField": "service_id", "direction": "to", "readOnly": true},
     {"model": ServiceInstanceProperties, "referenceField": "parent_id", "direction": "from", "readOnly": true},
+    {"model": require('./base/entity')("service_instance_seats", []), "referenceField":"service_instance_id", "direction": "from", "readOnly" : true},
     {"model": ServiceInstanceMessages, "referenceField": "service_instance_id", "direction": "from", "readOnly": true},
     {"model": ServiceInstanceCharges, "referenceField": "service_instance_id", "direction": "from", "readOnly": true},
     {
@@ -23,7 +27,14 @@ let references = [
         "direction": "from",
         "readOnly": true
     },
-    {"model": User, "referenceField": "user_id", "direction": "to", "readOnly": true}
+    {"model": User, "referenceField": "user_id", "direction": "to", "readOnly": true},
+    {
+        "model": PaymentStructureTemplate,
+        "referenceField": "payment_structure_template_id",
+        "direction": "to",
+        "readOnly": true
+    }
+
 ];
 let ServiceInstance = require("./base/entity")("service_instances", references);
 let Stripe = require('../config/stripe');
@@ -35,7 +46,8 @@ let buildPayStructure = function (payment_object, callback) {
     let plan_arr = ['name', 'amount', 'currency', 'interval', 'interval_count', 'statement_descriptor', 'trial_period_days'];
     let random_code = Math.random().toString(36).substring(10, 12) + Math.random().toString(36).substring(10, 12);
     let default_plan = {
-        'id': `${payment_object.name.replace(/ +/g, '-')}-ID${self.get("id")}-${random_code}`,
+        'name' : "servicebot-subscription",
+        'id': `${(payment_object.name || "sb-subscription").replace(/ +/g, '-')}-ID${self.get("id")}-${random_code}`,
         'currency': 'usd',
         'interval': 'month',
         'interval_count': 1,
@@ -47,17 +59,17 @@ let buildPayStructure = function (payment_object, callback) {
     if (plan.amount === null) {
         plan.amount = 0;
     }
-    plan.statement_descriptor = plan.statement_descriptor.substring(0, 22);
-    console.log(plan);
-
+    plan.statement_descriptor = (plan.statement_descriptor || "Subscription").substring(0, 22);
     callback(plan);
 };
 
 
 ServiceInstance.prototype.createPayPlan = async function (plan = null) {
     if (plan === null) {
-        let template = (await ServiceTemplates.find({"id": this.data.service_id}))[0];
-        plan = await this.buildPayStructure(template.data);
+        let paymentStructure = (await PaymentStructureTemplate.find({id: this.data.payment_structure_template_id}))[0];
+
+        // let template = (await ServiceTemplates.find({"id": this.data.service_id}))[0];
+        plan = await this.buildPayStructure({...paymentStructure.data, name:this.data.name});
     }
     if (plan.trial_period_days === null) {
         plan.trial_period_days = 0;
@@ -69,7 +81,7 @@ ServiceInstance.prototype.createPayPlan = async function (plan = null) {
     } catch (error) {
         try {
             this.data.payment_plan = await Stripe().connection.plans.create(plan);
-        }catch(error){
+        } catch (error) {
             this.data.status = "missing_payment";
             await this.update()
             throw error;
@@ -83,7 +95,7 @@ ServiceInstance.prototype.deletePayPlan = async function () {
     let self = this;
     if (self.data.payment_plan.id) {
         //Remove the plan from Stripe
-       await Stripe().connection.plans.del(self.data.payment_plan.id);
+        await Stripe().connection.plans.del(self.data.payment_plan.id);
         self.data.payment_plan = null;
         return await self.update()
     } else {
@@ -92,17 +104,18 @@ ServiceInstance.prototype.deletePayPlan = async function () {
 };
 
 
-ServiceInstance.prototype.subscribe = async function (paymentPlan=null) {
+ServiceInstance.prototype.subscribe = async function (paymentPlan = null) {
     let self = this;
     if (self.data.subscription_id) {
         throw "Instance is already subscribed"
     }
-    if(paymentPlan){
-        self = await this.changePaymentPlan(paymentPlan);
-    }
     let user = (await User.find({"id": self.data.user_id}))[0];
     if (user && user.data.status === "suspended") {
         throw "User is suspended, unable to subscribe"
+    }
+
+    if (paymentPlan) {
+        self = await this.changePaymentPlan(paymentPlan);
     }
     let sub_obj = {
         "customer": user.data.customer_id,
@@ -134,16 +147,16 @@ let requestCancellation = function (callback) {
             "service_instance_id": self.data.id,
             "user_id": self.data.user_id
         };
-        if(approve_cancellation){
+        if (approve_cancellation) {
             cancellationData.status = "approved"
         }
         let newServiceCancellation = new ServiceInstanceCancellations(cancellationData);
         newServiceCancellation.create(async function (err, result) {
             //Update the service instance status
-            if(approve_cancellation){
+            if (approve_cancellation) {
                 let unsub = await self.unsubscribe()
                 callback(result);
-            }else {
+            } else {
                 self.data.status = "waiting_cancellation";
                 self.update(function (err, updated_instance) {
                     callback(result);
@@ -229,7 +242,7 @@ let deleteFiles = function (callback) {
 
 ServiceInstance.prototype.changeProperties = async function (properties) {
     let updatedInstance = await this.attachReferences();
-    let oldInstance = {data : {...updatedInstance.data}}
+    let oldInstance = {data: {...updatedInstance.data}};
     //todo: support creating new properties, shouldn't be bad... just need to validate the config
     if (properties.some(prop => prop.id === null || prop.parent_id !== updatedInstance.get("id"))) {
         throw "prop id bad or parent id does not match"
@@ -240,15 +253,22 @@ ServiceInstance.prototype.changeProperties = async function (properties) {
         lifecycleManager = lifecycleManager[0];
         await lifecycleManager.prePropertyChange({
             instance: updatedInstance,
-            property_updates : properties
+            property_updates: properties
         });
     }
+    let paymentStructure = (await PaymentStructureTemplate.find({id : updatedInstance.data.payment_structure_template_id}, true))[0];
 
-    let mergedProps = oldProperties.map(prop => {
+    let metricIndexToUnprice = null;
+    let mergedProps = oldProperties.map((prop, index) => {
         let propToMerge = properties.find(reqProp => reqProp.id === prop.id);
-        return propToMerge ? {...prop, "data": propToMerge.data} : prop
+        let finalProp = propToMerge ? {...prop, "data": propToMerge.data} : prop
+        if(finalProp.type === "metric"){
+            if(!finalProp.config.pricing.tiers.includes(paymentStructure.data.references.tiers[0].name)) {
+                metricIndexToUnprice = index
+            }
+        }
+        return finalProp;
     });
-
     if (this.get("type") === "subscription") {
         let paymentPlan = this.get("payment_plan");
         if (paymentPlan === null || paymentPlan.amount === null) {
@@ -258,17 +278,27 @@ ServiceInstance.prototype.changeProperties = async function (properties) {
                 acc[handler.name] = handler.handler;
                 return acc;
             }, {});
-            let basePrice = require("../lib/handleInputs").getBasePrice(oldProperties, handlers, paymentPlan.amount);
-            let newPrice = require("../lib/handleInputs").getPrice(mergedProps, handlers, basePrice);
+            let baseProps = [...oldProperties];
+            let newProps = [...mergedProps];
+            if(metricIndexToUnprice !== null){
+                baseProps.splice(metricIndexToUnprice, 1);
+                newProps.splice(metricIndexToUnprice, 1);
+            }
+
+            let basePrice = require("../lib/handleInputs").getBasePrice(baseProps, handlers, paymentPlan.amount);
+            if(basePrice === 0){
+                basePrice = this.data.references.payment_structure_templates[0].amount;
+            }
+            let newPrice = require("../lib/handleInputs").getPrice(newProps, handlers, basePrice);
             paymentPlan.amount = newPrice;
             updatedInstance = await this.changePaymentPlan(paymentPlan, true);
         }
     }
     let updatedProps = await ServiceInstanceProperties.batchUpdate(mergedProps);
     if (lifecycleManager) {
-        await updatedInstance.attachReferences()
+        await updatedInstance.attachReferences();
         await lifecycleManager.postPropertyChange({
-            old_instance : oldInstance,
+            old_instance: oldInstance,
             instance: updatedInstance,
         });
     }
@@ -276,26 +306,105 @@ ServiceInstance.prototype.changeProperties = async function (properties) {
     return updatedInstance;
 };
 
-ServiceInstance.prototype.changePaymentPlan = async function (newPlan, ignorePlanTrial) {
+ServiceInstance.prototype.applyPaymentStructure = async function (paymentStructureId, ignoreTrial) {
+    let instance_object = await this.attachReferences();
+    let {payment_plan, references : {service_instance_properties, payment_structure_templates}} = instance_object.data;
+    let currentStructure = payment_structure_templates[0];
+    let handlers = (store.getState(true).pluginbot.services.inputHandler || []).reduce((acc, handler) => {
+        acc[handler.name] = handler.handler;
+        return acc;
+    }, {});
+
+    if (!currentStructure) {
+        throw "Instance has no payment structure";
+    }
+
+    let paymentStructureTemplate = (await PaymentStructureTemplate.find({id: paymentStructureId}))[0];
+    if (!paymentStructureTemplate) {
+        throw "Payment Structure Not Found";
+
+    }
+
+    let tier = (await Tier.find({
+        service_template_id: instance_object.data.service_id,
+        id: paymentStructureTemplate.data.tier_id
+    }))[0];
+    if (!tier) {
+        throw "Incompatible Payment Structure";
+    }
+
+    let lifecycleManager = store.getState(true).pluginbot.services.lifecycleManager;
+    if (lifecycleManager) {
+        lifecycleManager = lifecycleManager[0];
+        await lifecycleManager.prePaymentStructureChange({
+            instance: instance_object,
+            payment_structure_template: paymentStructureTemplate,
+        });
+    }
+    let applicableProperties = service_instance_properties.filter(property => {
+        if(property.config && property.config.pricing && property.config.pricing.tiers){
+            return property.config.pricing.tiers.includes(tier.data.name);
+        }else{
+            return true;
+        }
+    });
+    let newPrice = require("../lib/handleInputs").getPrice(applicableProperties, handlers, paymentStructureTemplate.data.amount);
+
+    let paymentPlan = {
+        ...paymentStructureTemplate.data,
+        name : tier.data.name + "-" + paymentStructureTemplate.data.id,
+        amount : newPrice
+    };
+
+
+    let newInstance = await (await instance_object.changePaymentPlan(paymentPlan, ignoreTrial)).attachReferences();
+    newInstance.data.payment_structure_template_id = paymentStructureId;
+    await newInstance.update();
+
+    if (lifecycleManager) {
+        let response = await lifecycleManager.postPaymentStructureChange({
+            old_instance: instance_object,
+            instance: newInstance
+        });
+        if (response) {
+            newInstance.data = {
+                ...newInstance.data,
+                ...response
+            }
+        }
+    }
+    return newInstance;
+
+
+};
+
+ServiceInstance.prototype.changePaymentPlan = async function (newPlan, ignorePlanTrial, disableProration) {
     await this.deletePayPlan();
     let planStructure = await this.buildPayStructure(newPlan);
     let updatedInstance = await this.createPayPlan(planStructure);
-    if(this.data.subscription_id !== null) {
-        let payload = {plan: updatedInstance.data.payment_plan.id}
-        if(ignorePlanTrial){
+    if (this.data.subscription_id !== null) {
+        let payload = {plan: updatedInstance.data.payment_plan.id};
+        if (ignorePlanTrial || newPlan.trial_period_days == null) {
             payload.trial_from_plan = false;
+        }
+        if(disableProration){
+            payload.prorate = false;
         }
         let stripeSubscription = await Stripe().connection.subscriptions.update(this.data.subscription_id, payload);
         let oldTrial = updatedInstance.data.trial_end;
-        updatedInstance.data.trial_end = stripeSubscription.trial_end
-        if(oldTrial !== stripeSubscription.trial_end){
-
+        updatedInstance.data.trial_end = stripeSubscription.trial_end;
+        // if (newPlan.id) {
+        //     updatedInstance.data.payment_structure_template_id = newPlan.id
+        // }
+        if (oldTrial !== stripeSubscription.trial_end) {
+            updatedInstance = await updatedInstance.update()
             //todo: handle this better,  don't like dispatching here.
             store.dispatchEvent("service_instance_trial_change", updatedInstance);
         }
+
     }
-    updatedInstance.data.type = updatedInstance.data.payment_plan.amount > 0 ? "subscription" : "custom";
-    return await updatedInstance.update();
+    // updatedInstance.data.type = updatedInstance.data.payment_plan.amount > 0 ? "subscription" : "custom";
+    return updatedInstance;
 };
 
 ServiceInstance.prototype.unsubscribe = async function () {
@@ -327,7 +436,7 @@ ServiceInstance.prototype.unsubscribe = async function () {
         console.error(error);
         throw error;
     }
-}
+};
 
 
 //todo: clean this up so they really support promises.

@@ -1,8 +1,5 @@
 import React from 'react';
 import { TwitterPicker, SketchPicker } from 'react-color';
-import getSymbolFromCurrency from 'currency-symbol-map';
-import {connect} from 'react-redux';
-
 let _ = require("lodash");
 let values = require('object.values');
 
@@ -81,18 +78,18 @@ class Inputs extends React.Component {
         let dependencies = this.props.manageDependency;
         if(dependencies) {
             return React.Children.map(self.props.children, child => {
-                let newProps = dependencies.map(dep =>{
+                  let newProps = dependencies.map(dep =>{
                     if(child.props.name == dep.dependsOn){
                         let dependentChild = React.Children.map(self.props.children, child =>{if(child.props.name == dep.name){return child}})[0]
                         return {dependentFunction: dep.valFun, dependent: dependentChild};
                     }
                 })[0];
-                if(newProps){
-                    return React.cloneElement(child, newProps)
-                }
-                else{
-                    return child;
-                }
+                  if(newProps){
+                      return React.cloneElement(child, newProps)
+                  }
+                  else{
+                      return child;
+                  }
             });
         }
     }
@@ -193,12 +190,9 @@ class Inputs extends React.Component {
         let placeholder     = this.props.placeholder;
         let disabled        = this.props.disabled ? true : false;
         let error           = this.props.errors && this.props.errors.length ? this.props.errors[0].message :
-            this.props.error ? this.props.error :
-                this.state.error ? this.state.error : false;
+                                this.props.error ? this.props.error :
+                                    this.state.error ? this.state.error : false;
         let warning         = this.props.warning ? this.props.warning : false;
-
-        let { options } = this.props;
-        let prefix = options.currency ? getSymbolFromCurrency(options.currency.value) : '';
 
         //error checking props
         if(!name){
@@ -225,7 +219,7 @@ class Inputs extends React.Component {
                     {label && <label className="control-label text-capitalize">{label}</label>}
                     <div className="price-input">
                         <span className="price-mask">{!isNaN(this.state.priceValue) && this.state.priceValue >= 0 ?
-                            `${prefix + this.state.priceValue}` : `${prefix + this.props.value/100}`}</span>
+                            `$${this.state.priceValue}` : `$${this.props.value/100}`}</span>
                         <input className="form-control price-value" autoComplete="off" maxLength={maxLength} type="number" placeholder={placeholder}
                                disabled={disabled} name={name} defaultValue={defaultValue || 0} onChange={this.handlePriceChange}/>
                     </div>
@@ -252,12 +246,12 @@ class Inputs extends React.Component {
                             <option value={null}>{''}</option> : ''
                         }
                         {(_.isArray(this.props.options) && this.props.options) ?
-                            this.props.options.map( option => (
-                                <option key={`option-${typeof(option) == 'object' ? Object.keys(option)[0] : option}`}
-                                        value={typeof(option) == 'object' ? Object.values(option)[0] : option}>
+                          this.props.options.map( option => (
+                             <option key={`option-${typeof(option) == 'object' ? Object.keys(option)[0] : option}`}
+                                     value={typeof(option) == 'object' ? Object.values(option)[0] : option}>
                                     {typeof(option) == 'object' ? Object.keys(option)[0] : option}</option>
-                            )) :
-                            <span className="help-block">Options format is not accepted. Must be an array or array of objects</span>
+                          )) :
+                        <span className="help-block">Options format is not accepted. Must be an array or array of objects</span>
 
                         }
                         {/*<option value={this.props.value || this.props.defaultValue}>{this.props.value || this.props.defaultValue}</option>*/}
@@ -309,7 +303,7 @@ class Inputs extends React.Component {
                     }
                     {/*{ this.state.showCustomPicker &&*/}
                     {/*<SketchPicker color={{color: {hex: this.state.value}}} colors={this.state.colors}*/}
-                    {/*onChange={this.handleColorPickerChange}/>*/}
+                                  {/*onChange={this.handleColorPickerChange}/>*/}
                     {/*}*/}
                     {this.props.error && <span className="help-block">{this.props.error}</span> }
                     <div className="clearfix"/>
@@ -320,11 +314,5 @@ class Inputs extends React.Component {
     }
 
 }
-
-Inputs = connect(state => {
-    return {
-        options: state.options,
-    }
-})(Inputs);
 
 export default Inputs;

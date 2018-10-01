@@ -3,7 +3,7 @@ import Load from '../../utilities/load.jsx';
 import Inputs from "../../utilities/inputsV2.jsx";
 import { formBuilder } from "../../utilities/form-builder";
 import Buttons from "../../elements/buttons.jsx";
-import Fetcher from "../../utilities/fetcher.jsx";
+import {Fetcher} from "servicebot-base-form";
 let _ = require("lodash");
 
 const FORM_NAME = "userEditRoleForm";
@@ -87,7 +87,7 @@ class UserFormEditRole extends React.Component {
                         <div className={`modal-footer text-right p-b-20`}>
                             <Buttons containerClass="inline" size="md" btnType="primary" text="Save User" value="submit"
                                      onClick={this.handleSubmission} loading={this.state.ajaxLoad}/>
-                            <Buttons containerClass="inline" size="md" btnType="default" text="Cancel" onClick={this.props.hide} />
+                            <Buttons buttonClass="_text" containerClass="inline" size="md" btnType="default" text="Cancel" onClick={this.props.hide} />
                         </div>
                     </div>
                 )

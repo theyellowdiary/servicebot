@@ -1,7 +1,5 @@
 import React from 'react';
-import Fetcher from "../../../views/components/utilities/fetcher.jsx"
-import ServiceBotBaseForm from "../../../views/components/elements/forms/servicebot-base-form.jsx";
-import {inputField} from "../../../views/components/elements/forms/servicebot-base-field.jsx";
+import {Fetcher, ServicebotBaseForm, inputField} from "servicebot-base-form";
 import Alerts from '../../../views/components/elements/alerts.jsx';
 import {required, url} from 'redux-form-validators'
 import {Field,} from 'redux-form'
@@ -114,33 +112,28 @@ userToken = generateJWT(user[:email], SECRET_KEY)
         }
     })
 </script>`;
-    return (
-        <div className="sbi--wrapper">
-            <h2>Customer account management embed</h2>
-            <div className="sbi--serverside">
-                <h3 className="sbi--title">Server-side</h3>
-                <span className="sbi--subtitle">In order to embed the management so users can add cards, cancel, and resubscribe, you need to generate a token which
-                will authenticate your users and be used by the client-side javascript.</span><br/>
-                <strong><span>Select a Server-side language or framework: </span></strong>
-                <select onChange={props.onChange} value={props.value}>
-                    <option value="node">NodeJS</option>
-                    <option value="php">PHP</option>
-                    <option value="ruby">Rails/Ruby</option>
-                    <option value="other">Other</option>
-                </select>
-                <pre class="sbi--code-sample">{server}</pre>
-                <span>
-                    <strong>DO NOT EXPOSE THE SECRET KEY TO THE PUBLIC</strong>,
-                    make sure not to commit it into version control or send under insecure channels or expose to client
-                </span>
-            </div>
-            <div className="sbi--client">
-                <h3 className="sbi-title">Client-side</h3>
-                <span className="sbi--subtitle">With the token generated on the server, use this HTML on the client...(with the proper token)</span>
-                <pre class="sbi--code-sample">{clientCode}</pre>
-            </div>
-        </div>
-    )
+    return (<div>
+        <h3>Server-side</h3>
+        <span>In order to embed the management so users can add cards, cancel, and resubscribe, you need to generate a token which
+        will authenticate your users and be used by the client-side javascript.</span>
+        <br/>
+        <span>Server-side language or framework</span>
+        <select onChange={props.onChange} value={props.value}>
+            <option value="node">NodeJS</option>
+            <option value="php">PHP</option>
+            <option value="ruby">Rails/Ruby</option>
+            <option value="other">Other</option>
+
+        </select>
+        <pre>{server}</pre>
+        <span>
+            <strong>DO NOT EXPOSE THE SECRET KEY TO THE PUBLIC</strong>,
+            make sure not to commit it into version control or send under insecure channels or expose to client</span>
+        <br/>
+        <h3>Client-side</h3>
+        <span>With the token generated on the server, use this HTML on the client...(with the proper token)</span>
+        <pre>{clientCode}</pre>
+    </div>)
 }
 
 function WebhookForm(props) {
@@ -173,7 +166,7 @@ function WebhookModal(props) {
         <Modal modalTitle={"Add endpoint"} icon="fa-plus" hideCloseBtn={false} show={show} hide={hide}
                hideFooter={false}>
             <div className="p-20">
-                <ServiceBotBaseForm
+                <ServicebotBaseForm
                     form={WebhookForm}
                     initialValues={{...hook}}
                     submissionRequest={submissionRequest}
@@ -211,7 +204,7 @@ class Webhooks extends React.Component {
             secretKey: null,
             selectedTemplate: 0,
             selectedServer: "node"
-        }
+        };
         this.fetchData = this.fetchData.bind(this);
         this.openHookForm = this.openHookForm.bind(this);
         this.closeHookForm = this.closeHookForm.bind(this);
@@ -221,10 +214,6 @@ class Webhooks extends React.Component {
         this.testHooks = this.testHooks.bind(this);
         this.showEvents = this.showEvents.bind(this);
         this.hideEvents = this.hideEvents.bind(this);
-        this.showManagement = this.showManagement.bind(this);
-        this.hideManagement = this.hideManagement.bind(this);
-        this.showForm = this.showForm.bind(this);
-        this.hideForm = this.hideForm.bind(this);
         this.changeServer = this.changeServer.bind(this);
         this.changeTemplate = this.changeTemplate.bind(this);
 
@@ -328,22 +317,6 @@ class Webhooks extends React.Component {
         this.setState({showEventsInfo: false});
     }
 
-    showForm() {
-        this.setState({showFormEmbed: true});
-    }
-
-    hideForm() {
-        this.setState({showFormEmbed: false});
-    }
-
-    showManagement() {
-        this.setState({showManagementEmbed: true});
-    }
-
-    hideManagement() {
-        this.setState({showManagementEmbed: false});
-    }
-
 
     render() {
         let self = this;
@@ -371,7 +344,7 @@ class Webhooks extends React.Component {
         }
         let formHTML;
         if (this.state.selectedTemplate === null || this.state.selectedTemplate == 0) {
-            formHTML = "Select a template from the list to embed"
+            formHTML = "Select a service from the list to embed"
         } else {
             formHTML = `<div id="servicebot-request-form"></div>
 <script src="https://js.stripe.com/v3/"></script>
@@ -391,71 +364,25 @@ Servicebot.init({
 })
 </script>`
         }
-        let formEmbed = (
-            <div className="sbi--wrapper">
-                <h2>Customer account management embed</h2>
-                <div className="sbi--client-side">
-                    <span class="sbi--subtitle">Paste the generated HTML on the page you want to embed a request form. <br/>You can find more detailed in our <a href="https://docs.servicebot.io/embed">documentation</a></span><br/>
-                    <strong><span class="sbi--dropdown-label">Select a service to embed: </span></strong>
-                    <select onChange={this.changeTemplate}>
-                        <option key={"default-0"} value="0">Select a template</option>
-                        {this.state.templates.map(template => {
-                            return (<option key={template.id} value={template.id}>{template.name}</option>)
-                        })}
-                    </select>
-                    <pre>{formHTML}</pre>
-                </div>
-            </div>
-        );
         return (
             <div>
                 <Jumbotron pageName={pageName} subtitle={subtitle}/>
                 <div
                     className="page-servicebot-webhooks col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2"
                     id="payment-form">
-                    <h3>Embed</h3>
-                    <span>Servicebot has embeddable forms which can facilitate actions such as subscribing, adding a credit card, cancelling, and resubscribing</span>
-                    {this.state.showFormEmbed ?
-                        <div className="sbi--modal">
-                            {formEmbed}
-                            <button className="sbi--embed-code-button sbi--ecb--hide" onClick={this.hideForm}>Hide</button>
-                        </div> :
-                        <div className="sbi--embed-button-wrapper">
-                            <span className="sbi--embed-label">Embed to allow customers to request new subscriptions</span>
-                            <button className="sbi--embed-code-button" onClick={this.showForm}>Get Embed Code</button>
-                        </div>
-                    }
-                    {this.state.showManagementEmbed ?
-                        <div className="sbi--modal">
-                            <ManagementEmbed
-                                value={this.state.selectedServer}
-                                onChange={this.changeServer}
-                                secretKey={this.state.secretKey}/>
-                            <button className="sbi--embed-code-button sbi--ecb--hide" onClick={this.hideManagement}>Hide</button>
-                        </div> :
-                        <div className="sbi--embed-button-wrapper">
-                            <span className="sbi--embed-label">Embed to allow customers to manage thier account and billing settings</span>
-                            <button className="sbi--embed-code-button" onClick={this.showManagement}>Get Embed Code
-                            </button>
-                        </div>
-                    }
-
-
                     <h3>Webhooks</h3>
-                    <span>Servicebot can send webhook events that notify your application any time an event happens.
-                        This is especially useful for events—like new customer subscription or trial expiration—that
-                        your SaaS product needs to know about. You can integrate your SaaS with Servicebot by listening
-                        to API calls sent from your Servicebot instance to your SaaS product.</span>
+                    <span>Servicebot can send webhook events that notify your application or third-party system any time an event happens.
+                        Use it for events, like new customer subscription or trial expiration, that
+                        your SaaS needs to know about.</span>
 
-                    <div className="sbi--webhook-button-wrapper">
-                        <span className="sbi--webhook-label">Add and test your webhooks</span>
-                        <button className="sbi--webhook-button" onClick={() => {
-                            self.openHookForm({})
-                        }} type="submit" value="submit"><i className="fa fa-plus"/> Add endpoint
+                    <div className="hook-actions m-b-15">
+                        <button className="btn btn-default m-r-5" onClick={self.testHooks} type="submit"
+                                value="submit">{loading ? <i className="fa fa-refresh fa-spin"></i> :
+                            <i className="fa fa-refresh"></i>} Re-test endpoints
                         </button>
-                        <button className="sbi--webhook-button sbi--wb--retest" onClick={self.testHooks} type="submit"
-                                value="submit">{loading ? <i className="fa fa-refresh fa-spin"/> :
-                            <i className="fa fa-refresh"/>} Re-test endpoints
+                        <button className="btn btn-primary m-r-5" onClick={() => {
+                            self.openHookForm({})
+                        }} type="submit" value="submit"><i className="fa fa-plus"></i> Add endpoint
                         </button>
                     </div>
 
@@ -552,7 +479,7 @@ Servicebot.init({
 
 
 let RouteDefinition = {
-    component: Webhooks, name: "Integrations", path: "/webhooks", isVisible: function (user) {
+    component: Webhooks, navType: "settings", name: "Webhook Settings", path: "/webhooks", isVisible: function (user) {
         //todo: this is dirty, need to do permission based...
         return user.role_id === 1
     }

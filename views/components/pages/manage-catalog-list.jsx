@@ -12,7 +12,8 @@ import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-a
 import ModalPublishingTemplate from "../elements/modals/modal-publishing-template.jsx";
 import ModalDeleteTemplate from "../elements/modals/modal-delete-template.jsx";
 import ModalEmbedTemplate from "../elements/modals/modal-embed-template.jsx";
-
+import ReactTooltip from 'react-tooltip';
+import ContentTitle from "../layouts/content-title.jsx";
 import getSymbolFromCurrency from 'currency-symbol-map'
 import {connect} from "react-redux";
 
@@ -37,7 +38,6 @@ class ManageCatalogList extends React.Component {
         this.onClosePublishingModal = this.onClosePublishingModal.bind(this);
         this.onOpenDeleteModal = this.onOpenDeleteModal.bind(this);
         this.onCloseDeleteModal = this.onCloseDeleteModal.bind(this);
-        this.onOpenEmbedModal = this.onOpenEmbedModal.bind(this);
         this.onCloseEmbedModal = this.onCloseEmbedModal.bind(this);
 
         this.rowActionsFormatter = this.rowActionsFormatter.bind(this);
@@ -88,17 +88,18 @@ class ManageCatalogList extends React.Component {
         this.setState({embedModal: false, currentDataObject: {}, lastFetch: Date.now()});
     }
 
-    onOpenEmbedModal(row){
-        this.setState({embedModal: true, currentDataObject: row});
-    }
-
 
     /**
      * Cell formatters
      * Formats each cell data by passing the function as the dataFormat prop in TableHeaderColumn
      */
     nameFormatter(cell, row){
-        return ( <Link to={`/manage-catalog/${row.id}`}>{cell}</Link> );
+        let numTiers = row.references.tiers.length;
+        let str = 'Tiers';
+        if(numTiers === 1) {
+            str = 'Tier';
+        }
+        return ( <Link to={`/manage-catalog/${row.id}`}>{cell} <span class="status-badge faded" >{numTiers} {str}</span></Link> );
     }
     priceFormatter(cell, row){
         let prefix = getSymbolFromCurrency(row.currency);
@@ -112,12 +113,17 @@ class ManageCatalogList extends React.Component {
     }
     publishedFormatter(cell){
         let color_class = 'status-badge ';
-        color_class += cell ? 'green' : 'red';
-        return ( `<span class="${color_class}" >${cell ? 'Published' : 'Unpublished'}</span>` );
+        color_class += cell ? 'green' : 'grey';
+        return ( `<span class="${color_class}" >${cell ? 'Live' : 'Draft'}</span>` );
         // return ( cell ? 'Published' : 'Unpublished' );
     }
     createdFormatter(cell){
-        return (getFormattedDate(cell, {time: true}));
+        return (<div className="datatable-date">
+                    <span data-tip={getFormattedDate(cell, {time: true})} data-for='date-updated'>{getFormattedDate(cell)}</span>
+                    <ReactTooltip id="date-updated" aria-haspopup='true' delayShow={400}
+                                  role='date' place="left" effect="solid"/>
+                </div>);
+        //return (getFormattedDate(cell, {time: true}));
     }
     rowActionsFormatter(cell, row){
         let self = this;
@@ -141,16 +147,11 @@ class ManageCatalogList extends React.Component {
                         action: () => {browserHistory.push(`/service-catalog/${row.id}/request`)},
                     },
                     {
-                        type: "button",
-                        label: 'Embed Request Form',
-                        action: () => {self.onOpenEmbedModal(row)},
-                    },
-                    {
                         type: "divider"
                     },
                     {
                         type: "button",
-                        label: row.published ? 'Unpublish Item' : 'Publish Item',
+                        label: row.published ? 'Set Draft' : 'Set Live',
                         action: () => {self.onOpenPublishingModal(row)},
                     },
                     {
@@ -159,7 +160,7 @@ class ManageCatalogList extends React.Component {
                         action: () => {self.onOpenDeleteModal(row)},
                     },
                 ].filter(option => {
-                    if(!self.props.provider && (option.label === "Request for User" || option.label === "Publish Item")){
+                    if(!self.props.provider && (option.label === "Request for User" || option.label === "Set Live")){
                         return false;
                     }
                     return true;
@@ -199,12 +200,13 @@ class ManageCatalogList extends React.Component {
             return ( <Load/> );
         } else {
             return (
-                <div className="row m-b-20">
+                <div className="page-service-instance row m-b-20">
                     <div className="col-xs-12">
+                        <ContentTitle title="Manage Services"/>
                         <ServiceBotTableBase
                             rows={this.state.rows}
                             createItemAction={ () => {browserHistory.push('/manage-catalog/create')} }
-                            createItemLabel={'Create Product / Service'}
+                            createItemLabel={'Create Service'}
                             fetchRows={this.fetchData}
                             sortColumn="updated_at"
                             sortOrder="desc"
@@ -214,29 +216,29 @@ class ManageCatalogList extends React.Component {
                                                dataSort={ true }
                                                dataFormat={ this.nameFormatter }
                                                width={200}>
-                                Product / Service Name
+                                Service Name
                             </TableHeaderColumn>
-                            <TableHeaderColumn dataField='amount'
-                                               dataSort={ true }
-                                               dataFormat={ this.priceFormatter }
-                                               searchable={false}
-                                               width={100}>
-                                Pricing
-                            </TableHeaderColumn>
-                            <TableHeaderColumn dataField='type'
-                                               dataSort={ true }
-                                               dataFormat={ this.paymentTypeFormatter }
-                                               searchable={false}
-                                               width={100}>
-                                Type
-                            </TableHeaderColumn>
-                            <TableHeaderColumn dataField='references'
-                                               dataSort={ true }
-                                               dataFormat={ this.categoryFormatter }
-                                               filterFormatted
-                                               width={120}>
-                                Category
-                            </TableHeaderColumn>
+                            {/*<TableHeaderColumn dataField='Tiers'*/}
+                                               {/*dataSort={ true }*/}
+                                               {/*dataFormat={ this.tierFormatter }*/}
+                                               {/*searchable={false}*/}
+                                               {/*width={50}>*/}
+                                {/*Tiers*/}
+                            {/*</TableHeaderColumn>*/}
+                            {/*<TableHeaderColumn dataField='type'*/}
+                                               {/*dataSort={ true }*/}
+                                               {/*dataFormat={ this.paymentTypeFormatter }*/}
+                                               {/*searchable={false}*/}
+                                               {/*width={100}>*/}
+                                {/*Type*/}
+                            {/*</TableHeaderColumn>*/}
+                            {/*<TableHeaderColumn dataField='references'*/}
+                                               {/*dataSort={ true }*/}
+                                               {/*dataFormat={ this.categoryFormatter }*/}
+                                               {/*filterFormatted*/}
+                                               {/*width={120}>*/}
+                                {/*Category*/}
+                            {/*</TableHeaderColumn>*/}
                             <TableHeaderColumn dataField='published'
                                                dataSort={ true }
                                                dataFormat={ this.publishedFormatter }

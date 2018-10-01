@@ -1,19 +1,18 @@
 import React from 'react';
 import cookie from 'react-cookie';
 import Load from '../../utilities/load.jsx';
-import Fetcher from "../../utilities/fetcher.jsx"
+import {Fetcher} from "servicebot-base-form"
 import {browserHistory} from 'react-router';
 import Modal from '../../utilities/modal.jsx';
 import ModalPaymentSetup from './modal-payment-setup.jsx';
 import {Price} from '../../utilities/price.jsx';
-import {connect} from 'react-redux';
-import getSymbolFromCurrency from 'currency-symbol-map';
 let _ = require("lodash");
 
 class ModalPayAllCharges extends React.Component {
 
     constructor(props){
         super(props);
+        console.log("HELLO!2");
         let uid = cookie.load("uid");
         if(this.props.ownerId){
             uid = this.props.ownerId;
@@ -107,6 +106,7 @@ class ModalPayAllCharges extends React.Component {
     }
 
     render () {
+        console.log("HELLO!");
         let self = this;
         let pageName = "Pay Charges";
         let currentModal = this.state.current_modal;
@@ -114,8 +114,6 @@ class ModalPayAllCharges extends React.Component {
         let charges = this.state.service.references.charge_items;
         let unpaidCharges = _.filter(charges, (item)=> {return (!item.approved)});
         let totalCharges = 0;
-        let { options } = this.props;
-        let prefix = options.currency ? getSymbolFromCurrency(options.currency.value) : '';
         unpaidCharges.map((charge)=>{ totalCharges+= charge.amount; });
 
         if(currentModal == 'model_pay_charge' && !self.state.paid){
@@ -127,7 +125,7 @@ class ModalPayAllCharges extends React.Component {
                                 <div className="col-xs-12">
                                     <p><strong>You are about to pay the outstanding charges for your item:</strong></p>
                                     <p>Item Name: {serviceName}</p>
-                                    <p><strong>Total Charges: <Price value={totalCharges} prefix={prefix}/></strong></p>
+                                    <p><strong>Total Charges: <Price value={totalCharges}/></strong></p>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +143,7 @@ class ModalPayAllCharges extends React.Component {
                         <div className="p-20">
                             <div className="row">
                                 <div className="col-xs-12">
-                                    <p><strong>Thank you! You have paid <Price value={totalCharges} prefix={prefix}/>.</strong></p>
+                                    <p><strong>Thank you! You have paid <Price value={totalCharges}/>.</strong></p>
                                     <p>This charge will appear in your billing history shortly.</p>
                                 </div>
                             </div>
@@ -162,10 +160,5 @@ class ModalPayAllCharges extends React.Component {
 
     }
 }
-ModalPayAllCharges = connect(state => {
-    return {
-        options: state.options,
-    }
-})(ModalPayAllCharges);
 
 export default ModalPayAllCharges;

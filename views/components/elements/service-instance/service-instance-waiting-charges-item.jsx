@@ -31,11 +31,10 @@ class ServiceInstanceWaitingChargesItem extends React.Component {
         return (
             <div className="xaas-body-row">
                 <div className="xaas-data xaas-charge"><span>{self.state.chargeItem.description}</span></div>
-                <div className="xaas-data xaas-price"><span><Price value={self.state.chargeItem.amount}  prefix={this.props.prefix}/></span></div>
+                <div className="xaas-data xaas-price"><span><Price value={self.state.chargeItem.amount}/></span></div>
                 {isAuthorized({permissions: 'can_administrate'}) &&
                     <div className="xaas-data xaas-action">
-
-                        <Buttons btnType="primary" text="Remove Charge" onClick={self.onCancelCharge}/>
+                        <span className="buttons _navy" onClick={self.onCancelCharge}>Remove</span>
                     </div>
                 }
             </div>

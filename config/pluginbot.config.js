@@ -113,7 +113,11 @@ let basePlugins = function() {
         {"path" : `${PLUGIN_DIRECTORY}/client-plugins/ga`},
         {"path" : `${PLUGIN_DIRECTORY}/updates`, "interval" : 86400000, "master" : "https://hub.serviceshop.io/api/v1/announcements"},
         {"path" : `${PLUGIN_DIRECTORY}/file-manager`},
-        {"path" : `${PLUGIN_DIRECTORY}/webhooks`}
+        {"path" : `${PLUGIN_DIRECTORY}/webhooks`},
+        {"path" : `${PLUGIN_DIRECTORY}/core-embeddables`},
+        {"path" : `${PLUGIN_DIRECTORY}/initial-state`}
+
+
     ];
 };
 
@@ -133,6 +137,7 @@ let getAppConf = function(){
         "configPath" : __dirname + "/pluginbot.config.js",
         "port" : process.env.PORT || 3000,
         "bundle_path" : process.env.BUNDLE_PATH || "/build/bundle.js",
+        "vendor_path" : process.env.vendor_path || "/build/vendor.js",
         "ssl_port" : process.env.SSL_PORT || 3001,
         "certificate_path" : process.env.CERTIFICATES || null, //ssl not mandatory
     };

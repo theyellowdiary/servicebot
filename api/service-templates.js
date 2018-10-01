@@ -22,6 +22,8 @@ let iconFilePath = ServiceTemplate.iconFilePath;
 let imageFilePath = ServiceTemplate.imageFilePath;
 let slug = require("slug");
 let validateProperties = require("../lib/handleInputs").validateProperties;
+let Tier = require("../models/tier");
+let PaymentStructureTemplate = require("../models/payment-structure-template");
 let fileManager = store.getState(true).pluginbot.services.fileManager[0];
 let jwt = require('jsonwebtoken');
 
@@ -135,9 +137,11 @@ module.exports = function (router) {
 
     });
 
-    router.get('/service-templates/:id/request', validate(ServiceTemplate), function (req, res, next) {
+    router.get('/service-templates/:id/request', validate(ServiceTemplate), async function (req, res, next) {
         let serviceTemplate = res.locals.valid_object;
+        let tiers = await Tier.find({service_template_id: serviceTemplate.data.id}, true);
         serviceTemplate.data.references = {};
+        res.locals.valid_object.data.references.tiers = tiers.map(tier => tier.data);
         serviceTemplate.getRelated(ServiceTemplateProperty, function (props) {
             //this object for authenticated call
             res.locals.valid_object.data.references[ServiceTemplateProperty.table] = props.map(entity => entity.data);
@@ -202,6 +206,18 @@ module.exports = function (router) {
             let props = (await serviceTemplate.getRelated(ServiceTemplateProperty)) || null;
             let req_body = req.body;
             let reqProps = req_body.references && req_body.references.service_template_properties || [];
+            let paymentStructureTemplate = (await PaymentStructureTemplate.find({id: req_body.payment_structure_template_id}))[0];
+
+            //check if the payment structure exists
+            if(!paymentStructureTemplate){
+                return res.status(400).json({error: 'Payment structure template not found'});
+            }
+            let tier = (await Tier.find({id: paymentStructureTemplate.data.tier_id, service_template_id: serviceTemplate.data.id}))[0];
+
+            //check if the structure's tier belongs to the template
+            if(!tier){
+                return res.status(400).json({error: 'Payment Structure does not belong to this service template'});
+            }
             await authPromise(req, res);
             let permission_array = res.locals.permissions || [];
             let handlers = (store.getState(true).pluginbot.services.inputHandler || []).reduce((acc, handler) => {
@@ -210,9 +226,9 @@ module.exports = function (router) {
             }, {});
             //this is true when user can override things
             let hasPermission = (permission_array.some(p => p.get("permission_name") === "can_administrate" || p.get("permission_name") === "can_manage"));
-            let templatePrice = serviceTemplate.get("amount");
+            let templatePrice = paymentStructureTemplate.get("amount");
             let price = hasPermission ? (req_body.amount || templatePrice) : templatePrice;
-            let trialPeriod = serviceTemplate.get("trial_period_days");
+            let trialPeriod = paymentStructureTemplate.get("trial_period_days");
 
             //todo: this doesn't do anthing yet, needs to check the "passed" props not the ones on the original...
             // let validationResult = props ? validateProperties(props, handlers) : [];
@@ -221,12 +237,22 @@ module.exports = function (router) {
             // }
 
             //todo: less looping later
-            let mergedProps = props.map(prop => {
+            let metricIndex = null;
+            let mergedProps = props.map((prop, index) => {
                 let propToMerge = reqProps.find(reqProp => reqProp.id === prop.data.id);
-                return propToMerge ? {...prop.data, "data" : propToMerge.data} : prop
+                let mergedProp = propToMerge ? {...prop.data, "data" : propToMerge.data} : prop
+                if(mergedProp.type === "metric" && mergedProp.config.pricing && mergedProp.config.pricing.tiers && !mergedProp.config.pricing.tiers.includes(tier.data.name)){
+                    metricIndex = index;
+                }
+                return mergedProp;
             });
             if (props) {
-                price = require("../lib/handleInputs").getPrice(mergedProps, handlers, price);
+                let priceProps = [...mergedProps];
+                if(metricIndex !== null){
+                    priceProps.splice(metricIndex, 1);
+                }
+
+                price = require("../lib/handleInputs").getPrice(priceProps, handlers, price);
 
             }
 
@@ -235,7 +261,8 @@ module.exports = function (router) {
 
             res.locals.adjusted_price = price;
             res.locals.merged_props = mergedProps;
-            if (!req.isAuthenticated()) {
+            res.locals.payment_structure_template = paymentStructureTemplate;
+            if (!req.isAuthenticated() || (req_body.hasOwnProperty("email") && req.user.data.email !== req_body.email)) {
 
                 if (req_body.hasOwnProperty("email")) {
                     let mailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -252,6 +279,11 @@ module.exports = function (router) {
 
                 let user = await User.findOne("email", req_body.email);
                 if (user.data) {
+                    if(hasPermission){
+                        req.body.client_id = user.get("id");
+                        res.locals.request_for = user;
+                        return next();
+                    }
                     let invitation = await Invitation.findOne("user_id", user.get("id"));
                     if (invitation.data) {
                         return res.status(400).json({error: 'User has already been invited'});
@@ -283,8 +315,12 @@ module.exports = function (router) {
         try {
             let serviceTemplate = res.locals.valid_object;
             let references = serviceTemplate.references;
+            let paymentStructureTemplate = res.locals.payment_structure_template;
             let props = references ? references.service_template_properties : null;
             let req_body = req.body;
+            if(!req_body.references){
+                req_body.references = {};
+            }
             req_body.references.service_template_properties = res.locals.merged_props;
             let Promise = require("bluebird");
             let permission_array = res.locals.permissions || [];
@@ -295,7 +331,7 @@ module.exports = function (router) {
             let user = req.user;
 
             //is the user authenticated (are they logged in)?
-            let isNew = !req.isAuthenticated();
+            let isNew = !req.isAuthenticated() || (req_body.hasOwnProperty("email") && !req_body.hasOwnProperty("client_id") && req.user.data.email !== req_body.email);
             let store = require('../config/redux/store');
 
             //todo: once in plugin this code needs big changes
@@ -313,62 +349,71 @@ module.exports = function (router) {
 
             }
             //if it's a new user request we need to create an account, invitation
+            //todo: move this part into a function
             if (isNew && serviceTemplate.get('published')) {
 
                 let globalProps = store.getState().options;
                 let roleId = globalProps['default_user_role'];
 
-                let newUser = new User({"email": req_body.email, "role_id": roleId, "status": "invited"});
+                let newUser = new User({"email": req_body.email, "role_id": roleId, "status": "active"});
                 if(req_body.password){
                     let password = require("bcryptjs").hashSync(req_body.password, 10);
 
                     newUser.set("password", password)
                     newUser.set("status", "active");
                 }
+                if(req_body.userName){
+                    newUser.set("name", req_body.userName);
+                }
+                if(req_body.token){
+                    newUser.set("google_user_id", req_body.token);
+                }
                 //promisify the createWithStripe function
                 let createUser = Promise.promisify(newUser.createWithStripe, {context: newUser});
 
                 //create the new user
                 let createdUser = await createUser();
-                if(!req_body.password) {
-                    let invite = new Invitation({"user_id": createdUser.get("id")});
-                    let createInvite = Promise.promisify(invite.create, {context: invite});
-                    //create the invitation for the user.
-                    let createdInvite = await createInvite();
-                    responseJSON.api = req.protocol + '://' + req.get('host') + "/api/v1/users/register?token=" + createdInvite.get("token");
-                    responseJSON.url = req.protocol + '://' + req.get('host') + "/invitation/" + createdInvite.get("token");
-
-                }
+                // if(!req_body.password) {
+                //     let invite = new Invitation({"user_id": createdUser.get("id")});
+                //     let createInvite = Promise.promisify(invite.create, {context: invite});
+                //     //create the invitation for the user.
+                //     let createdInvite = await createInvite();
+                //     responseJSON.api = req.protocol + '://' + req.get('host') + "/api/v1/users/register?token=" + createdInvite.get("token");
+                //     responseJSON.url = req.protocol + '://' + req.get('host') + "/invitation/" + createdInvite.get("token");
+                //
+                // }
                 responseJSON.token = jwt.sign({  uid: createdUser.get("id") }, process.env.SECRET_KEY, { expiresIn: '1h' });
                 let user_role = new Role({id : createdUser.get("role_id")}) ;
 
                 // todo : remove this once it supports promises
-                let permissionPromise = new Promise(resolve => {
-                    user_role.getPermissions(function (perms) {
-                        let permission_names = perms.map(perm => perm.data.permission_name);
-                        return resolve(permission_names);
-                    });
-                });
-
-                let loginPromise = new Promise((resolve, reject) => {
-                    req.logIn(createdUser, {session: true}, (err) => {
-                        if (err) {
-                            reject(err);
-                        }
-                        else{
-                            resolve();
-                        }
+                if(!req.isAuthenticated()) {
+                    let permissionPromise = new Promise(resolve => {
+                        user_role.getPermissions(function (perms) {
+                            let permission_names = perms.map(perm => perm.data.permission_name);
+                            return resolve(permission_names);
+                        });
                     });
 
-                });
+                    let loginPromise = new Promise((resolve, reject) => {
+                        req.logIn(createdUser, {session: true}, (err) => {
+                            if (err) {
+                                reject(err);
+                            }
+                            else {
+                                resolve();
+                            }
+                        });
 
-                //log in the user (give them a cookie)
-                await loginPromise;
+                    });
 
-                //set some data for the response
+                    //log in the user (give them a cookie)
+                    await loginPromise;
 
-                //currently the permissions that the client app sets get passed here.
-                responseJSON.permissions = await permissionPromise;
+                    //set some data for the response
+
+                    //currently the permissions that the client app sets get passed here.
+                    responseJSON.permissions = await permissionPromise;
+                }
                 responseJSON.uid = createdUser.get("id");
 
                 user = createdUser;
@@ -382,7 +427,7 @@ module.exports = function (router) {
             let newFund = null;
             //if token_id exists, create/update the user's fund
             if (req_body.token_id && req_body.token_id !== '') {
-                newFund = Fund.promiseFundCreateOrUpdate(user.get('id'), req_body.token_id);
+                newFund = Fund.promiseFundCreateOrUpdate(req_body.client_id || user.get('id'), req_body.token_id);
             }
 
             //create the service instance
@@ -392,19 +437,19 @@ module.exports = function (router) {
             //elevated accounts can override things
             if (hasPermission) {
                 res.locals.overrides = {
-                    user_id : req_body.client_id || req.user.get("id"),
+                    user_id : req_body.client_id || user.get("id"),
                     requested_by : req.user.get("id"),
                     description : req_body.description || serviceTemplate.get("description"),
                     name : req_body.name || serviceTemplate.get("name"),
-                    trial_period_days : req_body.trial_period_days || serviceTemplate.get("trial_period_days")
+                    trial_period_days : req_body.trial_period_days || paymentStructureTemplate.get("trial_period_days")
                 };
 
 
             }else{
                 res.locals.overrides = {
-                    user_id : req.user.get("id"),
+                    user_id : user.get("id"),
                     requested_by : req.user.get("id"),
-                    trial_period_days : serviceTemplate.get("trial_period_days") || 0
+                    trial_period_days : paymentStructureTemplate.get("trial_period_days") || 0
                 }
             }
 
@@ -415,6 +460,7 @@ module.exports = function (router) {
                 ...res.locals.overrides,
 
             });
+
             newInstance = await newInstance.attachReferences();
             let postData = {};
             if(lifecycleManager) {
@@ -434,9 +480,11 @@ module.exports = function (router) {
             try {
                 if (isNew && req_body.password === undefined) {
 
-                    newInstance.set("api", responseJSON.api);
-                    newInstance.set("url", responseJSON.url);
-                    store.dispatchEvent("service_instance_requested_new_user", newInstance);
+                    // newInstance.set("api", responseJSON.api);
+                    // newInstance.set("url", responseJSON.url);
+                    // store.dispatchEvent("service_instance_requested_new_user", newInstance);
+                    store.dispatchEvent("service_instance_requested_by_user", newInstance);
+
 
                 }else if(isNew){
 
@@ -461,9 +509,21 @@ module.exports = function (router) {
 
     router.post("/service-templates", auth(), function (req, res, next) {
         req.body.created_by = req.user.get("id");
-        req.body.trial_period_days = req.body.trial_period_days || 0;
-        req.body.currency = store.getState().options.currency;
+        // req.body.trial_period_days = req.body.trial_period_days || 0;
+        // req.body.currency = store.getState().options.currency;
         let properties = req.body.references && req.body.references.service_template_properties;
+        let tiers = req.body.references && req.body.references.tiers;
+
+        if(tiers) {
+            req.body.references.tiers = tiers.map(tier => {
+                let paymentTemplates = tier.references && tier.references.payment_structure_templates || [];
+                tier.references.payment_structure_templates = paymentTemplates.map(payment => {
+                    payment.currency = store.getState().options.currency;
+                    return payment;
+                })
+                return tier;
+            })
+        }
         if(properties){
             req.body.references.service_template_properties = properties.map(prop => {
                 return {
@@ -472,6 +532,7 @@ module.exports = function (router) {
                 };
             });
         }
+
         ServiceTemplate.findAll("name", req.body.name, (templates) => {
             if (templates && templates.length > 0) {
                 res.status(400).json({error: "Service template name already in use"})

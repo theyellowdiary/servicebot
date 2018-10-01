@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import Fetcher from "../../utilities/fetcher.jsx";
+import {Fetcher} from "servicebot-base-form";
 import Alerts from "../alerts.jsx";
 import Buttons from "../buttons.jsx";
 let _ = require("lodash");
@@ -63,7 +63,7 @@ class SuspendUserForm extends React.Component {
 
                     <div className={`modal-footer text-right p-b-20`}>
                         <Buttons containerClass="inline" btnType="primary" text="Suspend User" success={this.state.success} onClick={this.fetchSuspendUser}/>
-                        <Buttons containerClass="inline" btnType="default" text="Cancel" onClick={this.props.hide} />
+                        <Buttons className="_text" containerClass="inline" btnType="default" text="Cancel" onClick={this.props.hide} />
                     </div>
                 </div>
             );

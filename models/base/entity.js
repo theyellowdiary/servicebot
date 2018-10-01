@@ -16,7 +16,7 @@ var whereFilter = require('knex-filter-loopback').whereFilter;
  * @returns {Entity}
  */
 
-module.exports = function (tableName, references = [], primaryKey = 'id', database = knex) {
+var CreateEntity = function (tableName, references = [], primaryKey = 'id', database = knex) {
     var Entity = function (data) {
         let self = this;
         this.data = data;
@@ -25,7 +25,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
         //         let reference = references.find(ref => ref.model.table === name);
         //         try {
         //             if (!reference) {
-        //                 console.log(name);
+        //                 
         //                 throw `Reference is not defined on ${Entity.table}.`
         //             }
         //             return await self.getRelated(reference.model)
@@ -98,7 +98,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 throw err
             });
     };
-    Entity.prototype.create = function (callback) {
+    let create = function (callback) {
         let self = this;
         Entity.database(Entity.table).columnInfo()
             .then(function (info) {
@@ -141,7 +141,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
 
     };
 
-    Entity.prototype.delete = function (callback) {
+    let deleteE = function (callback) {
         let id = this.get('id');
         Entity.database(Entity.table).where('id', id).del()
             .then(function (res) {
@@ -174,12 +174,12 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
     Entity.prototype.createReferences = function (referenceData, reference, callback) {
         let self = this;
         if (reference.readOnly) {
-            console.log("Reference is readonly");
+
             callback(self);
         }
         else {
             referenceData.forEach(newChild => (newChild[reference.referenceField] = this.get(primaryKey)));
-            //console.log("referenceDate");
+            //
             //console.log(referenceData);
             reference.model.batchCreate(referenceData, function (response) {
                 if (reference.direction == "to") {
@@ -199,23 +199,30 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
 
     //todo - combine stuff into a single query
     //todo - possibly dispatch events
-    Entity.prototype.updateReferences = async function (referenceData, reference) {
+    Entity.prototype.updateReferences = async function (referenceData, reference, isTransaction=false) {
         let self = this;
         if (reference.readOnly) {
-            console.log("Reference is readonly");
+
             this;
         }
         else {
-
-            //
+            console.error(referenceData, reference);
             let ids = referenceData.reduce((acc, refInstance) => acc.concat(refInstance.id || []), []);
             referenceData.forEach(newChild => (newChild[reference.referenceField] = this.get(primaryKey)));
+
             let references = await this.getRelated(reference.model.table);
             let removedReferences = await reference.model.batchDelete({
                 not: {id: {"in": ids}},
                 [reference.referenceField]: self.get(primaryKey)
             });
-            let upsertedReferences = await reference.model.batchUpdate(referenceData);
+
+            let upsertedReferences = await reference.model.batchUpdate(referenceData, true, isTransaction);
+
+            //change "to" reference if it's different
+            if(reference.direction === "to" && upsertedReferences[0][reference.model.primaryKey] !== self.get(reference.referenceField)){
+                self.set(reference.referenceField, upsertedReferences[0][reference.model.primaryKey]);
+                await self.update();
+            }
 
             return upsertedReferences;
 
@@ -236,15 +243,19 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 callback(entities);
             })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
 
     //best one! (todo... clean up ORM cuz it sucks)
     Entity.find = async function (filter = {}, attatchReferences = false) {
         try {
-            let entities = await Entity.database(Entity.table).where(whereFilter(filter));
-            return entities ? entities.map(e => new Entity(e)) : [];
+            let result = await Entity.database(Entity.table).where(whereFilter(filter));
+            let entities = result ? result.map(e => new Entity(e)) : [];
+            if(attatchReferences){
+                entities = await Entity.batchAttatchReference(entities);
+            }
+            return entities;
         } catch (err) {
             console.error(err);
             return [];
@@ -268,7 +279,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 callback(entities);
             })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
 
@@ -281,7 +292,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 callback(new Entity(result[0]));
             })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
     //Generic findById function. Finds the record by passing the id.
@@ -294,7 +305,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 callback(new Entity(result[0]));
             })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
 
@@ -338,7 +349,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 callback(entities);
             })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
 
@@ -353,7 +364,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
             callback(result[0].count);
         })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
 
@@ -367,7 +378,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 callback(result[0].sum);
             })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
     //get objects created between dates
@@ -381,7 +392,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                 callback(entities);
             })
             .catch(function (err) {
-                console.log(err);
+                console.error(err);
             });
     };
 
@@ -425,9 +436,18 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
         for(let reference of Entity.references){
             let referenceData = await getReferences(reference, filter);
             entities = entities.map(entity => {
+                let entityReferences = referenceData[entity.data[Entity.primaryKey]] || []
+
+                //todo: maybe come up with a better answer to password stripping...
+                if(reference.model.table === "users"){
+                    entityReferences = entityReferences.map(user => {
+                        delete user.password;
+                        return user;
+                    })
+                }
                 entity.data["references"] = {
                     ...entity.data["references"],
-                    [reference.model.table] : referenceData[entity.data[Entity.primaryKey]] || []
+                    [reference.model.table] : entityReferences
                 }
                 return entity;
             })
@@ -436,7 +456,7 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
 
     };
     Entity.batchDelete = async function (filter) {
-        return knex(Entity.table).where(whereFilter(filter)).del();
+        return knex(Entity.table).where(whereFilter(filter)).del().returning("*");
     };
     /**
      *
@@ -458,40 +478,78 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
                             callback(result)
                         })
                         .catch(function (err) {
-                            console.log("WHOAH!");
-                            console.log(err);
+                            console.error(err);
                         })
                 })
         };
 
-    //TODO this batch update work
-    let batchUpdate = function (dataArray, callback) {
+    //TODO: figure out if updateReferences is even needed, if it is figure out how to remove it.
+    Entity.batchUpdate = async function (dataArray, updateReferences, isTransaction=false) {
+        let columns = await Entity.database(Entity.table).columnInfo()
+        let data = dataArray.map(function (entity) {
+            return _.pick(entity, _.keys(columns));
+        })
+        let transaction = Entity.database.transaction;
+        if(isTransaction){
+            transaction = async (callback) => {
+                return callback(Entity.database);
+            }
+        }
+        return await transaction(async function (trx) {
+            return Promise.map(data, async function (entityData, index) {
+                let record;
+                if (entityData[Entity.primaryKey]) {
+                    record = (await trx.from(Entity.table).where(Entity.primaryKey, entityData[Entity.primaryKey]).update(entityData).returning("*"))[0];
+                } else {
+                    record = (await trx.from(Entity.table).insert(entityData).returning("*"))[0];
+                }
 
-        Entity.database(Entity.table).columnInfo()
-            .then(function (info) {
-                return dataArray.map(function (entity) {
-                    return _.pick(entity, _.keys(info));
-                })
-            })
-            .then(function (data) {
-                Entity.database.transaction(function (trx) {
-                    return Promise.map(data, function (entityData) {
-                        if (entityData[Entity.primaryKey]) {
-                            return trx.from(Entity.table).where(Entity.primaryKey, entityData[Entity.primaryKey]).update(entityData).returning("*");
-                        } else {
-                            return trx.from(Entity.table).insert(entityData).returning("*");
+                if(updateReferences && dataArray[index].references){
+                    record.references = dataArray[index].references;
+                    for(let [refName, refValues] of Object.entries(dataArray[index].references)){
+                        let reference = references.find(ref => ref.model.table === refName);
+                        if(reference && !reference.readOnly){
+                            let trxReference = CreateEntity(reference.model.table, reference.model.references, reference.model.primaryKey, trx);
+                            let ids = refValues.reduce((acc, refInstance) => acc.concat(refInstance.id || []), []);
+                            let removedReferences = await trxReference.batchDelete({
+                                not: {id: {"in": ids}},
+                                [reference.referenceField]: record[Entity.primaryKey]
+                            });
+                            let refsToUpdate = refValues.reduce((acc, val) => {
+                                if(val[reference.model.primaryKey]){
+
+                                    //make sure that the referenceField is pointing properly
+                                    if(reference.direction === "from" && val[reference.referenceField] === record[Entity.primaryKey]){
+                                        acc.push(val);
+
+                                    }else if(reference.direction === "to" && record[reference.referenceField] === val[reference.model.primaryKey]){
+                                        acc.push(val);
+                                    }
+                                }else{
+                                    if(reference.direction === "from"){
+
+                                        val[reference.referenceField] = record[Entity.primaryKey];
+                                        acc.push(val);
+
+                                    }
+                                }
+                                return acc;
+                            }, []);
+                            record.references[reference.model.table] = (await trxReference.batchUpdate(refsToUpdate, true, true)) || [];
+
+
                         }
-                    });
+                    }
+                }
 
-                }).then(function (result) {
-                    callback(result);
-                }).catch(function (err) {
-                    console.log(err);
-                })
+                return record;
             });
+        });
+
     };
-    Entity.batchUpdate = promiseProxy(batchUpdate)
     Entity.prototype.update = promiseProxy(update, false);
+    Entity.prototype.delete = promiseProxy(deleteE, false);
+    Entity.prototype.create = promiseProxy(create, false);
     Entity.findOne = promiseProxy(findOne);
     Entity.prototype.attachReferences = promiseProxy(attachReferences);
     Entity.prototype.getRelated = promiseProxy(getRelated);
@@ -501,3 +559,4 @@ module.exports = function (tableName, references = [], primaryKey = 'id', databa
 
     return Entity;
 }
+module.exports = CreateEntity;

@@ -1,0 +1,12 @@
+.servicebot-invoice-modal-container .__modal {
+  margin-left: 280px;
+  transform: translateX(-140px);
+  margin-top: 40px;
+}
+.servicebot--embeddable {
+
+  &.servicebot--manage-billing-form-wrapper {
+    width: auto;
+    padding: 0;
+  }
+}

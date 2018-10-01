@@ -1,10 +1,32 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import Fetcher from "../../utilities/fetcher.jsx";
+import {Fetcher} from "servicebot-base-form";
 import Inputs from "../../utilities/inputs.jsx";
 import {DataForm, DataChild} from "../../utilities/data-form.jsx";
+import {ServicebotBaseForm, priceField, inputField} from "servicebot-base-form"
+import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues} from 'redux-form'
+import {numericality} from "redux-form-validators";
+
 import Buttons from "../buttons.jsx";
 let _ = require("lodash");
+
+
+
+function TrialForm(props){
+    return(<form onSubmit={props.handleSubmit}>
+        <Field
+            name={"trial_period_days"}
+            component={inputField}
+            type={"number"}
+            label="Trial Period"
+            validate={numericality({'>=': 0})}
+
+        />
+        <button className="buttons _primary" type="submit">
+            Submit
+        </button>
+    </form>)
+}
 
 class ServiceInstanceFormEdit extends React.Component {
 
@@ -33,7 +55,7 @@ class ServiceInstanceFormEdit extends React.Component {
         // Fetcher(self.state.url).then(function(response){
         //     if(response != null){
         //         if(!response.error){
-        //             console.log(response);
+        //             
         //             self.setState({loading:false, template: response});
         //         }
         //     }
@@ -114,28 +136,43 @@ class ServiceInstanceFormEdit extends React.Component {
             const instance = this.state.instance;
             const instance_props = this.state.instance.references.service_instance_properties;
             // const references = this.state.template.references.service_template_properties.length > 0 ? this.state.template.references.service_template_properties : false;
-
+            let paymentPlan = this.state.instance.payment_plan;
+            if(!paymentPlan){
+                return <div>Bad payment plan</div>
+            }
 
             //TODO: Add validation functions and pass into DataForm as props
             //** Stripe limits the trial days to 2 years
             const myValidators = this.getValidators();
+            let submissionRequest = {
+                'method': 'POST',
+                'url': `/api/v1/service-instances/${instance.id}/change-price`
+            };
 
             return (
                 <div>
-                    <DataForm validators={myValidators} handleResponse={this.handleResponse} url={`/api/v1/service-instances/${instance.id}`} method={'PUT'}>
+                    <ServicebotBaseForm
+                        form={TrialForm}
+                        formName={"TRIAL_FORM"}
+                        initialValues={{...paymentPlan, trial_period_days: 0}}
+                        submissionRequest={submissionRequest}
+                        handleResponse={this.handleResponse}
+                    />
 
-                        <div className="p-20">
-                            <div className="row">
-                                <div className="basic-info col-md-12">
-                                    <h3 className="p-b-20">Basic Info</h3>
+                    {/*<DataForm validators={myValidators} handleResponse={this.handleResponse} url={`/api/v1/service-instances/${instance.id}`} method={'PUT'}>*/}
 
-                                    <Inputs type="text" label="Service Name" name="name" defaultValue={instance.name}
-                                            onChange={function(){}} receiveOnChange={true} receiveValue={true}/>
+                        {/*<div className="p-20">*/}
+                            {/*<div className="row">*/}
+                                {/*<div className="basic-info col-md-12">*/}
+                                    {/*<h3 className="p-b-20">Basic Info</h3>*/}
 
-                                    <Inputs type="text" label="Service Description" name="description" defaultValue={instance.description}
-                                            onChange={function(){}} receiveOnChange={true} receiveValue={true}/>
-                                </div>
-                            </div>
+                                    {/*<Inputs type="text" label="Service Name" name="name" defaultValue={instance.name}*/}
+                                            {/*onChange={function(){}} receiveOnChange={true} receiveValue={true}/>*/}
+
+                                    {/*<Inputs type="text" label="Service Description" name="description" defaultValue={instance.description}*/}
+                                            {/*onChange={function(){}} receiveOnChange={true} receiveValue={true}/>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
                             {/*{references ?*/}
                                 {/*<div className="row">*/}
                                     {/*<div className="col-md-12">*/}
@@ -143,7 +180,7 @@ class ServiceInstanceFormEdit extends React.Component {
                                         {/*{references.map( reference => (*/}
                                             {/*<div key={`custom-fields-${reference.prop_label}`}>*/}
                                                 {/*<DataChild modelName="service_instance_properties" objectName={reference.name}>*/}
-                                                    {/*<Inputs type="hidden" name="id" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].id : ()=>{console.log("im so weird", _.filter(instance_props, {name: reference.name}))}}*/}
+                                                    {/*<Inputs type="hidden" name="id" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].id : ()=>{}}*/}
                                                             {/*onChange={function(){}} receiveOnChange={true} receiveValue={true}/>*/}
                                                     {/*<Inputs type="hidden" name="name" value={_.filter(instance_props, {name: reference.name}).length > 0 ? _.filter(instance_props, {name: reference.name})[0].name : ''}*/}
                                                             {/*onChange={function(){}} receiveOnChange={true} receiveValue={true}/>*/}
@@ -159,14 +196,14 @@ class ServiceInstanceFormEdit extends React.Component {
                                     {/*</div>*/}
                                 {/*</div> : <div/>*/}
                             {/*}*/}
-                        </div>
+                        {/*</div>*/}
 
-                        <div id="request-submission-box" className="modal-footer text-right">
-                            <Buttons containerClass="inline" btnType="primary" text="Submit" type="submit" value="submit"/>
-                            <Buttons containerClass="inline" btnType="default" text="Close" onClick={this.props.onHide}/>
-                        </div>
+                        {/*<div id="request-submission-box" className="modal-footer text-right">*/}
+                            {/*<Buttons containerClass="inline" btnType="primary" text="Submit" type="submit" value="submit"/>*/}
+                            {/*<Buttons containerClass="inline" btnType="default" text="Close" onClick={this.props.onHide}/>*/}
+                        {/*</div>*/}
 
-                    </DataForm>
+                    {/*</DataForm>*/}
                 </div>
             );
         }

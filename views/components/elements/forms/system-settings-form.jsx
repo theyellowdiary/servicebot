@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import Fetcher from "../../utilities/fetcher.jsx";
+import {Fetcher} from "servicebot-base-form";
 let _ = require("lodash");
 import Inputs from '../../utilities/inputs.jsx';
 import ContentTitle from '../../layouts/content-title.jsx';
@@ -32,7 +32,7 @@ class SystemSettingsForm extends React.Component {
             success: false,
             rolesUrl: `/api/v1/roles`,
             roles: [],
-            currentTabType: 'branding'
+            currentTabType: 'system'
         };
         this.fetchSettings = this.fetchSettings.bind(this);
         this.fetchRoles = this.fetchRoles.bind(this);
@@ -153,7 +153,9 @@ class SystemSettingsForm extends React.Component {
         }else{
             let self = this;
             let group = _.groupBy(this.state.system_settings, (setting)=>{return setting.type ? setting.type : "other"});
-            let types = _.uniq(_.map(this.state.system_settings, (setting) => setting.type));
+            //let types = _.uniq(_.map(this.state.system_settings, (setting) => setting.type));
+            let types = ["system"];
+            console.log("TYPES", types);
             let colorSettings = _.map(this.state.system_settings, (s)=> {
                 if(s.data_type == 'color_picker' && s.value != "undefined" && s.value != undefined){
                     return s.value
@@ -227,7 +229,7 @@ class SystemSettingsForm extends React.Component {
             }else { // for system settings page
 
                 let tabStyle = (type) => {
-                    let tabColor = this.props.options.button_primary_color.value;
+                    let tabColor = this.state.system_settings.button_primary_color.value;
                     if(type == self.state.currentTabType){
                         return({borderColor: tabColor});
                     }else{
@@ -245,9 +247,9 @@ class SystemSettingsForm extends React.Component {
                             <div className="col-md-3">
                                 <h4 className="text-capitalize">Setting Types</h4>
                                 <ul className="tabs">
-                                    <li key={`settings-type-tab-branding`} className={`tab text-capitalize ${self.state.currentTabType == 'branding' ? 'active' : ''}`}
+{/*                                    <li key={`settings-type-tab-branding`} className={`tab text-capitalize ${self.state.currentTabType == 'branding' ? 'active' : ''}`}
                                         style={tabStyle('branding')}
-                                        onClick={()=>{return this.handleTab('branding')}}><span>Branding</span></li>
+                                        onClick={()=>{return this.handleTab('branding')}}><span>Branding</span></li>*/}
                                     {types.map((type) => {
                                         return (
                                             <li key={`settings-type-tab-${type}`} className={`tab text-capitalize ${type == self.state.currentTabType ? 'active' : ''}`}
@@ -258,7 +260,7 @@ class SystemSettingsForm extends React.Component {
                                 </ul>
                             </div>
                             <div className="col-md-9 system-settings-page-form">
-                                <ContentTitle icon="cog" title="Customize your system options here."/>
+                                <ContentTitle icon="cog" title="System settings"/>
 
                                 {this.state.currentTabType == "branding" ?
                                     <div>

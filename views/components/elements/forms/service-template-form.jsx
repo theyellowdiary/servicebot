@@ -18,16 +18,14 @@ import {connect} from "react-redux";
 import {RenderWidget, WidgetList, PriceBreakdown, widgets} from "../../utilities/widgets";
 import {WysiwygRedux} from "../../elements/wysiwyg.jsx";
 import FileUploadForm from "./file-upload-form.jsx";
+import {addAlert, dismissAlert} from "../../utilities/actions";
 import {
-    inputField,
+    ServicebotBaseForm, inputField,
     selectField,
     OnOffToggleField,
     iconToggleField,
-    priceField,
-    priceToCents
-} from "./servicebot-base-field.jsx";
-import {addAlert, dismissAlert} from "../../utilities/actions";
-import ServiceBotBaseForm from "./servicebot-base-form.jsx";
+    priceField
+} from "servicebot-base-form";
 import SVGIcons from "../../utilities/svg-icons.jsx";
 import Load from "../../utilities/load.jsx";
 
@@ -125,11 +123,9 @@ class CustomField extends React.Component {
             willAutoFocus, index, typeValue, member, myValues, privateValue, requiredValue, promptValue, configValue,
             setPrivate, setRequired, setPrompt, changePrivate, changeRequired, changePrompt, templateType
         } = props;
-        let machineName;
 
         if (myValues.prop_label) {
             willAutoFocus = false;
-            machineName = slug(myValues.prop_label, {lower: true});
 
         }
         return (
@@ -189,12 +185,6 @@ class CustomField extends React.Component {
                     }
                 </div>
                 <div id="custom-prop-widget" className="custom-property-field-group">
-                    {machineName &&
-                    <div className="form-group form-group-flex addon-options-widget-config-input-wrapper">
-                        <label className="control-label form-label-flex-md addon-options-widget-config-input-label">Machine
-                            Name</label>
-                        <pre>{machineName}</pre>
-                    </div>}
                     {typeValue && <RenderWidget
                         showPrice={(templateType !== "custom" && templateType !== "split")}
                         member={member}
@@ -380,9 +370,8 @@ class TemplateForm extends React.Component {
                     <div className="col-md-8">
                         <div className="form-level-errors">
                             {!options.stripe_publishable_key &&
-                            <Link to="/stripe-settings"><br/><h4 className="form-error" style={{padding:'10px',paddingLeft:'30px'}}>
-                                The Request Of This Service Disabled Until Setup Complete - Click here to complete</h4>
-                            </Link>}
+                            <Link to="/stripe-settings"><br/><h4 className="form-error">Publishing Disabled Until Setup
+                                Complete - Click here to complete</h4></Link>}
                             {error && <div className="form-error">{error}</div>}
                         </div>
                         <div className="form-level-warnings"/>
@@ -401,10 +390,10 @@ class TemplateForm extends React.Component {
                             />
                         </div>
 
-                        <Field name="published" type="checkbox"
-                               defaultValue={true} color="#0091EA" faIcon="check"
-                               component={OnOffToggleField} label="Published?"
-                        />
+                        {options.stripe_publishable_key && <Field name="published" type="checkbox"
+                                                                  defaultValue={true} color="#0091EA" faIcon="check"
+                                                                  component={OnOffToggleField} label="Published?"
+                        />}
                         <Field name="category_id" type="select"
                                component={selectField} label="Category" options={formJSON ? formJSON._categories : []}
                                validate={[required()]}
@@ -564,7 +553,7 @@ class TemplateForm extends React.Component {
                                 <div id="service-submission-box" className="button-box right">
                                     <Link className="btn btn-rounded btn-default" to={'/manage-catalog/list'}>Go
                                         Back</Link>
-                                    <button className="btn btn-rounded btn-primary" type="submit">
+                                    <button className="buttons _primary" type="submit">
                                         Submit
                                     </button>
                                 </div>
@@ -656,7 +645,7 @@ class ServiceTemplateForm extends React.Component {
     submissionPrep(values) {
         //remove id's for duplicate template operation
         if (this.props.params.duplicate) {
-            console.log("We have a duplicate and we want to remove id");
+
             delete values.id;
             values.references.service_template_properties = values.references.service_template_properties.map(prop => {
                 if (prop.id) {
@@ -750,7 +739,7 @@ class ServiceTemplateForm extends React.Component {
                             }
                         </div>
                         <div className="col-md-9">
-                            <ServiceBotBaseForm
+                            <ServicebotBaseForm
                                 form={TemplateForm}
                                 formName={TEMPLATE_FORM_NAME}
                                 initialValues={initialValues}

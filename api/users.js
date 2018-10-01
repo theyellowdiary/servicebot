@@ -82,15 +82,31 @@ module.exports = function (router, passport) {
                 } else {
                     User.findById(foundInvitation.get("user_id"), function (newUser) {
                         req.body.id = newUser.get("id");
-                        req.body.password = bcrypt.hashSync(req.body.password, 10);
+                        if(req.body.password) {
+                            req.body.password = bcrypt.hashSync(req.body.password, 10);
+                        }else if(!req.body.google_user_id){
+                            return res.status(500).json({error: "No password specified"})
+                        }
                         Object.assign(newUser.data, req.body);
                         newUser.set("status", "active");
                         newUser.update(function (err, updatedUser) {
-                            foundInvitation.delete(function (response) {
-                                EventLogs.logEvent(updatedUser.get('id'), `user ${updatedUser.get('id')} ${updatedUser.get('email')} registered`);
-                                res.locals.json = updatedUser.data;
-                                res.locals.valid_object = updatedUser;
-                                next();
+                            if(err){
+                                //todo: maybe think about moving full error into this err?
+                                let message = err.match(/google_user_id/) ? "There is a user already connected to this Google account, try logging in" : "Error registering user"
+                                return res.status(500).json({error: message});
+                            }
+                            foundInvitation.delete(async function (response) {
+                                let payload = {  uid: updatedUser.data.id };
+                                await updatedUser.attachReferences();
+                                payload.user = updatedUser.data;
+                                delete payload.user.password;
+                                let token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '3h' });
+                                // res.json({token:token});
+                                //
+                                // EventLogs.logEvent(updatedUser.get('id'), `user ${updatedUser.get('id')} ${updatedUser.get('email')} registered`);
+                                return res.json({token});
+                                // res.locals.valid_object = updatedUser;
+                                // next();
                             })
                         })
 
@@ -299,14 +315,13 @@ module.exports = function (router, passport) {
     //Strip passwords from all user things
     router.all("*", function (req, res, next) {
         if (res.locals.json) {
-            if (res.locals.json.password) {
-                delete res.locals.json.password;
-
-            } else if (Array.isArray(res.locals.json)) {
+            if (Array.isArray(res.locals.json)) {
                 res.locals.json = res.locals.json.map(user => {
                     delete user.password;
                     return user;
                 })
+            }else{
+                delete res.locals.json.password
             }
         }
         next();

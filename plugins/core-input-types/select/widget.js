@@ -2,11 +2,9 @@ import React from "react";
 import TagsInput from "react-tagsinput"
 
 //todo: all the imports from the main app will result in duplicate code.... need to fix this!
-import {priceField} from "../../../views/components/elements/forms/servicebot-base-field.jsx";
 import handler from "./widgetHandler";
-import CurrencyInput from 'react-currency-input';
 import WidgetPricingInput from '../../../views/components/utilities/widget-inputs/WidgetPricingInput.jsx';
-import PriceAdjustment from '../../../views/components/utilities/widget-inputs/WidgetPriceAdjustment';
+import {adjust} from '../../../views/components/utilities/widget-inputs/WidgetPriceAdjustment';
 
 
 let Tags = (props) => {
@@ -15,7 +13,7 @@ let Tags = (props) => {
             <label className="control-label form-label-flex-md addon-options-widget-config-input-label">Available Options</label>
             <div className="form-input-flex">
                 <TagsInput className="addon-options-widget-config-input react-tagsinput"
-                    inputProps={{placeholder: 'Add Options'}} {...props.input} value={props.input.value || []}/>
+                           inputProps={{placeholder: 'Add Options'}} {...props.input} value={props.input.value || []}/>
             </div>
         </div>
     );
@@ -31,7 +29,7 @@ class SelectPricing extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         let self = this;
-        if (prevProps.configValue && prevProps.configValue.value && prevProps.configValue.value.length > this.props.configValue.value.length) {
+        if (this.props.configValue.value && prevProps.configValue && prevProps.configValue.value && prevProps.configValue.value.length > this.props.configValue.value.length) {
             let propsToRemove = prevProps.configValue.value.filter(prop => self.props.configValue.value.indexOf(prop) < 0);
             let newState = propsToRemove.reduce((acc, prop) => {
                 acc[prop] = undefined;
@@ -72,7 +70,7 @@ class SelectPricing extends React.Component {
                     let input = {
                         onChange : self.handleChange(option),
                         name : option,
-                        value :  pricingValue && pricingValue[option]
+                        value :  (pricingValue && pricingValue[option]) || 0
                     };
 
                     return (<div>{option} : <WidgetPricingInput input={input} operation={operation}/></div>);
@@ -86,7 +84,6 @@ class SelectPricing extends React.Component {
 
 let SelectWidget = (props) => {
     let {input, configValue, label} = props;
-    console.log(input);
     return (
         <div className="form-group form-group-flex addon-options-widget-default-value-wrapper">
             {label && <label className="control-label form-label-flex-md addon-options-widget-default-value-label">{label}</label>}
@@ -96,7 +93,7 @@ let SelectWidget = (props) => {
                     { configValue && configValue.value && configValue.value.map((option, index) => {
                             let price = configValue.pricing && configValue.pricing.value && configValue.pricing.value[option];
                             return <option key={index} value={option}>
-                                {(price && configValue.pricing.operation) ? <div>{option}<PriceAdjustment price={price} operation={configValue.pricing.operation}/></div> : `${option}`}
+                                {(price && configValue.pricing.operation) ? `${option}: ${adjust(configValue.pricing.operation, price)}` : `${option}`}
                             </option>
                         }
                     )}

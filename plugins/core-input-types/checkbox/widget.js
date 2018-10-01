@@ -1,9 +1,8 @@
 import React from "react";
 import handler from "./widgetHandler";
-import CurrencyInput from 'react-currency-input';
 import PriceAdjustment from '../../../views/components/utilities/widget-inputs/WidgetPriceAdjustment';
 import WidgetPricingInput from '../../../views/components/utilities/widget-inputs/WidgetPricingInput.jsx';
-import {OnOffToggleField} from "../../../views/components/elements/forms/servicebot-base-field.jsx";
+import {OnOffToggleField} from "servicebot-base-form";
 let Checkbox = (props) => {
     let {input, configValue, label} = props;
     return (
@@ -27,9 +26,6 @@ let Price = (props) => {
         <div className={`addon-checkbox-widget-price-inputs-wrapper`}>
             <div className="form-group form-group-flex checkbox-checkbox-widget-price-inputs">
                 <WidgetPricingInput input={props.input} operation={config && config.pricing && config.pricing.operation}/>
-                {/*<CurrencyInput {...props.input} className="form-control addon-checkbox-widget-price-input"*/}
-                               {/*prefix="$" decimalSeparator="." thousandSeparator="," precision="2"*/}
-                {/*/>*/}
             </div>
         </div>
     );

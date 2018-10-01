@@ -20,6 +20,7 @@ import ModalEditUserRole from "../elements/modals/modal-edit-user-role.jsx";
 import Modal from '../utilities/modal.jsx';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
+import {getFormattedDate} from "../utilities/date-format.jsx";
 
 let _ = require("lodash");
 
@@ -184,9 +185,7 @@ class ManageUsers extends React.Component {
     fundFormatter(cell) {
         //check if user has funds
         if(cell.funds.length > 0){
-            return ( <span className="status-badge green" ><i className="fa fa-check" /></span> );
-        } else {
-            return ( <span className="status-badge red" ><i className="fa fa-times" /></span> );
+            return ( <span className="userfund"><i class="fa fa-credit-card"></i></span>);
         }
     }
     statusFormatter(cell, row) {
@@ -226,20 +225,26 @@ class ManageUsers extends React.Component {
         }
         return "Error";
     }
-    lastLoginFormatter(cell, row){
+    lastLoginFormater(cell, row){
         if(row.last_login != null){
-            return (
-                <DateFormat time={true} date={row.last_login}/>
-            );
+            return (<div className="datatable-date">
+                <span data-tip={getFormattedDate(cell, {time: true})} data-for='date-updated'>{getFormattedDate(cell)}</span>
+                <ReactTooltip id="date-updated" aria-haspopup='true' delayShow={400}
+                              role='date' place="left" effect="solid"/>
+            </div>);
         }else{
             return 'Never';
         }
     }
-    createdAtFormatter(cell, row){
-        return (
-            <DateFormat date={row.created_at} time={true}/>
-        );
+
+    createdAtFormater(cell){
+        return (<div className="datatable-date">
+            <span data-tip={getFormattedDate(cell, {time: true})} data-for='date-updated'>{getFormattedDate(cell)}</span>
+            <ReactTooltip id="date-updated" aria-haspopup='true' delayShow={400}
+                          role='date' place="left" effect="solid"/>
+        </div>);
     }
+
     profileLinkFormatter(cell, row){
         return (
             <Link to={`/manage-users/${row.id}`}>{cell}</Link>
@@ -373,26 +378,21 @@ class ManageUsers extends React.Component {
                         <Content>
                             <div className="row m-b-20">
                                 <div className="col-xs-12">
-                                    <ContentTitle icon="cog" title="Manage all your users here"/>
+                                    <ContentTitle title="Manage Users"/>
                                     <ServiceBotTableBase
-                                        createItemProps={!this.props.stripe_publishable_key && {disabled : true}}
-                                        createItemAction={this.props.stripe_publishable_key ? this.openInviteUserModal : () => {}}
-                                        createItemLabel={this.props.stripe_publishable_key ? "Invite user" : (<Link to="/stripe-settings" data-tip="Setup Incomplete - Click to finish">
-                                            Invite User
-                                            <ReactTooltip place="bottom" type="dark" effect="solid"/>
-                                        </Link>)}
+                                        // createItemProps={!this.props.stripe_publishable_key && {disabled : true}}
+                                        // createItemAction={this.props.stripe_publishable_key ? this.openInviteUserModal : () => {}}
+                                        // createItemLabel={this.props.stripe_publishable_key ? "Invite user" : (<Link to="/stripe-settings" data-tip="Setup Incomplete - Click to finish">
+                                        //     Invite User
+                                        //     <ReactTooltip place="bottom" type="dark" effect="solid"/>
+                                        // </Link>)}
                                         rows={this.state.rows}
                                         fetchRows={this.fetchData}
                                         sortColumn="created_at"
                                         sortOrder="desc"
                                     >
                                         <TableHeaderColumn isKey
-                                                           dataField='id'
-                                                           dataFormat={this.idFormatter}
-                                                           dataSort={ false }
-                                                           searchable={false}
-                                                           width='30'/>
-                                        <TableHeaderColumn dataField='email'
+                                                           dataField='email'
                                                            dataFormat={this.profileLinkFormatter}
                                                            dataSort={ true }
                                                            width='150'>
@@ -413,8 +413,8 @@ class ManageUsers extends React.Component {
                                         <TableHeaderColumn dataField='references'
                                                            dataFormat={this.fundFormatter}
                                                            dataSort={ true }
-                                                           width='80'>
-                                            Fund?
+                                                           searchable={false}
+                                                           width='40'>
                                         </TableHeaderColumn>
                                         <TableHeaderColumn dataField='references'
                                                            dataFormat={this.roleFormatter}
@@ -424,14 +424,14 @@ class ManageUsers extends React.Component {
                                             Role
                                         </TableHeaderColumn>
                                         <TableHeaderColumn dataField='last_login'
-                                                           dataFormat={this.lastLoginFormatter}
+                                                           dataFormat={this.lastLoginFormater}
                                                            dataSort={ true }
                                                            searchable={false}
                                                            width='100'>
                                             Last Login
                                         </TableHeaderColumn>
                                         <TableHeaderColumn dataField='created_at'
-                                                           dataFormat={this.createdAtFormatter}
+                                                           dataFormat={this.createdAtFormater}
                                                            dataSort={ true }
                                                            searchable={false}
                                                            width='100'>
@@ -460,5 +460,5 @@ class ManageUsers extends React.Component {
 export default connect(
     (state) => {
         return ( {user: state.user,
-        stripe_publishable_key : state.options && state.options.stripe_publishable_key} );
+            stripe_publishable_key : state.options && state.options.stripe_publishable_key} );
     })(ManageUsers);

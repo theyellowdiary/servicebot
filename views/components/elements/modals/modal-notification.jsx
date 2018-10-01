@@ -2,12 +2,11 @@ import React from 'react';
 import Load from '../../utilities/load.jsx';
 import {browserHistory} from 'react-router';
 import cookie from 'react-cookie';
-import Fetcher from "../../utilities/fetcher.jsx";
+import {Fetcher} from "servicebot-base-form";
 import Modal from '../../utilities/modal.jsx';
 import DateFormat from '../../utilities/date-format.jsx';
 import {Price} from '../../utilities/price.jsx';
 import { connect } from "react-redux";
-let _ = require("lodash");
 
 class ModalNotification extends React.Component {
 

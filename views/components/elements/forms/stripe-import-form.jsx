@@ -1,6 +1,6 @@
 import React from 'react';
 import Load from '../../utilities/load.jsx';
-import Fetcher from "../../utilities/fetcher.jsx";
+import {Fetcher} from "servicebot-base-form";
 import Inputs from "../../utilities/inputsV2.jsx";
 import { formBuilder } from "../../utilities/form-builder";
 import Buttons from "../buttons.jsx";
@@ -77,20 +77,28 @@ class SystemSettingsForm extends React.Component {
                             <h3>Import Stripe Data</h3>
                             <p>
                                 You can import all customers, funds, payment plans, subscriptions, and invoices
-                                to ServiceBot with one click. Note that reversing this action can only be done manually.
+                                to ServiceBot with one click.
+                                <p><b>Note:</b> Reversing this action can only be done manually.</p>
                             </p>
+
                         </div>
                         {getAlerts()}
                         <div className="stripe-keys-form row">
                             <div className="col-md-12">
                                 <div className="row">
-                                    <div className="stripe-import-form">
+                                    {this.state.ajaxLoad && (<div className="stripe-import-form">
+                                        <div className="p-20">
+                                            {/* Define Inputs */}
+                                           Importing...
+                                        </div>
+                                    </div>)}
+                                    {!this.state.ajaxLoad && (<div className="stripe-import-form">
                                         <div className="p-20">
                                             {/* Define Inputs */}
                                             <Inputs type="boolean" label="Notify customers by email?" name="notifyUsers" defaultValue={false}/>
                                         </div>
-                                        <Buttons containerClass="inline" size="md" btnType="danger" text="Import Stripe Data" value="submit" onClick={this.handleSubmission} loading={this.state.ajaxLoad}/>
-                                    </div>
+                                        <Buttons containerClass="inline" size="md" btnType="danger" text="Import Stripe Data" value="submit" onClick={this.handleSubmission} />
+                                    </div>)}
                                 </div>
                             </div>
                         </div>

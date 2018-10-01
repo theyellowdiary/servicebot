@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import Fetcher from '../../utilities/fetcher.jsx';
 import Load from '../../utilities/load.jsx';
 import {isAuthorized} from '../../utilities/authorizer.jsx';
-import ServiceInstanceMessageForm from '../../elements/forms/service-instance-message-form.jsx';
+// import ServiceInstanceMessageForm from '../../elements/forms/service-instance-message-form.jsx';
 import DateFormat from '../../utilities/date-format.jsx';
 import Avatar from '../../elements/avatar.jsx';
 
@@ -49,7 +49,7 @@ class ServiceInstanceMessage extends React.Component {
             return (
                 <div id="service-instance-message" className="row">
                     <div className="col-xs-12 service-comments service-block">
-                        <h5 className="m-b-20">Have questions?</h5>
+                        <h5 className="m-b-20">Logs</h5>
                             <Load/>
                     </div>
                 </div>);
@@ -64,11 +64,11 @@ class ServiceInstanceMessage extends React.Component {
             };
             if(messages.length > 0){
                 return (
-                    <div className="service-instance-box">
+                    <div className="service-instance-actions p-0">
                         <div className="service-instance-box-title">
-                            <span>Have questions?</span>
+                            <span>Logs</span>
                         </div>
-                        <div className="service-instance-box-content">
+                        <div className="service-instance-box-content p-b-30">
                             <div className="comments">
                                 <ul className="comments-list">
                                     {messages.map((message)=>{
@@ -88,20 +88,20 @@ class ServiceInstanceMessage extends React.Component {
                                 </ul>
                             </div>
                             <div>
-                                <ServiceInstanceMessageForm instanceId={self.state.instanceId} handleComponentUpdating={self.handleComponentUpdating}/>
+                                {/*<ServiceInstanceMessageForm instanceId={self.state.instanceId} handleComponentUpdating={self.handleComponentUpdating}/>*/}
                             </div>
                         </div>
                     </div>
                 );
             }else{
                 return(
-                    <div className="service-instance-box">
+                    <div className="service-instance-actions p-0">
                         <div className="service-instance-box-title">
-                            <span>Have questions?</span>
+                            <span>Logs</span>
                         </div>
-                        <div className="service-instance-box-content">
+                        <div className="service-instance-box-content p-b-30">
                             <div>
-                                <ServiceInstanceMessageForm instanceId={self.state.instanceId} handleComponentUpdating={self.handleComponentUpdating}/>
+                                {/*<ServiceInstanceMessageForm instanceId={self.state.instanceId} handleComponentUpdating={self.handleComponentUpdating}/>*/}
                             </div>
                         </div>
                     </div>
