@@ -1,14 +1,14 @@
 import React from 'react';
 import ServiceRequestForm from "../elements/forms/service-instance-form-request.jsx"
 import {AdminEditingGear, AdminEditingSidebar} from "../layouts/admin-sidebar.jsx";
-import {Fetcher} from "servicebot-base-form"
+import {Fetcher} from "@vbosstech/servicebot-base-form"
 import {Price, getPrice} from "../utilities/price.jsx";
 import {getPrice as getTotalPrice, getPriceAdjustments} from "../../../lib/handleInputs";
 import { connect } from 'react-redux';
-import ServicebotCheckoutEmbed from "servicebot-checkout-embed"
+import {ServicebotCheckoutEmbed} from "@vbosstech/servicebot-checkout-embed"
 let _ = require("lodash");
 import {formValueSelector, getFormValues} from 'redux-form'
-import consume from "pluginbot-react/dist/consume";
+import consume from "@vbosstech/pluginbot-react/dist/consume";
 const REQUEST_FORM_NAME = "serviceInstanceRequestForm";
 const selector = formValueSelector(REQUEST_FORM_NAME); // <-- same as form name
 import {setNavClass, resetNavClass} from "../utilities/actions";

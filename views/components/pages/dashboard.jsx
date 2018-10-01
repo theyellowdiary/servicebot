@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
         if((analytics.offeringStats && analytics.offeringStats.total === 0) || analytics.hasStripeKeys === false) {
             showSteps = true;
             step1 = 'active';
-            pageName = 'Setup Your Servicebot';
+            pageName = 'Setup Your ServiceBot';
             sub = 'Start selling your offerings in minutes';
             if(analytics.offeringStats.total > 0) {
                 step2 = 'active';

@@ -2,7 +2,7 @@ import React from 'react';
 import {Link, browserHistory} from 'react-router';
 import 'react-tagsinput/react-tagsinput.css';
 import './css/template-create.css';
-import consume from "pluginbot-react/dist/consume";
+import consume from "@vbosstech/pluginbot-react/dist/consume";
 import {
     Field,
     FormSection,
@@ -13,12 +13,12 @@ import {
 import {connect} from "react-redux";
 import {RenderWidget, WidgetList, widgets, SelectWidget} from "../../utilities/widgets";
 import {Authorizer, isAuthorized} from "../../utilities/authorizer.jsx";
-import {inputField, selectField, widgetField, priceField} from "servicebot-base-form";
+import {inputField, selectField, widgetField, priceField} from "@vbosstech/servicebot-base-form";
 import {CardSection} from "../../elements/forms/billing-settings-form.jsx";
 import getSymbolFromCurrency from 'currency-symbol-map'
 
 import {Price} from "../../utilities/price.jsx";
-import {Fetcher} from "servicebot-base-form";
+import {Fetcher} from "@vbosstech/servicebot-base-form";
 import ModalUserLogin from "../modals/modal-user-login.jsx";
 import {setUid, fetchUsers, setUser} from "../../utilities/actions";
 import {required, email, numericality, length} from 'redux-form-validators'
@@ -28,7 +28,7 @@ import cookie from 'react-cookie';
 
 let _ = require("lodash");
 
-import {ServicebotBaseForm} from "servicebot-base-form";
+import {ServicebotBaseForm} from "@vbosstech/servicebot-base-form";
 import {getPrice} from "../../../../lib/handleInputs";
 import values from 'object.values';
 

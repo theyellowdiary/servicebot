@@ -4,7 +4,7 @@ import Load from '../../utilities/load.jsx';
 // import {DataForm} from "../../utilities/data-form.jsx";
 import Buttons from "../buttons.jsx";
 import Alerts from "../alerts.jsx";
-import {ServicebotBaseForm, priceField, inputField} from "servicebot-base-form"
+import {ServicebotBaseForm, priceField, inputField} from "@vbosstech/servicebot-base-form"
 import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues} from 'redux-form'
 import {required, numericality} from "redux-form-validators";
 

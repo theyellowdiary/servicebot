@@ -18,7 +18,7 @@ import {connect} from "react-redux";
 import {RenderWidget, WidgetList, PriceBreakdown, widgets} from "../../utilities/widgets";
 import {WysiwygRedux} from "../../elements/wysiwyg.jsx";
 import {addAlert, dismissAlert} from "../../utilities/actions";
-import {ServicebotBaseForm, inputField, selectField, priceField} from "servicebot-base-form";
+import {ServicebotBaseForm, inputField, selectField, priceField} from "@vbosstech/servicebot-base-form";
 import Load from "../../utilities/load.jsx";
 
 let _ = require("lodash");

@@ -373,15 +373,15 @@ module.exports = function (router) {
 
                 //create the new user
                 let createdUser = await createUser();
-                // if(!req_body.password) {
-                //     let invite = new Invitation({"user_id": createdUser.get("id")});
-                //     let createInvite = Promise.promisify(invite.create, {context: invite});
-                //     //create the invitation for the user.
-                //     let createdInvite = await createInvite();
-                //     responseJSON.api = req.protocol + '://' + req.get('host') + "/api/v1/users/register?token=" + createdInvite.get("token");
-                //     responseJSON.url = req.protocol + '://' + req.get('host') + "/invitation/" + createdInvite.get("token");
-                //
-                // }
+                if(!req_body.password) {
+                    let invite = new Invitation({"user_id": createdUser.get("id")});
+                    let createInvite = Promise.promisify(invite.create, {context: invite});
+                    //create the invitation for the user.
+                    let createdInvite = await createInvite();
+                    responseJSON.api = req.protocol + '://' + req.get('host') + "/api/v1/users/register?token=" + createdInvite.get("token");
+                    responseJSON.url = req.protocol + '://' + req.get('host') + "/invitation/" + createdInvite.get("token");
+                
+                }
                 responseJSON.token = jwt.sign({  uid: createdUser.get("id") }, process.env.SECRET_KEY, { expiresIn: '1h' });
                 let user_role = new Role({id : createdUser.get("role_id")}) ;
 

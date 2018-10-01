@@ -1,10 +1,10 @@
 import React from 'react';
-import {ServicebotBaseForm, widgetField} from "servicebot-base-form";
+import {ServicebotBaseForm, widgetField} from "@vbosstech/servicebot-base-form";
 import {required, url} from 'redux-form-validators'
 import {Field,FieldArray} from 'redux-form'
 import Buttons from "../buttons.jsx";
 import Modal from '../../utilities/modal.jsx';
-import consume from "pluginbot-react/dist/consume";
+import consume from "@vbosstech/pluginbot-react/dist/consume";
 
 
 let renderCustomProperty = (props) => {

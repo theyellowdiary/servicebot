@@ -15,7 +15,7 @@ module.exports = function(analytics) {
             method: "get",
             middleware: [getVersion],
             permissions: [],
-            description: "Get Servicebot version"
+            description: "Get ServiceBot version"
         },
         {
             endpoint: "/analytics/data",

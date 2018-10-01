@@ -8,7 +8,7 @@ import {NavNotification} from "../pages/notifications.jsx";
 import SideNav from '../layouts//side-nav.jsx';
 import {AppMessage} from '../elements/app-message.jsx';
 import ReactTooltip from 'react-tooltip';
-import consume from "pluginbot-react/dist/consume"
+import consume from "@vbosstech/pluginbot-react/dist/consume"
 
 import {connect} from "react-redux";
 import '../../../public/js/bootstrap-3.3.7-dist/js/bootstrap.js';
@@ -248,12 +248,6 @@ class NavServiceBot extends React.Component {
                             <li><Link href="https://api-docs.servicebot.io/" target="_blank" className={'nav-link-child'}>API Reference</Link></li>
                         </ul>
                     </li>
-                    <li>
-                        <a target="_blank" href="https://help.servicebot.io" style={style}
-                           className={getLinkClass('manage-helpcenter', 'parent')}>
-                            <span className="nav-icons icon-helpcenter"/>Help Center
-                        </a>
-                    </li>
                 </ul>
             )
         } else {
@@ -383,7 +377,7 @@ class NavServiceBot extends React.Component {
                                         {this.getLivemode()}
                                     </div>
                                     <Link target="_blank" to="http://servicebot.io">
-                                        Powered by Servicebot
+                                        Powered by ServiceBot
                                     </Link>
                                     {this.props.services.footerComponent && this.props.services.footerComponent.map((comp, index) => {
                                         return (<div key={"footer-" + index}>

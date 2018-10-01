@@ -25,7 +25,7 @@ import {
     OnOffToggleField,
     iconToggleField,
     priceField
-} from "servicebot-base-form";
+} from "@vbosstech/servicebot-base-form";
 import SVGIcons from "../../utilities/svg-icons.jsx";
 import Load from "../../utilities/load.jsx";
 

@@ -24,7 +24,7 @@ class StripeSettings extends React.Component {
         let self = this;
         let pageName = this.props.route.name;
         let breadcrumbs = [{name:'Home', link:'home'},{name:'My Services', link:'/my-services'},{name:pageName, link:null}];
-        let subtitle= 'Servicebot works with Stripe. Integrate and import your existing Stripe data with one click.';
+        let subtitle= 'ServiceBot works with Stripe. Integrate and import your existing Stripe data with one click.';
         return(
             <Authorizer permissions="can_administrate">
                 <Jumbotron pageName={pageName} subtitle={subtitle} />

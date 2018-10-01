@@ -1,5 +1,5 @@
 import React from 'react';
-import {Fetcher} from "servicebot-base-form"
+import {Fetcher} from "@vbosstech/servicebot-base-form"
 import DataTable from "../elements/datatable/datatable.jsx";
 import Jumbotron from "../layouts/jumbotron.jsx";
 import {Link, browserHistory} from 'react-router';

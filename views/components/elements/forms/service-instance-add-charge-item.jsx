@@ -2,7 +2,7 @@ import React from 'react';
 import Load from '../../utilities/load.jsx';
 import Inputs from "../../utilities/inputs.jsx";
 import {DataForm} from "../../utilities/data-form.jsx";
-import {ServicebotBaseForm,inputField, priceField} from "servicebot-base-form"
+import {ServicebotBaseForm,inputField, priceField} from "@vbosstech/servicebot-base-form"
 import {Field} from "redux-form"
 import {numericality, required} from "redux-form-validators";
 

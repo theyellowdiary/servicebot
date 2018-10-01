@@ -8,7 +8,7 @@ import {NavNotification} from "../pages/notifications.jsx";
 import SideNav from '../layouts//side-nav.jsx';
 import {AppMessage} from '../elements/app-message.jsx';
 import ReactTooltip from 'react-tooltip';
-import consume from "pluginbot-react/dist/consume"
+import consume from "@vbosstech/pluginbot-react/dist/consume"
 
 import { connect } from "react-redux";
 import '../../../public/js/bootstrap-3.3.7-dist/js/bootstrap.js';

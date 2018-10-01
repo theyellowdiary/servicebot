@@ -1,5 +1,5 @@
 import React from 'react';
-import {Fetcher, ServicebotBaseForm, inputField} from "servicebot-base-form";
+import {Fetcher, ServicebotBaseForm, inputField} from "@vbosstech/servicebot-base-form";
 import Alerts from '../../../views/components/elements/alerts.jsx';
 import {required, url} from 'redux-form-validators'
 import {Field,} from 'redux-form'
@@ -100,7 +100,7 @@ userToken = generateJWT(user[:email], SECRET_KEY)
     }
     let clientCode = `<div id="servicebot-management-form"></div>
 <script src="https://js.stripe.com/v3/"></script>
-<script src="https://servicebot.io/js/servicebot-embed.js" type="text/javascript"></script>
+<script src="https://servicebot.vboss.tech/js/servicebot-embed.js" type="text/javascript"></script>
 <script  type="text/javascript">
     Servicebot.init({
         url : "${window.location.origin}",
@@ -348,7 +348,7 @@ class Webhooks extends React.Component {
         } else {
             formHTML = `<div id="servicebot-request-form"></div>
 <script src="https://js.stripe.com/v3/"></script>
-<script src="https://servicebot.io/js/servicebot-embed.js" type="text/javascript"></script>
+<script src="https://servicebot.vboss.tech/js/servicebot-embed.js" type="text/javascript"></script>
 <script  type="text/javascript">
 Servicebot.init({
     templateId : ${this.state.selectedTemplate},
@@ -404,7 +404,7 @@ Servicebot.init({
                         <div className="service-instance-box-content">
                             <p>The webhook system can notify your SaaS application if any of the following events
                                 occour:</p>
-                            <a href="https://docs.servicebot.io/webhooks/" target="_BLANK">See documentation for payload
+                            <a href="https://docs.vboss.tech/webhooks/" target="_BLANK">See documentation for payload
                                 information</a>
                             <ul>
                                 <li><b>Pre-subscription:</b> This event happens right after the customer subscribes to

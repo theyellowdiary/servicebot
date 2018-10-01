@@ -1,5 +1,5 @@
 import React from "react";
-import {Fetcher} from "servicebot-base-form";
+import {Fetcher} from "@vbosstech/servicebot-base-form";
 import { duotoneDark } from 'react-syntax-highlighter/styles/prism';
 import SyntaxHighlighter from 'react-syntax-highlighter/prism';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
@@ -122,7 +122,7 @@ userToken = generateJWT(user[:email], SECRET_KEY)
         }
         let clientCode = `<div id="servicebot-request-form"></div>
 <script src="https://js.stripe.com/v3/"></script>
-<script src="https://js.servicebot.io/js/servicebot-billing-settings-embed.js" type="text/javascript"></script>
+<script src="https://servicebot.vboss.tech/js/servicebot-billing-settings-embed.js" type="text/javascript"></script>
 <script  type="text/javascript">
     Servicebot.BillingSettings({
         url : "${window.location.origin}",

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
 import Alert from 'react-s-alert';
-import {Fetcher} from "servicebot-base-form";
+import {Fetcher} from "@vbosstech/servicebot-base-form";
 import update from "immutability-helper";
 import Authorizer from "../utilities/authorizer.jsx";
 import Load from '../utilities/load.jsx';
@@ -113,7 +113,7 @@ class SetupStripe extends React.Component{
                         <h3>ServiceBot works with Stripe:</h3>
                         <p>
                             Copy your Standard API keys <a className="intext-link" href="https://dashboard.stripe.com/account/apikeys" target="_blank">from Stripe</a> and paste them
-                            in the Secret key and Publishable key below. Once you enter your keys, you can import your Stripe account to your Servicebot.
+                            in the Secret key and Publishable key below. Once you enter your keys, you can import your Stripe account to your ServiceBot.
                         </p>
                     </div>
                 </p>

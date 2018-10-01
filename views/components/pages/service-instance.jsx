@@ -27,7 +27,7 @@ import DateFormat from "../utilities/date-format.jsx";
 import $ from "jquery";
 import '../../../public/js/bootstrap-3.3.7-dist/js/bootstrap.js';
 import _ from "lodash";
-import ServicebotBillingSettingsEmbed from "servicebot-billing-settings-embed"
+import ServicebotBillingSettingsEmbed from "@vbosstech/servicebot-billing-settings-embed"
 import ContentTitle from "../layouts/content-title.jsx";
 
 class ServiceInstance extends React.Component {

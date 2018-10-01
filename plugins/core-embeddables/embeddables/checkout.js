@@ -1,6 +1,6 @@
 import React from "react";
 import cookie from "react-cookie";
-import {Fetcher, inputField, iconToggleField, ServicebotBaseForm} from "servicebot-base-form";
+import {Fetcher, inputField, iconToggleField, ServicebotBaseForm} from "@vbosstech/servicebot-base-form";
 import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues} from 'redux-form'
 import {connect} from "react-redux";
 import {RenderWidget, WidgetList, widgets} from "../../../views/components/utilities/widgets";
@@ -290,7 +290,7 @@ class CheckoutPage extends React.Component {
         let {selectedPlan, selectedTemplate} = this.state;
         return `<div id="servicebot-request-form"></div>
                 <script src="https://js.stripe.com/v3/"></script>
-                <script src="https://js.servicebot.io/js/servicebot-checkout-embed.js" type="text/javascript"></script>
+                <script src="https://servicebot.vboss.tech/js/servicebot-checkout-embed.js" type="text/javascript"></script>
                 <script  type="text/javascript">
                     Servicebot.Checkout({
                         templateId : ${selectedTemplate},
@@ -386,7 +386,7 @@ class CheckoutPage extends React.Component {
                         <div className="_indented">
                             <p className="form-help-text"> Paste the generated HTML on the page you want to embed
                                 a request form. You can find more detailed documentation
-                                <a href="https://docs.servicebot.io/checkout-embed"> here</a>
+                                <a href="https://docs.vboss.tech/embed"> here</a>
                             </p>
 
                             <div className="_embed-code-form">

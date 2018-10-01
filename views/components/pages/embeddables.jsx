@@ -1,5 +1,5 @@
 import React from 'react';
-import consume from "pluginbot-react/dist/consume";
+import consume from "@vbosstech/pluginbot-react/dist/consume"
 import slug from "slug";
 
 slug.defaults.mode = "rfc3986";

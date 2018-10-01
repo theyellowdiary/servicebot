@@ -1,7 +1,7 @@
 import React from 'react';
 import {Elements, injectStripe, CardElement, StripeProvider} from 'react-stripe-elements';
 import {get, has} from "lodash";
-import {ServicebotBaseForm, Fetcher, inputField}from "servicebot-base-form"
+import {ServicebotBaseForm, Fetcher, inputField}from "@vbosstech/servicebot-base-form"
 import Alerts from '../alerts.jsx';
 import {required} from 'redux-form-validators'
 import {Field,} from 'redux-form'

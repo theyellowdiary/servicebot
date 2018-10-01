@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router, Route, IndexRoute, IndexRedirect, browserHistory} from 'react-router';
 import {connect} from "react-redux";
-import PluginbotProvider from "pluginbot-react/dist/provider"
+import PluginbotProvider from "@vbosstech/pluginbot-react/dist/provider"
 
 // App
 import App from "./components/app.jsx";
