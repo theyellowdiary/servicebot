@@ -1,21 +1,267 @@
+# Service Bot Installation Guide
+Open-source subscription management & billing automation system
 
-<p align="center">
-<a href="https://servicebot.io">
-<img width="250" heigth="250" src="https://servicebot.io/images/logo/servicebot-logo-full-blue.png">
-</a>
-</p>
+## Production
 
-___
-<p align="center">
-<b>Open-source Subscription Management System</b>
-<p align="center">Automate what happens when customers subscribe, cancel, and upgrade</p>
-<p align="center"><a href="https://servicebot.io"><img width="750" src="https://servicebot.io/newadmin.gif"></a></p>
-</p>
+TODO: OpenShift
 
-## Overview
-Servicebot is an XaaS (Anything-as-a-service) platform. You can define requestable service templates with an advanced service designer that supports many input types, pricing models, and even develop plugins which can run code when these services are requested. The goal being Servicebot manages the lifecycle of any type of service a business can offer.
+## Staging
 
-[![Try in PWD](https://cdn.rawgit.com/play-with-docker/stacks/cff22438/assets/images/button.png)](http://play-with-docker.com?stack=/servicebot/latest)
+Deploy ebilling with docker.
+
+On new linux server, install:
+
+```bash
+# Install guide: 'docs/docker.md'
+docker
+docker-compose
+
+nginx
+certbot
+node
+```
+
+Using o2o-box to deploy ebilling (run as `root`):
+
+TODO: Deploy as `ubuntu`
+
+```bash
+# Run as root
+cd packages/o2o-box
+npm install
+# Deploy ebillling
+# service <service>
+sudo node src/index.js service servicebot
+```
+
+```
+  cd /Volumes/vBOSS/github/servicebot                                              &&
+  cd  servicebot                                                                   &&
+  git remote add upstream https://github.com/service-bot/servicebot.git            &&
+  git fetch upstream                                                               &&
+  git pull upstream master                                                         && 
+  
+  cd ../servicebot-billing-settings-embed                                                       &&
+  git remote add upstream https://github.com/service-bot/servicebot-billing-settings-embed.git  &&
+  git fetch upstream                                                                            &&
+  git pull upstream master                                                                      &&
+
+  cd ../servicebot-checkout-embed                                                               &&
+  git remote add upstream https://github.com/service-bot/servicebot-checkout-embed.git          &&
+  git fetch upstream                                                                            &&
+  git pull upstream master                                                                      &&
+
+  cd ../servicebot-base-form                                                       &&
+  git remote add upstream https://github.com/service-bot/servicebot-base-form.git  &&
+  git fetch upstream                                                               &&
+  git pull upstream master                                                         &&
+
+  cd ../servicebot-docs                                                            &&
+  git remote add upstream https://github.com/service-bot/servicebot-docs.git       &&
+  git fetch upstream                                                               &&
+  git pull upstream master                                                         &&
+
+  cd  ../pluginbot                                                                 &&
+  git remote add upstream https://github.com/service-bot/pluginbot.git             &&
+  git fetch upstream                                                               &&
+  git pull upstream master                                                         &&
+
+  cd ../pluginbot-react                                                            &&
+  git remote add upstream https://github.com/service-bot/pluginbot-react.git       &&
+  git fetch upstream                                                               &&
+  git pull upstream master                                                         &&
+  
+  cd ../servicebot-client                                                          &&
+  git remote add upstream https://github.com/service-bot/servicebot-client.git     &&
+  git fetch upstream                                                               &&
+  git pull upstream master      
+  
+  npm publish --access=public                                     
+```
+
+
+## Handle PostgreSQL
+
+We often face with 3 cases:
+
++ [1] Native/RDS PosgreSQL
++ [2] From other docker
++ [3] Dont have any PostgreSQL
+
+|   	| Case                               	| How to                                                      	|
+|---	|------------------------------------	|-------------------------------------------------------------	|
+| 1 	| Native/RDS PostgrSQL already exist 	| + Remove docker's service in yaml file which run PostgreSQL 	|
+|   	|                                    	| + Update PostgreSQL config of client                        	|
+| 2 	| From other docker                  	| + Joining exist PostgresSQL Docker using network            	|
+|   	|                                    	| + Sample conf [db](docker-compose-db.yml)                   	|
+| 3 	| Dont have any PosgreSQL            	| + Current yaml file support create new PostgreSQL           	|
+|   	|                                    	| + Reuse & Update user, pass & database's name conf          	|
+
+## Prerequisites
+- Ubuntu Server (At least 16.04)
+- NodeJS >= 8.9.1 (LTS version)
+- PM2
+- Postgresql 9+
+
+## Remote to your server
+```bash
+ssh user@ip-address
+```
+
+After connected to your server, make sure you are on the home directory.
+```bash
+cd ~
+```
+
+## Setup basic environment
+
+```bash
+git clone https://github.com/o2oprotocol/devops.git
+```
+
+Switch working directory to `devops`
+```bash
+cd ~/devops
+```
+
+Upgrade ubuntu packages & install some new packages
+```bash
+./1.ubuntu-upgrade.sh
+```
+
+If you see the popup which show information about `configuring grub-pc`, just press `ENTER` key.
+
+Be patient. This task will take a while.
+
+## Install postgresql
+```bash
+sudo apt-get update &&
+sudo apt-get install postgresql postgresql-contrib
+```
+
+## Create postgres database, credentials
+
+Create user
+```bash
+sudo -u postgres createuser servicebot
+```
+
+Create database
+```bash
+sudo -u postgres createdb servicebotdb
+```
+
+Giving the user a password
+```bash
+sudo -u postgres psql
+psql=# alter user servicebot with encrypted password 'Abcd@1234';
+```
+
+Granting privileges on database
+```bash
+psql=# grant all privileges on database servicebotdb to servicebot;
+```
+
+After doing all above steps, close the `psql=#` REPL by pressing `CTRL+D`
+
+Test the connection by:
+```bash
+psql -h localhost -U servicebot servicebotdb -W
+```
+
+Enter the password above `servicebot`
+
+If you connect success and terminal shows `servicebot=>` means you are doing well.
+
+Press `CTRL+D` to quit the terminal.
+
+
+## Double check your environments are correct.
+### Check nodejs version
+```bash
+node -v
+```
+
+Make sure the nodejs version is greater or equals `8.9.1` (It can be `8.11.1`)
+
+The result could be: `v8.11.2`
+
+### Check the `pm2` is present and 
+```bash
+pm2 -v
+```
+
+The result could be: `2.10.4`
+
+## Clone source code
+
+Switch working directory to home directory (~)
+```bash
+cd ~
+```
+
+Clone source code
+```bash
+git clone https://vbosstech@bitbucket.org/eworkforce/ebilling.git
+```
+
+## Create environment variables
+
+Export application variables.
+*Make sure that you replace email information by your information.*
+```bash
+ echo "export POSTGRES_DB_HOST=localhost            
+ export POSTGRES_DB_USER=servicebot                 
+ export POSTGRES_DB_NAME=servicebotdb               
+ export POSTGRES_DB_PASSWORD=Abcd@1234              
+ export POSTGRES_DB_PORT=5432                       
+ export ADMIN_USER=thanh.nn@tctav.com               
+ export ADMIN_PASSWORD=Abcd@1234                    
+ export ADMIN_NAME=Admin                            
+ export VIRTUAL_HOST=127.0.0.1                      
+ export SECRET_KEY=Q45Gpb2vkiYGoBi5jDz8mcWlmmFWgVbk 
+ export SMTP_HOST=mail.tctav.com                    
+ export SMTP_USER=thanh.nn@tctav.com                
+ export SMTP_PASSWORD=servicebot                    
+ export SMTP_PORT=587" >> ~/.bash_profile
+```
+
+Apply changing for env
+```bash
+source ~/.bash_profile
+```
+
+
+## Build & Run Ebilling
+
+Switch working directory to `ebilling` directory
+```bash
+cd ~/ebilling
+```
+
+Execute `yarn` to install dependencies
+```bash
+yarn
+```
+
+Build source
+```bash
+yarn build
+```
+
+Start `ebilling` application
+```bash
+PORT=3334 pm2 --name=ebilling start npm -- start 
+```
+
+## Allow Port if not
+
+If you are using firewall, please make sure that port `3334` is allowed.
+```bash
+sudo ufw allow 3334
+```
+
+**Enjoy your great things by browse app at: http://your-ip-address:3334**
 
 ## Features
 - **Automate Billing:** Create and sell anything as a service in minutes.
@@ -35,62 +281,44 @@ Servicebot is an XaaS (Anything-as-a-service) platform. You can define requestab
     - **Communication:** Customers can send your business messages when they have questions
 
 - **Extensibility:**
-    - **Full REST API:** Integrate Servicebot with your existing website or application
-    - **Plugin framework:** Develop plugins to extend the functionality of servicebot (documentation coming soon)
+    - **Full REST API:** Integrate BnBService with your existing website or application
+    - **Plugin framework:** Develop plugins to extend the functionality of bnbservice (documentation coming soon)
+
+> JENKINS
 
 
-    
-## Examples
 
-[ServiceShop](https://serviceshop.io) - Request different open-source systems
+```
+npm install
 
-[Growth Writer](https://growth-writer.serviceshop.io) - Blog Writing as a service
+rm -rf .env
 
-[Vampeo](https://vampeo.serviceshop.io) - Software Development as a service
+# BnB Config
+export PORT=3334
+export SSL_PORT=3200
+export POSTGRES_DB_HOST=localhost            
+export POSTGRES_DB_USER=ebilling                 
+export POSTGRES_DB_NAME=ebillingdb               
+export POSTGRES_DB_PASSWORD=devops2018              
+export POSTGRES_DB_PORT=5432                       
+export ADMIN_USER=thanh.nn@tctav.com               
+export ADMIN_PASSWORD=devops2018                    
+export ADMIN_NAME=Admin                            
+export VIRTUAL_HOST=127.0.0.1                      
+export SECRET_KEY=Q45Gpb2vkiYGoBi5jDz8mcWlmmFWgVbk 
+export SMTP_HOST=mail.tctav.com                    
+export SMTP_USER=thanh.nn@tctav.com                
+export SMTP_PASSWORD=devops2018                    
+export SMTP_PORT=587
 
-## Installation
+npm run build
 
-**Self Hosting Solution** - Manual installation guide could be found here: [Installation Guide](https://hackernoon.com/install-and-configure-an-open-source-crm-for-your-xaas-business-f976451221f0)
+# Keep process
+export BUILD_ID=dontKillMe
 
-**Managed Solution** - You can order a Servicebot instance online from [servicebot.io](https://servicebot.io)
+pm2 delete eBilling || true
+pm2 start --name=eBilling npm -- start
 
-
-## Usage Guide
-
-Documentation: <https://docs.servicebot.io/> 
-
-API reference: <https://api-docs.servicebot.io/>
-
-
-## Built With
-- [NodeJS](https://github.com/nodejs/node) &mdash; Our back end API is a Node express app. It responds to requests RESTfully in JSON.
-- [React](https://github.com/facebook/react) &mdash; Our front end is a React app that communicates with the Node Express api server.
-- [PostgreSQL](http://www.postgresql.org/) &mdash; Our database is Postgres.
-- [Stripe](https://stripe.com/) &mdash; Our platform integrates with Stripe to handle billing
-
-## Contributing
-
-ServiceBot is **open source** and accepts contributions from the public
-
-We look forward to working with you!
-
-## Credit
-- Maintained by [Vampeo](http://vampeo.com)
-- Supported by [BrowserStack](https://www.browserstack.com/)
-
-## License
-Copyright (C) 2018 ServiceBot
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+pm2 save
+pm2 startup || true
+```
