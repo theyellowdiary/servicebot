@@ -1,0 +1,14 @@
+set POSTGRES_DB_HOST=127.0.0.1
+set POSTGRES_DB_USER=ebilling
+set POSTGRES_DB_NAME=ebilling
+set POSTGRES_DB_PASSWORD=Abcd@1234
+set POSTGRES_DB_PORT=5432
+set ADMIN_USER=admin@e-billing.com
+set ADMIN_PASSWORD=Abcd@1234
+set ADMIN_NAME=Admin Master
+set VIRTUAL_HOST=127.0.0.1
+set SECRET_KEY=Q45Gpb2vkiYGoBi5jDz8mcWlmmFWgVbk
+set SMTP_HOST=mail.tctav.com
+set SMTP_USER=admin@e-billing.com
+set SMTP_PASSWORD=Abcd@1234
+set SMTP_PORT=587

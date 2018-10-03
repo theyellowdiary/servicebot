@@ -1,0 +1,24 @@
+version: '2'
+services:
+  ebilling:
+    build:
+      context: .
+    environment:
+      PORT : "3000"
+    volumes:
+      - {{ENVIRONMENT_FILE}}:/usr/src/app/.env
+    links:
+      - mongo
+    ports:
+      - "{{SERVICE_PORT}}:3000"
+  mongo:
+    image: mongo
+    volumes:
+      - {{MONGO_DATA}}:/data/db
+  redis:
+    image: redis
+    volumes:
+      - {{REDIS_DATA}}:/data
+volumes:
+  {{MONGO_DATA}}:
+  {{REDIS_DATA}}:

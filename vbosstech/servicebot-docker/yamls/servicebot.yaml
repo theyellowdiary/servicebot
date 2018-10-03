@@ -1,0 +1,38 @@
+version: '2'
+services:
+  ebilling:
+    build:
+      context: .
+    environment:
+      POSTGRES_DB_PORT : "{{POSTGRES_DB_PORT}}"
+      POSTGRES_DB_HOST : "{{POSTGRES_DB_HOST}}"
+      POSTGRES_DB_USER : "{{POSTGRES_DB_USER}}"
+      POSTGRES_DB_PASSWORD : "{{POSTGRES_DB_PASSWORD}}"
+      POSTGRES_DB_NAME : "{{POSTGRES_DB_NAME}}"
+#      SMTP_HOST : 'localhost'
+#      SMTP_USER : 'postmaster@localhost'
+#      SMTP_PASSWORD : 'password'
+#      SMTP_PORT : '587'
+      PORT : "3000"
+    volumes:
+      - {{UPLOAD_DATA}}:/usr/src/app/uploads
+      - {{ENVIRONMENT_FILE}}:/usr/src/app/env
+    links:
+      - db
+    ports:
+      - "{{SERVICE_PORT}}:3000"
+    command: ["sh", "-c", "node /usr/src/app/bin/wait-for-it.js db 5432  && npm run-script start"]
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER : "{{POSTGRES_DB_USER}}"
+      POSTGRES_PASSWORD : "{{POSTGRES_DB_PASSWORD}}"
+      POSTGRES_DB : "{{POSTGRES_DB_NAME}}"
+    volumes:
+      - {{DB_DATA}}:/var/lib/postgresql/data
+    expose:
+      - "5432"
+volumes:
+  {{UPLOAD_DATA}}:
+  {{DB_DATA}}:
+  {{ENVIRONMENT_FILE}}:

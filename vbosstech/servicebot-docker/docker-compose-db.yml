@@ -1,0 +1,30 @@
+#Explanation:
+#SMTP_ settings should be uncommented and configured if you want to have servicebot send emails
+#CERTIFICATES and the certificate volume should be uncommented when you get SSL certs, enter path to
+version: '2'
+services:
+  ebilling:
+    image: vbosstech/ebilling
+    environment:
+      POSTGRES_DB_PORT : "5432"
+      POSTGRES_DB_HOST : "db"
+      POSTGRES_DB_USER : "ebilling"
+      POSTGRES_DB_PASSWORD : "vboss.tech"
+      POSTGRES_DB_NAME : "ebilling2"
+      PORT : "3000"
+    volumes:
+      - upload-data2:/usr/src/app/uploads
+      - environment-file2:/usr/src/app/env
+    ports:
+      - "3335:3000"
+    command: ["sh", "-c", "node /usr/src/app/bin/wait-for-it.js db 5432  && npm run-script start"]
+    networks:
+      - ebilling_default
+volumes:
+  upload-data2:
+  environment-file2:
+
+networks:
+  ebilling_default:
+    external:
+      name: ebilling_default

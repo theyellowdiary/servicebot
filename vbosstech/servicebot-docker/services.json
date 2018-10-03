@@ -1,0 +1,28 @@
+[
+  {
+    "name": "servicebot",
+    "repo": "https://vbosstech@github.com/vbosstech/servicebot.git",
+    "docker_file": "dockerfiles/servicebot",
+    "docker_compose": "yamls/servicebot.yaml",
+    "domainName": "servicebot.vboss.tech",
+    "SERVICE_PORT": "3333",
+    "POSTGRES_DB_PORT": "5433",
+    "POSTGRES_DB_HOST": "db",
+    "POSTGRES_DB_USER": "servicebot",
+    "POSTGRES_DB_PASSWORD": "YourPassword",
+    "POSTGRES_DB_NAME": "servicebot",
+    "UPLOAD_DATA": "upload_data",
+    "DB_DATA": "db_data",
+    "ENVIRONMENT_FILE": "env"
+  },
+  {
+    "name": "leadgeneration-chatbot",
+    "repo": "https://vbosstech@bitbucket.org/SaaS-Subscription-Billing/leadgeneration-chatbot.git",
+    "docker_file": "dockerfiles/leadgeneration-chatbot",
+    "docker_compose": "yamls/leadgeneration-chatbot.yaml",
+    "domainName": "leadgeneration-chatbot.company.com",
+    "ENVIRONMENT_FILE": "envfiles/leadgeneration-chatbot.env",
+    "MONGO_DATA": "mongo_data",
+    "REDIS_DATA": "redis_data"
+  }
+]

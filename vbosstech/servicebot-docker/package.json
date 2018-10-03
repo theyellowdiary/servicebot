@@ -1,0 +1,28 @@
+{
+  "name": "o2o-box",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "nexe": "nexe",
+    "dev": "node src/commands/index.js",
+    "binary": "nexe dist/index.js --output vboss",
+    "webpack": "webpack --mode=production",
+    "build": "npm run webpack && npm run binary"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "chalk": "^2.4.1",
+    "cross-spawn": "^6.0.5",
+    "cross-spawn-promise": "^0.10.1",
+    "dotenv": "^6.0.0",
+    "fs-extra": "^7.0.0",
+    "handlebars": "^4.0.11",
+    "nexe": "^2.0.0-rc.34",
+    "replace-in-file": "^3.4.2"
+  },
+  "devDependencies": {
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
+  }
+}

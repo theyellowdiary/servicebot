@@ -1,0 +1,3495 @@
+{
+	"info": {
+		"_postman_id": "dd7a171e-80ae-4ddf-8df8-51aad26984c8",
+		"name": "eBilling Chatbot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "5540bddd-6a52-4ced-861e-07093262a90d",
+			"name": "[Auth] Get Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"lehoanganh25991@gmail.com\",\n\t\"password\": \"Abcd@1234\"\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/auth/token",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "9c287be6-31af-4323-84da-0d6a3edc9e21",
+					"name": "[Auth] Get Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"lehoanganh25991@gmail.com\",\r\n  \"password\": \"Abcd@1234\"\r\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/auth/token",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "151",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 02:52:04 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"97-IM2FhuBA1Bf3LAFP4esRsfA1fV8\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "{\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTUzMzUyMzkyNCwiZXhwIjoxNTMzNTM0NzI0fQ.12rijtD9cShoxC3uy7Ah-oKUV31tWpqst2mT2fVSwx0\"}"
+				}
+			]
+		},
+		{
+			"_postman_id": "f8a36261-3310-44a4-bdfd-ad21cf79a19a",
+			"name": "[User] Get All",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/users",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "1c411542-2b1f-426a-81d9-2312d0acd7c0",
+			"name": "[User] Register New User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Test 4\",\n\t\"email\": \"test4@e-billing.com\",\n\t\"password\": \"0105\"\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/users/register",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "8c21e2e9-e81d-4968-904c-9c7869407bfc",
+					"name": "[User] Get By Own",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Test 4\",\n\t\"email\": \"test4@e-billing.com\",\n\t\"password\": \"0105\"\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/users/register",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1523",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 09:30:34 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5f3-F4w/cUgZux+KQCos50K380wjga8\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=test4%40e-billing.com; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=8; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "test4%40e-billing.com",
+							"key": "username"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "8",
+							"key": "uid"
+						}
+					],
+					"body": "{\"message\":\"successful signup\",\"permissions\":[\"get_users_own\",\"get_users_id\",\"put_users_id\",\"get_users_id_avatar\",\"put_users_id_avatar\",\"post_users_register\",\"post_funds\",\"get_funds_own\",\"put_funds_id\",\"get_service_templates_public\",\"get_service_templates_id_icon\",\"get_service_templates_id_image\",\"get_service_templates_id_request\",\"put_service_templates_id_request\",\"get_service_categories\",\"get_service_instances_own\",\"get_service_instances_id\",\"put_service_instances_id\",\"post_service_instances_id_approve\",\"post_service_instances_id_reactivate\",\"post_service_instances_id_change_properties\",\"post_service_instances_id_request_cancellation\",\"get_service_instances_id_awaiting_charges\",\"post_service_instances_id_approve_charges\",\"post_service_instances_id_files\",\"get_service_instances_id_files\",\"delete_service_instances_id_files_fid\",\"get_service_instances_id_files_fid\",\"get_service_instance_messages\",\"post_service_instance_messages\",\"get_service_instance_messages_search\",\"get_service_instance_messages_id\",\"put_service_instance_messages_id\",\"get_service_instance_cancellations_own\",\"delete_service_instance_cancellations_id\",\"post_service_instance_cancellations_id_undo\",\"get_invoices_own\",\"get_invoices_id\",\"get_invoices_upcoming_id\",\"get_system_options_public\",\"get_system_options_file_id\",\"get_system_options_version\",\"post_auth_token\",\"post_auth_session_clear\",\"post_auth_reset_password\",\"get_auth_reset_password_uid_token\",\"post_auth_reset_password_uid_token\",\"get_notifications_own\",\"put_notifications_id\"]}"
+				}
+			]
+		},
+		{
+			"_postman_id": "2ef8fa19-5e36-4ec0-91bd-beb3a8f57f18",
+			"name": "[Service][Category] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-categories"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "853bb2d1-d84a-41df-aca3-a7c63399af78",
+					"name": "[Service][Category] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/service-categories",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"service-categories"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "278",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 02:52:11 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"116-0JD/7rFfisyEW2LT3aSqdserCfY\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"name\":\"Uncategorized\",\"description\":\"Uncategorized Services\",\"created_at\":\"2018-08-06T02:34:27.138Z\",\"updated_at\":\"2018-08-06T02:34:27.138Z\"},{\"id\":2,\"name\":\"Phone\",\"description\":\"Phone\",\"created_at\":\"2018-08-06T02:35:58.093Z\",\"updated_at\":\"2018-08-06T02:35:58.093Z\"}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "c8f98ed7-b143-490c-a06e-fada2ac2b10e",
+			"name": "[Service][Template] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-templates/public",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-templates",
+						"public"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "579a563a-40ee-4ae3-a034-8c2e39608615",
+					"name": "[Service][Template] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/service-templates/public",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"service-templates",
+								"public"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2479",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 02:51:29 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"9af-Xdm+T0oCgDmT2OukkRhAu83tkNM\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"category_id\":2,\"created_by\":1,\"name\":\"Service Name\",\"description\":\"Summary\",\"details\":\"<p>Details</p>\",\"published\":true,\"statement_descriptor\":\"Anh Le Hoang\",\"trial_period_days\":3,\"amount\":500,\"currency\":\"usd\",\"interval\":\"month\",\"interval_count\":1,\"type\":\"subscription\",\"subscription_prorate\":true,\"split_configuration\":null,\"created_at\":\"2018-08-06T02:36:55.664Z\",\"updated_at\":\"2018-08-06T02:36:55.664Z\",\"references\":{\"service_template_properties\":[{\"id\":1,\"name\":\"large-screen\",\"type\":\"checkbox\",\"data\":{\"value\":true},\"config\":{\"pricing\":{\"value\":100,\"operation\":\"add\"}},\"prop_class\":null,\"prop_label\":\"Large Screen\",\"prop_description\":null,\"created_at\":\"2018-08-06T02:36:55.698Z\",\"updated_at\":\"2018-08-06T02:36:55.698Z\",\"parent_id\":1,\"private\":false,\"prompt_user\":true,\"required\":false}],\"service_categories\":[{\"id\":2,\"name\":\"Phone\",\"description\":\"Phone\",\"created_at\":\"2018-08-06T02:35:58.093Z\",\"updated_at\":\"2018-08-06T02:35:58.093Z\"}],\"users\":[{\"id\":1,\"role_id\":1,\"name\":\"admin\",\"email\":\"lehoanganh25991@gmail.com\",\"provider\":\"local\",\"status\":\"active\",\"customer_id\":\"cus_DMhyUIqVytGCuO\",\"phone\":null,\"last_login\":\"2018-08-06T02:39:39.034Z\",\"created_at\":\"2018-08-06T02:34:28.444Z\",\"updated_at\":\"2018-08-06T02:42:46.331Z\"}]}},{\"id\":2,\"category_id\":2,\"created_by\":1,\"name\":\"Service 2\",\"description\":\"Summary\",\"details\":\"<p>Details</p>\",\"published\":true,\"statement_descriptor\":\"Anh Le Hoang\",\"trial_period_days\":5,\"amount\":1000,\"currency\":\"usd\",\"interval\":\"month\",\"interval_count\":1,\"type\":\"subscription\",\"subscription_prorate\":true,\"split_configuration\":null,\"created_at\":\"2018-08-06T02:42:06.293Z\",\"updated_at\":\"2018-08-06T02:42:06.293Z\",\"references\":{\"service_template_properties\":[{\"id\":2,\"name\":\"x-large-screen\",\"type\":\"checkbox\",\"data\":{\"value\":true},\"config\":{\"pricing\":{\"value\":500,\"operation\":\"add\"}},\"prop_class\":null,\"prop_label\":\"X Large Screen\",\"prop_description\":null,\"created_at\":\"2018-08-06T02:42:06.315Z\",\"updated_at\":\"2018-08-06T02:42:06.315Z\",\"parent_id\":2,\"private\":false,\"prompt_user\":true,\"required\":false}],\"service_categories\":[{\"id\":2,\"name\":\"Phone\",\"description\":\"Phone\",\"created_at\":\"2018-08-06T02:35:58.093Z\",\"updated_at\":\"2018-08-06T02:35:58.093Z\"}],\"users\":[{\"id\":1,\"role_id\":1,\"name\":\"admin\",\"email\":\"lehoanganh25991@gmail.com\",\"provider\":\"local\",\"status\":\"active\",\"customer_id\":\"cus_DMhyUIqVytGCuO\",\"phone\":null,\"last_login\":\"2018-08-06T02:39:39.034Z\",\"created_at\":\"2018-08-06T02:34:28.444Z\",\"updated_at\":\"2018-08-06T02:42:46.331Z\"}]}}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "8a843785-3f84-4a67-919d-d6406cbeae5f",
+			"name": "[Service][Template][Property] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-template-properties/{{serviceTemplateId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-template-properties",
+						"{{serviceTemplateId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "4cf4278f-137a-42e8-8b39-a549a2b9811a",
+					"name": "[Service][Template][Property] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/service-template-properties/{{serviceTemplateId}}",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"service-template-properties",
+								"{{serviceTemplateId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "339",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 06:46:28 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"153-REEhnu3EILV9IuPavZERi95DfF8\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "{\"id\":1,\"name\":\"large-screen\",\"type\":\"checkbox\",\"data\":{\"value\":true},\"config\":{\"pricing\":{\"value\":100,\"operation\":\"add\"}},\"prop_class\":null,\"prop_label\":\"Large Screen\",\"prop_description\":null,\"created_at\":\"2018-08-06T02:36:55.698Z\",\"updated_at\":\"2018-08-06T02:36:55.698Z\",\"parent_id\":1,\"private\":false,\"prompt_user\":true,\"required\":false}"
+				}
+			]
+		},
+		{
+			"_postman_id": "d955fbc2-de7e-4eaf-8adc-f624dcbeb748",
+			"name": "[Service][Template] Create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"category_id\": 1,\r\n  \"created_by\": 1,\r\n  \"name\": \"Service XX\",\r\n  \"description\": \"description\",\r\n  \"details\": \"details\",\r\n  \"published\": true,\r\n  \"statement_descriptor\": \"statement_descriptor\",\r\n  \"trial_period_days\": 0,\r\n  \"amount\": 5.5,\r\n  \"overhead\": 0,\r\n  \"currency\": \"USD\",\r\n  \"interval\": \"month\",\r\n  \"interval_count\": 1,\r\n  \"type\": \"subscription\",\r\n  \"subscription_prorate\": true,\r\n  \"split_configuration\": null,\r\n  \"references\": {\r\n    \"service_template_properties\": []\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/service-templates",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-templates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "6bec63d9-a408-4c09-8de9-751c5a72b48b",
+			"name": "[Service][Template] Update",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\": 60\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/service-templates/8",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-templates",
+						"8"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "30b872d5-ed50-4d01-b66c-58b30b260d30",
+					"name": "[Service][Template] Update",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\": 60\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/service-templates/8",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"service-templates",
+								"8"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "429",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 08:12:37 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1ad-GoPLVTy5aOFicVl+nVeK0s1nXaM\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "{\"id\":8,\"category_id\":1,\"created_by\":1,\"name\":\"Service XX\",\"description\":\"description\",\"details\":\"details\",\"published\":true,\"statement_descriptor\":\"statement_descriptor\",\"trial_period_days\":0,\"amount\":60,\"overhead\":0,\"currency\":\"usd\",\"interval\":\"month\",\"interval_count\":1,\"type\":\"subscription\",\"subscription_prorate\":true,\"split_configuration\":null,\"created_at\":\"2018-08-06T08:07:02.560Z\",\"updated_at\":\"2018-08-06T08:12:37.816Z\"}"
+				}
+			]
+		},
+		{
+			"_postman_id": "84e5b848-55fa-472f-840f-0b69608651f6",
+			"name": "[Service][Template] Init Instance Get Req Info",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"test1@e-billing.com\",\n    \"token_id\": \"tok_1Cw47pLQ5zChKF90NVLLljgn\",\n    \"client_id\": 5,\n    \"references\": {\n        \"service_template_properties\": [],\n        \"service_categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Phone\",\n                \"description\": \"Phone\",\n                \"created_at\": \"2018-08-06T02:35:58.093Z\",\n                \"updated_at\": \"2018-08-06T02:35:58.093Z\"\n            }\n        ],\n        \"users\": [\n            {\n                \"id\": 1,\n                \"role_id\": 1,\n                \"name\": \"admin\",\n                \"email\": \"lehoanganh25991@gmail.com\",\n                \"provider\": \"local\",\n                \"status\": \"active\",\n                \"customer_id\": \"cus_DMhyUIqVytGCuO\",\n                \"phone\": null,\n                \"last_login\": \"2018-08-06T02:39:39.034Z\",\n                \"created_at\": \"2018-08-06T02:34:28.444Z\",\n                \"updated_at\": \"2018-08-06T02:42:46.331Z\"\n            }\n        ]\n    }\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/service-templates/7/request",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-templates",
+						"7",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "0277b61d-8914-4535-a416-07ec94f1e405",
+			"name": "[Service][Template] Init Instance",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"username\": \"test1@e-billing.com\",\r\n   \"id\":6,\r\n   \"category_id\":2,\r\n   \"created_by\":1,\r\n   \"name\":\"Service 6\",\r\n   \"description\":\"Summary 6\",\r\n   \"details\":\"<p>Details 6</p>\",\r\n   \"published\":true,\r\n   \"statement_descriptor\":\"Anh Le Hoang\",\r\n   \"trial_period_days\":0,\r\n   \"amount\":700,\r\n   \"currency\":\"usd\",\r\n   \"interval\":\"day\",\r\n   \"interval_count\":1,\r\n   \"type\":\"one_time\",\r\n   \"subscription_prorate\":true,\r\n   \"split_configuration\":null,\r\n   \"created_at\":\"2018-08-06T07:41:47.745Z\",\r\n   \"updated_at\":\"2018-08-06T07:44:00.807Z\",\r\n   \"references\":{\r\n      \"service_template_properties\":[\r\n\r\n      ]\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/service-templates/6/request",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-templates",
+						"6",
+						"request"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "c014ee10-7244-409d-be7c-27bbc000ae1e",
+					"name": "[Service][Template] Init Instance",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"username\": \"test1@e-billing.com\",\r\n   \"id\":6,\r\n   \"category_id\":2,\r\n   \"created_by\":1,\r\n   \"name\":\"Service 6\",\r\n   \"description\":\"Summary 6\",\r\n   \"details\":\"<p>Details 6</p>\",\r\n   \"published\":true,\r\n   \"statement_descriptor\":\"Anh Le Hoang\",\r\n   \"trial_period_days\":0,\r\n   \"amount\":700,\r\n   \"currency\":\"usd\",\r\n   \"interval\":\"day\",\r\n   \"interval_count\":1,\r\n   \"type\":\"one_time\",\r\n   \"subscription_prorate\":true,\r\n   \"split_configuration\":null,\r\n   \"created_at\":\"2018-08-06T07:41:47.745Z\",\r\n   \"updated_at\":\"2018-08-06T07:44:00.807Z\",\r\n   \"references\":{\r\n      \"service_template_properties\":[\r\n\r\n      ]\r\n   }\r\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/service-templates/6/request",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"service-templates",
+								"6",
+								"request"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2028",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 09:04:42 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7ec-wOtITEBfwFveEseKef0TjSjOgXo\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "{\"id\":34,\"service_id\":6,\"user_id\":5,\"requested_by\":5,\"payment_plan\":{\"id\":\"Service-6-ID34-gxw8\",\"object\":\"plan\",\"active\":true,\"aggregate_usage\":null,\"amount\":0,\"billing_scheme\":\"per_unit\",\"created\":1533546279,\"currency\":\"usd\",\"interval\":\"day\",\"interval_count\":1,\"livemode\":false,\"metadata\":{},\"name\":\"Service 6\",\"nickname\":null,\"product\":\"prod_DMoGWTtI6UCDYr\",\"statement_descriptor\":\"Anh Le Hoang\",\"tiers\":null,\"tiers_mode\":null,\"transform_usage\":null,\"trial_period_days\":null,\"usage_type\":\"licensed\"},\"name\":\"Service 6\",\"description\":\"Summary 6\",\"subscription_id\":\"sub_DMoGUw1i9c1jad\",\"subscribed_at\":1533546280,\"trial_end\":null,\"status\":\"running\",\"type\":\"one_time\",\"split_configuration\":null,\"created_at\":\"2018-08-06T09:04:37.654Z\",\"updated_at\":\"2018-08-06T09:04:41.026Z\",\"references\":{\"service_instance_properties\":[],\"service_instance_messages\":[],\"charge_items\":[{\"id\":18,\"user_id\":5,\"service_instance_id\":34,\"approved\":true,\"subscription_id\":null,\"item_id\":\"ii_1Cw4dpLQ5zChKF9053zGUDvl\",\"amount\":700,\"currency\":\"usd\",\"description\":\"Service 6\",\"period_start\":\"1533546280\",\"period_end\":\"1533632680\",\"created_at\":\"2018-08-06T09:04:37.747Z\",\"updated_at\":\"2018-08-06T09:04:42.889Z\"}],\"service_instance_cancellations\":[],\"users\":[{\"id\":5,\"role_id\":3,\"name\":\"Test 1\",\"email\":\"test1@e-billing.com\",\"provider\":\"local\",\"status\":\"active\",\"customer_id\":\"cus_DMm9NYIQAmh0Ff\",\"phone\":null,\"last_login\":\"2018-08-06T08:55:08.889Z\",\"created_at\":\"2018-08-06T06:53:52.115Z\",\"updated_at\":\"2018-08-06T08:55:08.914Z\"}]},\"webhook_responses\":{},\"request\":{\"username\":\"test1@e-billing.com\",\"id\":6,\"category_id\":2,\"created_by\":1,\"name\":\"Service 6\",\"description\":\"Summary 6\",\"details\":\"<p>Details 6</p>\",\"published\":true,\"statement_descriptor\":\"Anh Le Hoang\",\"trial_period_days\":0,\"amount\":700,\"currency\":\"usd\",\"interval\":\"day\",\"interval_count\":1,\"type\":\"one_time\",\"subscription_prorate\":true,\"split_configuration\":null,\"created_at\":\"2018-08-06T07:41:47.745Z\",\"updated_at\":\"2018-08-06T07:44:00.807Z\",\"references\":{\"service_template_properties\":[]}}}"
+				}
+			]
+		},
+		{
+			"_postman_id": "53e22300-a7bb-4cc0-a2b4-d3788502662a",
+			"name": "[Service][Template] Delete",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-templates/8",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-templates",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "7a6e67c3-9122-4b12-9851-3413a7e9ad3a",
+			"name": "[Service][Instance] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-instances",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-instances"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "cd410e89-ed6d-4036-9832-93d91c26822e",
+					"name": "[Service][Instance] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/service-instances",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"service-instances"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1617",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 02:51:52 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"651-POGx0cw6oXuUaQ5Kbj9J/7sSNC0\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"service_id\":1,\"user_id\":2,\"requested_by\":2,\"payment_plan\":{\"id\":\"Service-Name-ID1-k02\",\"name\":\"Service Name\",\"tiers\":null,\"active\":true,\"amount\":600,\"object\":\"plan\",\"created\":1533523245,\"product\":\"prod_DMi4HHPjtMay86\",\"currency\":\"usd\",\"interval\":\"month\",\"livemode\":false,\"metadata\":{},\"nickname\":null,\"tiers_mode\":null,\"usage_type\":\"licensed\",\"billing_scheme\":\"per_unit\",\"interval_count\":1,\"aggregate_usage\":null,\"transform_usage\":null,\"trial_period_days\":3,\"statement_descriptor\":\"Anh Le Hoang\"},\"name\":\"Service Name\",\"description\":\"Summary\",\"subscription_id\":\"sub_DMi4xhKy36qHkU\",\"subscribed_at\":\"1533523246\",\"trial_end\":\"1533782446\",\"status\":\"running\",\"type\":\"subscription\",\"split_configuration\":null,\"created_at\":\"2018-08-06T02:40:43.872Z\",\"updated_at\":\"2018-08-06T02:40:46.887Z\",\"references\":{\"service_instance_properties\":[{\"id\":1,\"name\":\"large-screen\",\"type\":\"checkbox\",\"data\":{\"value\":true},\"config\":{\"pricing\":{\"value\":100,\"operation\":\"add\"}},\"prop_class\":null,\"prop_label\":\"Large Screen\",\"prop_description\":null,\"created_at\":\"2018-08-06T02:36:55.698Z\",\"updated_at\":\"2018-08-06T02:36:55.698Z\",\"parent_id\":1,\"private\":false,\"prompt_user\":true,\"required\":false}],\"service_instance_messages\":[],\"charge_items\":[],\"service_instance_cancellations\":[],\"users\":[{\"id\":2,\"role_id\":3,\"name\":\"Anh\",\"email\":\"anh.lh@tctav.com\",\"password\":\"$2a$10$MfaBS0btK0nHyYFEUHLkC.eLhpzyhghu1fcfcmcr7D/4/za5J7hyy\",\"provider\":\"local\",\"status\":\"active\",\"customer_id\":\"cus_DMi1l3Jo7zKxDa\",\"phone\":null,\"last_login\":\"2018-08-06T02:40:27.788Z\",\"created_at\":\"2018-08-06T02:37:34.933Z\",\"updated_at\":\"2018-08-06T02:40:27.806Z\"}]}}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "f1a9de7f-edea-4b61-8d12-b777cd1b5db2",
+			"name": "[Service][Instance] Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-instances/{{serviceInstanceId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-instances",
+						"{{serviceInstanceId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "4f226714-695d-47a9-a59d-8e7ad4ea9b4a",
+			"name": "[Service][Instance] Get By Own",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-instances/own",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-instances",
+						"own"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "65b3f69d-343d-4aa6-80c0-dec0caa45eb2",
+			"name": "[Service][Instance] Approve",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-instances/3/approve",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-instances",
+						"3",
+						"approve"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "101b1145-a1f5-4d2f-aacb-da787d03f03d",
+			"name": "[Service][Instance] Get File",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-instances/{{serviceInstanceId}}/files",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-instances",
+						"{{serviceInstanceId}}",
+						"files"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "c52ee579-1a15-457a-81e6-e5fce93c7ac6",
+			"name": "[Service][Instance][Property] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/service-instance-properties/{{serviceInstanceId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-instance-properties",
+						"{{serviceInstanceId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "d7b236e7-b2ab-4960-8e09-614a7b2639de",
+			"name": "[Service][Category] Get All",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"category_id\": 1,\r\n  \"created_by\": 1,\r\n  \"name\": \"Service X\",\r\n  \"description\": \"description\",\r\n  \"details\": \"details\",\r\n  \"published\": true,\r\n  \"statement_descriptor\": \"statement_descriptor\",\r\n  \"trial_period_days\": 0,\r\n  \"amount\": 5.5,\r\n  \"overhead\": 0,\r\n  \"currency\": \"USD\",\r\n  \"interval\": \"month\",\r\n  \"interval_count\": 1,\r\n  \"type\": \"subscription\",\r\n  \"subscription_prorate\": true,\r\n  \"split_configuration\": null,\r\n  \"created_at\": \"2018-08-06T02:36:55.664Z\",\r\n  \"updated_at\": \"2018-08-06T02:36:55.664Z\",\r\n  \"references\": {\r\n    \"service_template_properties\": []\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/service-categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "21bc3c05-694e-483c-a0bf-7bbd0779cc02",
+			"name": "[Service][Category] Create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Tablet\",\r\n  \"description\": \"description\"\r\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/service-categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"service-categories"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "e9c61c1b-e859-4aab-ad41-fc80f68e5335",
+					"name": "[Service][Category] Create",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Tablet\",\r\n  \"description\": \"description\"\r\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/service-categories",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"service-categories"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 08:06:26 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"34-qPx7G07LYafc2UnCDvHOidV/2tU\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "{\"name\":\"Tablet\",\"description\":\"description\",\"id\":3}"
+				}
+			]
+		},
+		{
+			"_postman_id": "afafe7a6-c9d0-48cc-994d-c2f19ce0611c",
+			"name": "[Analytics] Get Summary",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/analytics/data",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"analytics",
+						"data"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "0af8f53d-92bf-47f9-846b-2b8090e4ce47",
+					"name": "[Analytics] Get Summary",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/analytics/data",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"analytics",
+								"data"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1506",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 02:52:20 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5e2-5wX6WQ22gTn7BYuX/FpQl4kFCtI\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "{\"customerStats\":{\"total\":2,\"fundsTotal\":0,\"flagged\":0,\"invited\":0,\"active\":2},\"offeringStats\":{\"totalQuote\":0,\"totalSplit\":0,\"totalOneTime\":0,\"totalSubscription\":2,\"total\":2},\"salesStats\":{\"overall\":{\"total\":1,\"activeSales\":1,\"requested\":0,\"waitingCancellation\":0,\"cancelled\":0,\"customersWithOfferings\":1,\"remainingCharges\":0},\"subscriptionStats\":{\"active\":1,\"annual\":7200,\"month\":600,\"totalCharges\":0,\"totaPaidCharges\":0,\"totalRemainingCharges\":0,\"payAnnually\":0,\"payMonthly\":1,\"payWeekly\":0,\"payDaily\":0},\"oneTimeStats\":{\"active\":0,\"allCharges\":0,\"singleApprove\":0,\"singleWaiting\":0},\"split\":{\"active\":0,\"splitTotalNum\":0,\"splitTotalAmt\":0,\"splitPaidNum\":0,\"splotPaidAmt\":0,\"splitRemainingNum\":0,\"splitRemainingAmt\":0},\"quote\":{\"active\":0,\"customTotalAmt\":0,\"customTotalPaidAmt\":0,\"customTotalRemaining\":0}},\"hasStripeKeys\":true,\"isLive\":false,\"hasChangedHeader\":false,\"totalServiceInstances\":\"1\",\"totalCustomers\":\"2\",\"totalFlaggedCustomers\":\"0\",\"totalRequestedServiceInstances\":\"0\",\"totalRunningServiceInstances\":\"1\",\"totalMissingPaymentServiceInstances\":\"0\",\"totalWaitingServiceInstances\":\"0\",\"totalChargeItems\":\"0\",\"totalWaitingCancellationServiceInstances\":\"0\",\"totalCancelledServiceInstances\":\"0\",\"totalRejectedServiceInstances\":\"0\",\"totalPaidChargeItems\":\"0\",\"totalUnpaidChargeItems\":\"0\",\"totalRefundAmount\":0,\"totalServiceInstanceCancellations\":\"0\",\"totalRefunds\":\"0\",\"totalApprovedChargeItems\":\"0\",\"totalWebhooks\":\"0\",\"totalPublishedTemplates\":\"2\",\"totalUnpublishedTemplates\":\"0\",\"totalSales\":0}"
+				}
+			]
+		},
+		{
+			"_postman_id": "9eb4785b-9583-4388-aba0-60812f83ebac",
+			"name": "[Analytics] Get Property Data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/analytics/properties/{{propertyId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"analytics",
+						"properties",
+						"{{propertyId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "76a50d62-1201-40f5-ac13-eda3abb0a7c2",
+			"name": "[Role] Get All Role Permissions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"category_id\": 2,\n    \"created_by\": 1,\n    \"name\": \"Service Name\",\n    \"description\": \"Summary\",\n    \"details\": \"<p>Details</p>\",\n    \"published\": true,\n    \"statement_descriptor\": \"Anh Le Hoang\",\n    \"trial_period_days\": 3,\n    \"amount\": 500,\n    \"currency\": \"usd\",\n    \"interval\": \"month\",\n    \"interval_count\": 1,\n    \"type\": \"subscription\",\n    \"subscription_prorate\": true,\n    \"split_configuration\": null,\n    \"created_at\": \"2018-08-06T02:36:55.664Z\",\n    \"updated_at\": \"2018-08-06T02:36:55.664Z\",\n    \"references\": {\n        \"service_template_properties\": [\n            {\n                \"id\": 1,\n                \"name\": \"large-screen\",\n                \"type\": \"checkbox\",\n                \"data\": {\n                    \"value\": true\n                },\n                \"config\": {\n                    \"pricing\": {\n                        \"value\": 100,\n                        \"operation\": \"add\"\n                    }\n                },\n                \"prop_class\": null,\n                \"prop_label\": \"Large Screen\",\n                \"prop_description\": null,\n                \"created_at\": \"2018-08-06T02:36:55.698Z\",\n                \"updated_at\": \"2018-08-06T02:36:55.698Z\",\n                \"parent_id\": 1,\n                \"private\": false,\n                \"prompt_user\": true,\n                \"required\": false\n            }\n        ],\n        \"service_categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Phone\",\n                \"description\": \"Phone\",\n                \"created_at\": \"2018-08-06T02:35:58.093Z\",\n                \"updated_at\": \"2018-08-06T02:35:58.093Z\"\n            }\n        ],\n        \"users\": [\n            {\n                \"id\": 1,\n                \"role_id\": 1,\n                \"name\": \"admin\",\n                \"email\": \"lehoanganh25991@gmail.com\",\n                \"provider\": \"local\",\n                \"status\": \"active\",\n                \"customer_id\": \"cus_DMhyUIqVytGCuO\",\n                \"phone\": null,\n                \"last_login\": \"2018-08-06T02:39:39.034Z\",\n                \"created_at\": \"2018-08-06T02:34:28.444Z\",\n                \"updated_at\": \"2018-08-06T02:42:46.331Z\"\n            }\n        ]\n    },\n    \"email\": \"hoanganh25991@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/roles/manage-permissions",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"roles",
+						"manage-permissions"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "2482cae0-54ac-4068-a1b8-441dc899fbeb",
+					"name": "[Role] Get All Role Permissions",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"category_id\": 2,\n    \"created_by\": 1,\n    \"name\": \"Service Name\",\n    \"description\": \"Summary\",\n    \"details\": \"<p>Details</p>\",\n    \"published\": true,\n    \"statement_descriptor\": \"Anh Le Hoang\",\n    \"trial_period_days\": 3,\n    \"amount\": 500,\n    \"currency\": \"usd\",\n    \"interval\": \"month\",\n    \"interval_count\": 1,\n    \"type\": \"subscription\",\n    \"subscription_prorate\": true,\n    \"split_configuration\": null,\n    \"created_at\": \"2018-08-06T02:36:55.664Z\",\n    \"updated_at\": \"2018-08-06T02:36:55.664Z\",\n    \"references\": {\n        \"service_template_properties\": [\n            {\n                \"id\": 1,\n                \"name\": \"large-screen\",\n                \"type\": \"checkbox\",\n                \"data\": {\n                    \"value\": true\n                },\n                \"config\": {\n                    \"pricing\": {\n                        \"value\": 100,\n                        \"operation\": \"add\"\n                    }\n                },\n                \"prop_class\": null,\n                \"prop_label\": \"Large Screen\",\n                \"prop_description\": null,\n                \"created_at\": \"2018-08-06T02:36:55.698Z\",\n                \"updated_at\": \"2018-08-06T02:36:55.698Z\",\n                \"parent_id\": 1,\n                \"private\": false,\n                \"prompt_user\": true,\n                \"required\": false\n            }\n        ],\n        \"service_categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Phone\",\n                \"description\": \"Phone\",\n                \"created_at\": \"2018-08-06T02:35:58.093Z\",\n                \"updated_at\": \"2018-08-06T02:35:58.093Z\"\n            }\n        ],\n        \"users\": [\n            {\n                \"id\": 1,\n                \"role_id\": 1,\n                \"name\": \"admin\",\n                \"email\": \"lehoanganh25991@gmail.com\",\n                \"provider\": \"local\",\n                \"status\": \"active\",\n                \"customer_id\": \"cus_DMhyUIqVytGCuO\",\n                \"phone\": null,\n                \"last_login\": \"2018-08-06T02:39:39.034Z\",\n                \"created_at\": \"2018-08-06T02:34:28.444Z\",\n                \"updated_at\": \"2018-08-06T02:42:46.331Z\"\n            }\n        ]\n    },\n    \"email\": \"hoanganh25991@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/roles/manage-permissions",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"roles",
+								"manage-permissions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1078",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 04:04:31 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"436-Jo80o/2u5cGsT5Mo6haFfxSrH58\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"role_id\":1,\"permission_ids\":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145]},{\"role_id\":2,\"permission_ids\":[2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,21,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,104,105,106,107,108,109,112,113,114,115,116,117,120,123,125,126,127,128,129,130,131,132,133,134,139]},{\"role_id\":3,\"permission_ids\":[4,6,7,9,10,11,17,18,21,32,37,40,43,44,45,58,60,61,63,64,66,68,70,71,72,73,74,75,82,83,84,85,86,90,94,97,113,115,116,120,123,125,128,129,130,131,132,139,146]}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "11bf7bc2-d02e-4df8-b222-b21f89cc9daa",
+			"name": "[Role] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"category_id\": 2,\n    \"created_by\": 1,\n    \"name\": \"Service Name\",\n    \"description\": \"Summary\",\n    \"details\": \"<p>Details</p>\",\n    \"published\": true,\n    \"statement_descriptor\": \"Anh Le Hoang\",\n    \"trial_period_days\": 3,\n    \"amount\": 500,\n    \"currency\": \"usd\",\n    \"interval\": \"month\",\n    \"interval_count\": 1,\n    \"type\": \"subscription\",\n    \"subscription_prorate\": true,\n    \"split_configuration\": null,\n    \"created_at\": \"2018-08-06T02:36:55.664Z\",\n    \"updated_at\": \"2018-08-06T02:36:55.664Z\",\n    \"references\": {\n        \"service_template_properties\": [\n            {\n                \"id\": 1,\n                \"name\": \"large-screen\",\n                \"type\": \"checkbox\",\n                \"data\": {\n                    \"value\": true\n                },\n                \"config\": {\n                    \"pricing\": {\n                        \"value\": 100,\n                        \"operation\": \"add\"\n                    }\n                },\n                \"prop_class\": null,\n                \"prop_label\": \"Large Screen\",\n                \"prop_description\": null,\n                \"created_at\": \"2018-08-06T02:36:55.698Z\",\n                \"updated_at\": \"2018-08-06T02:36:55.698Z\",\n                \"parent_id\": 1,\n                \"private\": false,\n                \"prompt_user\": true,\n                \"required\": false\n            }\n        ],\n        \"service_categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Phone\",\n                \"description\": \"Phone\",\n                \"created_at\": \"2018-08-06T02:35:58.093Z\",\n                \"updated_at\": \"2018-08-06T02:35:58.093Z\"\n            }\n        ],\n        \"users\": [\n            {\n                \"id\": 1,\n                \"role_id\": 1,\n                \"name\": \"admin\",\n                \"email\": \"lehoanganh25991@gmail.com\",\n                \"provider\": \"local\",\n                \"status\": \"active\",\n                \"customer_id\": \"cus_DMhyUIqVytGCuO\",\n                \"phone\": null,\n                \"last_login\": \"2018-08-06T02:39:39.034Z\",\n                \"created_at\": \"2018-08-06T02:34:28.444Z\",\n                \"updated_at\": \"2018-08-06T02:42:46.331Z\"\n            }\n        ]\n    },\n    \"email\": \"hoanganh25991@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/roles",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"roles"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "78e4abdc-c179-4b14-88b9-37eeacd77bf7",
+					"name": "[Role] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"category_id\": 2,\n    \"created_by\": 1,\n    \"name\": \"Service Name\",\n    \"description\": \"Summary\",\n    \"details\": \"<p>Details</p>\",\n    \"published\": true,\n    \"statement_descriptor\": \"Anh Le Hoang\",\n    \"trial_period_days\": 3,\n    \"amount\": 500,\n    \"currency\": \"usd\",\n    \"interval\": \"month\",\n    \"interval_count\": 1,\n    \"type\": \"subscription\",\n    \"subscription_prorate\": true,\n    \"split_configuration\": null,\n    \"created_at\": \"2018-08-06T02:36:55.664Z\",\n    \"updated_at\": \"2018-08-06T02:36:55.664Z\",\n    \"references\": {\n        \"service_template_properties\": [\n            {\n                \"id\": 1,\n                \"name\": \"large-screen\",\n                \"type\": \"checkbox\",\n                \"data\": {\n                    \"value\": true\n                },\n                \"config\": {\n                    \"pricing\": {\n                        \"value\": 100,\n                        \"operation\": \"add\"\n                    }\n                },\n                \"prop_class\": null,\n                \"prop_label\": \"Large Screen\",\n                \"prop_description\": null,\n                \"created_at\": \"2018-08-06T02:36:55.698Z\",\n                \"updated_at\": \"2018-08-06T02:36:55.698Z\",\n                \"parent_id\": 1,\n                \"private\": false,\n                \"prompt_user\": true,\n                \"required\": false\n            }\n        ],\n        \"service_categories\": [\n            {\n                \"id\": 2,\n                \"name\": \"Phone\",\n                \"description\": \"Phone\",\n                \"created_at\": \"2018-08-06T02:35:58.093Z\",\n                \"updated_at\": \"2018-08-06T02:35:58.093Z\"\n            }\n        ],\n        \"users\": [\n            {\n                \"id\": 1,\n                \"role_id\": 1,\n                \"name\": \"admin\",\n                \"email\": \"lehoanganh25991@gmail.com\",\n                \"provider\": \"local\",\n                \"status\": \"active\",\n                \"customer_id\": \"cus_DMhyUIqVytGCuO\",\n                \"phone\": null,\n                \"last_login\": \"2018-08-06T02:39:39.034Z\",\n                \"created_at\": \"2018-08-06T02:34:28.444Z\",\n                \"updated_at\": \"2018-08-06T02:42:46.331Z\"\n            }\n        ]\n    },\n    \"email\": \"hoanganh25991@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{endpoint}}/roles",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "327",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 04:04:23 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"147-OcVfncMEJOozHN3J56FHIfofAWA\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"role_name\":\"admin\",\"created_at\":\"2018-08-06T02:34:27.180Z\",\"updated_at\":\"2018-08-06T02:34:27.180Z\"},{\"id\":2,\"role_name\":\"staff\",\"created_at\":\"2018-08-06T02:34:27.180Z\",\"updated_at\":\"2018-08-06T02:34:27.180Z\"},{\"id\":3,\"role_name\":\"user\",\"created_at\":\"2018-08-06T02:34:27.180Z\",\"updated_at\":\"2018-08-06T02:34:27.180Z\"}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "db781391-e775-48ef-913b-f4fdc44978ee",
+			"name": "[Invoice] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/invoices",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"invoices"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "fa4724c6-62f7-43e6-93f0-07ae1f612a80",
+					"name": "[Invoice] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/invoices",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1739",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 04:09:53 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"6cb-jhzLtIprNKSYljQ2xjsCWTmeEfw\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"user_id\":3,\"service_instance_id\":2,\"invoice_id\":\"in_1CvzApLQ5zChKF90GqUSOURo\",\"subscription\":\"sub_DMicjuxC1o5uGA\",\"charge\":null,\"description\":null,\"amount_due\":0,\"discount\":null,\"attempt_count\":0,\"closed\":true,\"currency\":\"usd\",\"forgiven\":false,\"date\":\"1533525262\",\"next_attempt\":null,\"paid\":true,\"period_end\":\"1533525262\",\"period_start\":\"1533525262\",\"receipt_number\":null,\"starting_balance\":0,\"ending_balance\":0,\"total\":0,\"livemode\":false,\"created_at\":\"2018-08-06T03:19:16.993Z\",\"updated_at\":\"2018-08-06T03:19:16.993Z\",\"references\":{\"user_invoice_lines\":[{\"id\":1,\"invoice_id\":1,\"line_item_id\":\"sub_DMicjuxC1o5uGA\",\"amount\":0,\"currency\":\"usd\",\"description\":\"Trial period for Service Name\",\"proration\":false,\"quantity\":1,\"type\":\"subscription\",\"livemode\":false,\"created_at\":\"2018-08-06T03:19:17.049Z\",\"updated_at\":\"2018-08-06T03:19:17.049Z\"}],\"transactions\":[]}},{\"id\":2,\"user_id\":2,\"service_instance_id\":1,\"invoice_id\":\"in_1CvyeILQ5zChKF90Pdch1vuX\",\"subscription\":\"sub_DMi4xhKy36qHkU\",\"charge\":null,\"description\":null,\"amount_due\":0,\"discount\":null,\"attempt_count\":0,\"closed\":true,\"currency\":\"usd\",\"forgiven\":false,\"date\":\"1533523246\",\"next_attempt\":null,\"paid\":true,\"period_end\":\"1533523246\",\"period_start\":\"1533523246\",\"receipt_number\":null,\"starting_balance\":0,\"ending_balance\":0,\"total\":0,\"livemode\":false,\"created_at\":\"2018-08-06T03:34:30.612Z\",\"updated_at\":\"2018-08-06T03:34:30.612Z\",\"references\":{\"user_invoice_lines\":[{\"id\":2,\"invoice_id\":2,\"line_item_id\":\"sub_DMi4xhKy36qHkU\",\"amount\":0,\"currency\":\"usd\",\"description\":\"Trial period for Service Name\",\"proration\":false,\"quantity\":1,\"type\":\"subscription\",\"livemode\":false,\"created_at\":\"2018-08-06T03:34:30.670Z\",\"updated_at\":\"2018-08-06T03:34:30.670Z\"}],\"transactions\":[]}}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "84026c87-2db4-401b-a308-cb164dd6386e",
+			"name": "[Invoice] Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/invoices/upcoming/{{invoiceId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"invoices",
+						"upcoming",
+						"{{invoiceId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "c9bd7f05-70b7-4296-adc4-39b44dc72a04",
+			"name": "[Invoice] Get Upcoming",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/invoices/upcoming/{{invoiceUpcomingId}}",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"invoices",
+						"upcoming",
+						"{{invoiceUpcomingId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "e977a08f-4250-4896-8dfb-9835eab67083",
+					"name": "[Invoice] Get Upcoming",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/invoices/upcoming/2",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"invoices",
+								"upcoming",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1648",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 06:42:02 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"670-49kyysJhvIn3FmjeBmyzv1aGjAE\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "{\"tax\":null,\"date\":1533782446,\"paid\":false,\"lines\":{\"url\":\"/v1/invoices/upcoming/lines?customer=cus_DMi1l3Jo7zKxDa\",\"data\":[{\"id\":\"sub_DMi4xhKy36qHkU\",\"plan\":{\"id\":\"Service-Name-ID1-k02\",\"name\":\"Service Name\",\"tiers\":null,\"active\":true,\"amount\":600,\"object\":\"plan\",\"created\":1533523245,\"product\":\"prod_DMi4HHPjtMay86\",\"currency\":\"usd\",\"interval\":\"month\",\"livemode\":false,\"metadata\":{},\"nickname\":null,\"tiers_mode\":null,\"usage_type\":\"licensed\",\"billing_scheme\":\"per_unit\",\"interval_count\":1,\"aggregate_usage\":null,\"transform_usage\":null,\"trial_period_days\":3,\"statement_descriptor\":\"Anh Le Hoang\"},\"type\":\"subscription\",\"amount\":600,\"object\":\"line_item\",\"period\":{\"end\":1536460846,\"start\":1533782446},\"currency\":\"usd\",\"livemode\":false,\"metadata\":{},\"quantity\":1,\"proration\":false,\"description\":\"1 × Service Name (at $6.00 / month)\",\"discountable\":true,\"subscription\":null,\"subscription_item\":\"si_DMi4Av7SiydiEZ\"}],\"object\":\"list\",\"has_more\":false,\"total_count\":1},\"total\":600,\"charge\":null,\"closed\":false,\"number\":\"38D4BDA-0002\",\"object\":\"invoice\",\"billing\":\"charge_automatically\",\"currency\":\"usd\",\"customer\":\"cus_DMi1l3Jo7zKxDa\",\"discount\":null,\"due_date\":null,\"forgiven\":false,\"livemode\":false,\"metadata\":{},\"subtotal\":600,\"attempted\":false,\"amount_due\":600,\"period_end\":1533782446,\"amount_paid\":0,\"description\":null,\"tax_percent\":null,\"period_start\":1533523246,\"subscription\":\"sub_DMi4xhKy36qHkU\",\"attempt_count\":0,\"billing_reason\":\"upcoming\",\"ending_balance\":null,\"receipt_number\":null,\"application_fee\":null,\"amount_remaining\":600,\"starting_balance\":0,\"next_payment_attempt\":1533786046,\"statement_descriptor\":null,\"webhooks_delivered_at\":null}"
+				}
+			]
+		},
+		{
+			"_postman_id": "38054ecd-8b79-483a-a248-c0e7c12ba57d",
+			"name": "[Event][Log] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/event-logs",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"event-logs"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "da42172e-23d5-429e-85f5-0e71e87e59f8",
+					"name": "[Notication] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/notifications",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"notifications"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3403",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 04:13:10 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"d4b-H2rkMrhVM3r23T3ySvrm0jSzX3c\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"source_id\":null,\"message\":\"Hello there, \\r\\nYou have been invited to use the Anh Le Hoang ServiceBot System. From here you can request new services, manage your services, and see other service options. Please click the link to begin user <a href='http://178.128.21.43/invitation/c15306c18757c2930794ad7b8fdca3e9b67354cb'>registration</a>.\",\"type\":null,\"user_id\":2,\"subject\":\"ServiceBot Invitation!\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T02:37:35.029Z\"},{\"id\":2,\"source_id\":null,\"message\":\"You have gained a new user! Anh - anh.lh@tctav.com has just joined your ServiceBot system.\",\"type\":null,\"user_id\":1,\"subject\":\"New ServiceBot User\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T02:38:00.469Z\"},{\"id\":3,\"source_id\":null,\"message\":\"Your registration has been completed! You can now access your account at <a href='https://https://ebilling.com'>here</a>. Thank you for choosing Anh Le Hoang.\",\"type\":null,\"user_id\":2,\"subject\":\"ServiceBot registration complete\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T02:38:00.479Z\"},{\"id\":4,\"source_id\":null,\"message\":\"Your service Service Name has been requested for you. Please login to your account and approve the <a href='https://https://ebilling.com/my-services'>service</a>.\",\"type\":null,\"user_id\":2,\"subject\":\"ServiceBot Instance needs approval\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T02:40:46.953Z\"},{\"id\":5,\"source_id\":null,\"message\":\"Your service request for Service Name has been completed. Please click the link to complete user <a href='http://178.128.21.43/invitation/7e9571e12d4df3633dbe266a7881925b0b9ba90e'>registration</a> in order to view your services. Once registered you can access your <a href='https://https://ebilling.com/service-instance/2'>service</a>.\",\"type\":null,\"user_id\":3,\"subject\":\"ServiceBot Instance requested\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T03:14:23.602Z\"},{\"id\":6,\"source_id\":null,\"message\":\"Hello there, \\r\\nYou have been invited to use the Anh Le Hoang ServiceBot System. From here you can request new services, manage your services, and see other service options. Please click the link to begin user <a href='http://178.128.21.43/invitation/cd975eb779656fb73ca103ff76646d78be8305cc'>registration</a>.\",\"type\":null,\"user_id\":3,\"subject\":\"ServiceBot Invitation!\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T03:18:46.236Z\"},{\"id\":7,\"source_id\":null,\"message\":\"You have gained a new user! Test 2 - hoanganh25991@gmail.com has just joined your ServiceBot system.\",\"type\":null,\"user_id\":1,\"subject\":\"New ServiceBot User\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T03:19:12.569Z\"},{\"id\":8,\"source_id\":null,\"message\":\"Your registration has been completed! You can now access your account at <a href='https://https://ebilling.com'>here</a>. Thank you for choosing Anh Le Hoang.\",\"type\":null,\"user_id\":3,\"subject\":\"ServiceBot registration complete\",\"affected_versions\":\"*\",\"read\":false,\"email_delivered\":false,\"email_read\":false,\"created_at\":\"2018-08-06T03:19:12.570Z\"}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "3342caf7-e81c-4f5a-83fe-5af6722173f6",
+			"name": "[Notification][Tempalte] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/notification-templates",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"notification-templates"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "1589fc90-60eb-41d7-b34f-52ab295371d8",
+					"name": "[Notification][Tempalte] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/notification-templates",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"notification-templates"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "8449",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 04:14:14 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2101-h+yW3LjgqepWNNBbUp/FISbAOGM\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"name\":\"request_service_instance_admin\",\"event_name\":\"service_instance_requested_for_user\",\"message\":\"Your service [[name]] has been requested for you. Please login to your account and approve the <a href='https://[[_hostname]]/my-services'>service</a>.\",\"subject\":\"ServiceBot Instance needs approval\",\"description\":\"This notification it triggered when a service is requested by an admin on behalf of a user and the user needs to approve it\",\"model\":\"service-instance\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":2,\"name\":\"request_service_instance_user\",\"event_name\":\"service_instance_requested_by_user\",\"message\":\"Your service request for [[name]] has been completed. Please login to your account to view and access your <a href='https://[[_hostname]]/service-instance/[[id]]'>service</a>.\",\"subject\":\"ServiceBot Instance requested\",\"description\":\"This notification it triggered when a service is requested by a user\",\"model\":\"service-instance\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":3,\"name\":\"request_service_instance_new_user\",\"event_name\":\"service_instance_requested_new_user\",\"message\":\"Your service request for [[name]] has been completed. Please click the link to complete user <a href='[[url]]'>registration</a> in order to view your services. Once registered you can access your <a href='https://[[_hostname]]/service-instance/[[id]]'>service</a>.\",\"subject\":\"ServiceBot Instance requested\",\"description\":\"This notification it triggered when a service is requested by a new user. They are sent the link to complete registration\",\"model\":\"service-instance\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":4,\"name\":\"service_requires_payment_approval\",\"event_name\":\"service_instance_charge_added\",\"message\":\"There are additional charges added to your service, [[name]]. Please login to your account and approve the <a href='https://[[_hostname]]/my-services'>charges</a>.\",\"subject\":\"ServiceBot Instance has additional charges\",\"description\":\"This notification it triggered when a service has been updated with a new charge that needs approval\",\"model\":\"service-instance\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":5,\"name\":\"service_cancellation_submitted\",\"event_name\":\"service_instance_cancellation_requested\",\"message\":\"Your cancellation request for [[name]] has been submitted. You will receive another notification when it has been approved.\",\"subject\":\"ServiceBot Instance cancellation submitted\",\"description\":\"This notification it triggered when a service instance cancellation has been requested by a user\",\"model\":\"service-instance\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":6,\"name\":\"service_instance_update\",\"event_name\":\"service_instance_updated\",\"message\":\"Your Service Instance [[name]] has been updated. You can use this link to view your <a href='https://[[_hostname]]/service-instance/[[id]]'>instance details</a>.\",\"subject\":\"ServiceBot Instance updated\",\"description\":\"This notification it triggered when a service instance has been updated\",\"model\":\"service-instance\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":7,\"name\":\"instance_cancellation_approved\",\"event_name\":\"service_instance_cancellation_approved\",\"message\":\"Your cancellation request has been approved.\",\"subject\":\"ServiceBot Instance cancellation request approved\",\"description\":\"This notification it triggered when a service cancellation request has been approved\",\"model\":\"service-instance-cancellation\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":8,\"name\":\"instance_cancellation_rejected\",\"event_name\":\"service_instance_cancellation_rejected\",\"message\":\"Your cancellation request for has been rejected. For more information, contact your service provider or comment on your <a href='https://[[_hostname]]/service-instance/[[service_instance_id]]'>service</a> and we will get back to you shortly.\",\"subject\":\"ServiceBot Instance cancellation request rejected\",\"description\":\"This notification it triggered when a service cancellation request has been rejected\",\"model\":\"service-instance-cancellation\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":9,\"name\":\"password_reset\",\"event_name\":\"password_reset_request_created\",\"message\":\"Follow the following link to <a href='[[url]]'>reset your password</a>.\",\"subject\":\"ServiceBot password reset\",\"description\":\"This notification it triggered when a user requests a password reset\",\"model\":\"user\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":10,\"name\":\"invitation\",\"event_name\":\"user_invited\",\"message\":\"Hello there, \\r\\nYou have been invited to use the [[_company_name]] ServiceBot System. From here you can request new services, manage your services, and see other service options. Please click the link to begin user <a href='[[url]]'>registration</a>.\",\"subject\":\"ServiceBot Invitation!\",\"description\":\"This notification it triggered when a user is invited to they system by an admin\",\"model\":\"user\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":11,\"name\":\"registration_user\",\"event_name\":\"user_registered\",\"message\":\"Your registration has been completed! You can now access your account at <a href='https://[[_hostname]]'>here</a>. Thank you for choosing [[_company_name]].\",\"subject\":\"ServiceBot registration complete\",\"description\":\"This notification it triggered when registration has been completed\",\"model\":\"user\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":12,\"name\":\"registration_admin\",\"event_name\":\"user_registered\",\"message\":\"You have gained a new user! [[name]] - [[email]] has just joined your ServiceBot system.\",\"subject\":\"New ServiceBot User\",\"description\":\"This notification it triggered for an admin when a new user has joined the system\",\"model\":\"user\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":false,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":13,\"name\":\"user_suspension\",\"event_name\":\"user_suspended\",\"message\":\"Your ServiceBot account has been suspended. Please contact your service provider and check the state of your <a href='https://[[_hostname]]/my-services'>account</a>.\",\"subject\":\"ServiceBot Account Suspended\",\"description\":\"This notification it triggered when an account has been suspended\",\"model\":\"user\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"},{\"id\":14,\"name\":\"payment_failure\",\"event_name\":\"payment_failure\",\"message\":\"Your payment failed. Please log into your account and check your <a href='https://[[_hostname]]/billing-settings'>payment plan</a>.\",\"subject\":\"ServiceBot Payment Failure\",\"description\":\"This notification it triggered when a payment has failed to go through. It notifies the user to update their payment method\",\"model\":\"user\",\"additional_recipients\":null,\"send_email\":true,\"send_to_owner\":true,\"create_notification\":true,\"created_at\":\"2018-08-06T02:34:27.145Z\",\"updated_at\":\"2018-08-06T02:34:27.145Z\"}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "dfb9dd5f-4cfb-457c-9a34-ca04b14b8221",
+			"name": "[Notication] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/notifications",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"notifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "4be8a2f9-e716-4a96-829f-998d08e4eb0c",
+			"name": "[Webhook] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/webhooks",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"webhooks"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "8116f5ce-4ac3-4e7b-bb0c-033f1619e136",
+					"name": "[Webhook] Get All",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"disabled": false
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{endpoint}}/webhooks",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"webhooks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "186",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Aug 2018 06:47:41 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ba-/GBpG/L5fsBrkcr8QfIL08v2JDg\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "username=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "uid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "spk=pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ; Path=/",
+							"name": "Set-Cookie",
+							"description": "an HTTP cookie"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff",
+							"name": "X-Content-Type-Options",
+							"description": "The only defined value, \"nosniff\", prevents Internet Explorer from MIME-sniffing a response away from the declared content-type"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off",
+							"name": "X-DNS-Prefetch-Control",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen",
+							"name": "X-Download-Options",
+							"description": "Custom header"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block",
+							"name": "X-XSS-Protection",
+							"description": "Cross-site scripting (XSS) filter"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": false,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "pk_test_JrJ6XcNflKPUQaIN5qhnyCJQ",
+							"key": "spk"
+						},
+						{
+							"expires": "Tue Jan 19 2038 10:14:07 GMT+0700 (SE Asia Standard Time)",
+							"httpOnly": true,
+							"domain": "178.128.21.43",
+							"path": "/",
+							"secure": false,
+							"value": "s%3AVEhaQF48AiJ32xDIsszXr-WrpdYMp3_6.zA34ihswKFL37TV0hoMNUEkGu5mUW6fEERKeCW0QEBQ",
+							"key": "connect.sid"
+						}
+					],
+					"body": "[{\"id\":1,\"endpoint_url\":\"http://128.199.109.195/ebilling/index.php\",\"health\":\"OK\",\"async_lifecycle\":true,\"created_at\":\"2018-08-06T03:33:09.412Z\",\"updated_at\":\"2018-08-06T03:33:09.412Z\"}]"
+				}
+			]
+		},
+		{
+			"_postman_id": "429082e1-7652-4d29-b9d0-428fbc383158",
+			"name": "[Stripe] Get",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{endpoint}}/stripe/keys",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"stripe",
+						"keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "845e08ca-7718-4c0b-97c1-4670bd8992a3",
+			"name": "[Fund] Store",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token_id\": \"tok_1Cw47pLQ5zChKF90NVLLljgn\",\n\t\"user_id\": 5\n}"
+				},
+				"url": {
+					"raw": "{{endpoint}}/funds",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"funds"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
