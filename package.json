@@ -18,7 +18,7 @@
   "dependencies": {
     "@eservices/pluginbot": "^0.2.0",
     "@eservices/pluginbot-react": "^0.1.2",
-    "@eservices/servicebot-base-form": "0.0.4",
+    "@eservices/servicebot-base-form": "0.0.40",
     "@eservices/servicebot-billing-settings-embed": "^0.2.77",
     "@eservices/servicebot-checkout-embed": "^0.2.107",
     "async": "^2.5.0",
