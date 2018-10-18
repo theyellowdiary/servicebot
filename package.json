@@ -1,10 +1,8 @@
 {
-  "version": "0.11.50",
   "name": "@eservices/servicebot",
+  "version": "0.11.62",
   "license": "GPL-3.0",
   "scripts": {
-    "precommit": "lint-staged",
-    "format": "lint-staged",
     "start": "node ./bin/start",
     "build": "./node_modules/.bin/webpack",
     "dev-client": "./node_modules/.bin/webpack-dev-server --port 3002 --content-base public/",
@@ -20,9 +18,9 @@
   "dependencies": {
     "@eservices/pluginbot": "^0.2.0",
     "@eservices/pluginbot-react": "^0.1.2",
-    "@eservices/servicebot-base-form": "0.0.38",
-    "@eservices/servicebot-billing-settings-embed": "^0.2.75",
-    "@eservices/servicebot-checkout-embed": "^0.2.105",
+    "@eservices/servicebot-base-form": "0.0.4",
+    "@eservices/servicebot-billing-settings-embed": "^0.2.77",
+    "@eservices/servicebot-checkout-embed": "^0.2.107",
     "async": "^2.5.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
@@ -40,9 +38,9 @@
     "fetch-retry": "^1.2.1",
     "form-data": "^2.3.1",
     "glob": "^7.1.2",
+    "globalize": "^1.4.0",
     "helmet": "^3.9.0",
     "http": "0.0.0",
-    "husky": "^0.14.3",
     "immutability-helper": "^2.4.0",
     "imports-loader": "^0.7.1",
     "install": "^0.8.9",
@@ -51,7 +49,6 @@
     "knex": "^0.12.9",
     "knex-filter-loopback": "^0.1.0",
     "kubernetes-client": "^3.16.0",
-    "lint-staged": "^7.2.2",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "morgan": "^1.9.0",
@@ -65,7 +62,6 @@
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
     "pg": "^6.4.2",
-    "prettier": "^1.14.0",
     "promise-polyfill": "^6.0.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.0",
@@ -94,7 +90,6 @@
     "react-tooltip": "^3.3.1",
     "react-transition-group": "^1.2.1",
     "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.5",
     "redux-form": "^7.1.0",
     "redux-form-validators": "^2.0.1",
     "redux-logger": "^3.0.6",
@@ -108,7 +103,6 @@
     "slug": "^0.9.1",
     "stripe": "^4.25.0",
     "style-loader": "^0.13.2",
-    "svg-inline-loader": "^0.8.0",
     "swagger-jsdoc": "^1.9.7",
     "underscore": "^1.8.3",
     "wait-for-port": "0.0.2",
@@ -137,12 +131,5 @@
     "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^3.12.0",
     "webpack-dev-server": "^1.14.1"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier --write --single-quote --trailing-comma=all --print-width 120",
-      "eslint --fix",
-      "git add"
-    ]
   }
 }

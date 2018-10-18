@@ -159,7 +159,7 @@ class SystemSettingsForm extends React.Component {
                                 <div className="title">
                                     <h3>Reconfigure Stripe API Keys</h3>
                                     <p>
-                                        You can modify your Stripe keys to go from test to live, update to newer keys, or change to a different account. Retrieve your keys <a className="intext-link" href="https://dashboard.stripe.com/account/apikeys" target="_blank">from Stripe</a>. If you are changing from test to live or entering keys to a different account, you can choose to migrate data to a new Stripe account, or clear ServiceBot data and start fresh.
+                                        You can modify your Stripe keys to go from test to live, update to newer keys, or change to a different account. Retrieve your keys <a className="intext-link" href="https://dashboard.stripe.com/account/apikeys" target="_blank">from Stripe</a>. If you are changing from test to live or entering keys to a different account, you can choose to migrate data to a new Stripe account, or clear Servicebot data and start fresh.
                                     </p>
                                 </div>
                                 :
@@ -167,7 +167,7 @@ class SystemSettingsForm extends React.Component {
                                     <h3>Add Stripe API Keys</h3>
                                     <p>
                                         Copy your Standard API keys <a className="intext-link" href="https://dashboard.stripe.com/account/apikeys" target="_blank">from Stripe</a> and paste them
-                                        in the Secret key and Publishable key below. Once you enter your keys, you can import your Stripe account to your ServiceBot.
+                                        in the Secret key and Publishable key below. Once you enter your keys, you can import your Stripe account to your Servicebot.
                                     </p>
                                 </div>
                             }
@@ -185,7 +185,7 @@ class SystemSettingsForm extends React.Component {
                                                         onChange={function(){}} receiveOnChange={true} receiveValue={true}/>
                                                 {self.state.stripe_settings.secret_key &&
                                                     <Inputs defaultValue="true" hideValue={true} type="select" label="Do you want to import existing customers to the new Stripe account? This option only applies if the new keys are related to a different Stripe account or if you are switching between Test/Live mode." name="full_removal"
-                                                        options={[{"Reset ServiceBot data and connect to the new Stripe account":true},{"Keep ServiceBot data and import data to the new Stripe account":false}]} onChange={function(){}} receiveOnChange={true} receiveValue={true}/>
+                                                        options={[{"Reset Servicebot data and connect to the new Stripe account":true},{"Keep Servicebot data and import data to the new Stripe account":false}]} onChange={function(){}} receiveOnChange={true} receiveValue={true}/>
                                                 }
                                             </div>
                                             <div className="col-md-12 text-right">
@@ -203,7 +203,7 @@ class SystemSettingsForm extends React.Component {
                                         <div className="title">
                                             <h3>Connect to Stripe Webhooks</h3>
                                             <p>
-                                                Copy your ServiceBot webhook URL below and paste it as a new <a className="intext-link" href="https://dashboard.stripe.com/account/webhooks" target="_blank">Stripe endpoint</a> in your Stripe account.
+                                                Copy your Servicebot webhook URL below and paste it as a new <a className="intext-link" href="https://dashboard.stripe.com/account/webhooks" target="_blank">Stripe endpoint</a> in your Stripe account.
                                             </p>
                                             <div className="stripe-webhook">{`https://${window.location.hostname}/api/v1/stripe/webhook`}</div>
                                         </div>

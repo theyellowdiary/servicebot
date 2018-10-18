@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const stripeCurrencies = ['usd', 'aud', 'cad', 'eur', 'gbp' ];
+const stripeCurrencies = [ 'USD', 'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN', 'BAM', 'BBD', 'BDT', 'BGN', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BWP', 'BZD', 'CAD', 'CDF', 'CHF', 'CLP', 'CNY', 'COP', 'CRC', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD', 'EGP', 'ETB', 'EUR', 'FJD', 'FKP', 'GBP', 'GEL', 'GIP', 'GMD', 'GNF', 'GTQ', 'GYD', 'HKD', 'HNL', 'HRK', 'HTG', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JMD', 'JPY', 'KES', 'KGS', 'KHR', 'KMF', 'KRW', 'KYD', 'KZT', 'LAK', 'LBP', 'LKR', 'LRD', 'LSL', 'MAD', 'MDL', 'MGA', 'MKD', 'MMK', 'MNT', 'MOP', 'MRO', 'MUR', 'MVR', 'MWK', 'MXN', 'MYR', 'MZN', 'NAD', 'NGN', 'NIO', 'NOK', 'NPR', 'NZD', 'PAB', 'PEN', 'PGK', 'PHP', 'PKR', 'PLN', 'PYG', 'QAR', 'RON', 'RSD', 'RUB', 'RWF', 'SAR', 'SBD', 'SCR', 'SEK', 'SGD', 'SHP', 'SLL', 'SOS', 'SRD', 'STD', 'SVC', 'SZL', 'THB', 'TJS', 'TOP', 'TRY', 'TTD', 'TWD', 'TZS', 'UAH', 'UGX', 'UYU', 'UZS', 'VND', 'VUV', 'WST', 'XAF', 'XCD', 'XOF', 'XPF', 'YER', 'ZAR', 'ZMW' ];
 
 class SystemSettingsForm extends React.Component {
 
@@ -180,14 +180,14 @@ class SystemSettingsForm extends React.Component {
                         }
 
                         {_.indexOf(this.props.filter, 'home_hero_image') != -1 &&
-                            <div className="image-upload-box form-group-flex column">
-                                <label className="control-label">Front Page Hero Image</label>
-                                <ImageUploader name="file" elementID="front-page-image"
-                                               imageURL="/api/v1/system-options/file/front_page_image"
-                                               imageStyle="badge badge-lg" uploadButton={true}
-                                               reloadNotice="Please reload the application."
-                                />
-                            </div>
+                        <div className="image-upload-box form-group-flex column">
+                            <label className="control-label">Front Page Hero Image</label>
+                            <ImageUploader name="file" elementID="front-page-image"
+                                           imageURL="/api/v1/system-options/file/front_page_image"
+                                           imageStyle="badge badge-lg" uploadButton={true}
+                                           reloadNotice="Please reload the application."
+                            />
+                        </div>
                         }
 
                         {types.map((type) => {
@@ -199,18 +199,18 @@ class SystemSettingsForm extends React.Component {
                                                 return (
                                                     <div key={`option_${group.option}`}>
                                                         <Inputs type={group.data_type} name={group.option}
-                                                               label={group.option.replace(/_+/g, ' ')}
-                                                               colors={colorSettings} defaultValue={group.value}
-                                                               onChange={self.handleOnChange}/>
+                                                                label={group.option.replace(/_+/g, ' ')}
+                                                                colors={colorSettings} defaultValue={group.value}
+                                                                onChange={self.handleOnChange}/>
                                                     </div>
                                                 );
                                             }else {
                                                 return (
                                                     <div key={`option_${group.option}`}>
                                                         <Inputs type={group.data_type} name={group.option}
-                                                               label={group.option.replace(/_+/g, ' ')}
-                                                               defaultValue={group.value}
-                                                               onChange={self.handleOnChange}/>
+                                                                label={group.option.replace(/_+/g, ' ')}
+                                                                defaultValue={group.value}
+                                                                onChange={self.handleOnChange}/>
                                                     </div>
                                                 );
                                             }
@@ -228,15 +228,15 @@ class SystemSettingsForm extends React.Component {
                 )
             }else { // for system settings page
 
-                let tabStyle = (type) => {
-                    let tabColor = this.state.system_settings.button_primary_color.value;
-                    if(type == self.state.currentTabType){
-                        return({borderColor: tabColor});
-                    }else{
-                        return({});
-                    }
-                };
-
+                // let tabStyle = (type) => {
+                //     let tabColor = this.state.system_settings.button_primary_color.value;
+                //     if(type == self.state.currentTabType){
+                //         return({borderColor: tabColor});
+                //     }else{
+                //         return({});
+                //     }
+                // };
+                //
 
                 return (
                     <div className="row">
@@ -247,13 +247,13 @@ class SystemSettingsForm extends React.Component {
                             <div className="col-md-3">
                                 <h4 className="text-capitalize">Setting Types</h4>
                                 <ul className="tabs">
-{/*                                    <li key={`settings-type-tab-branding`} className={`tab text-capitalize ${self.state.currentTabType == 'branding' ? 'active' : ''}`}
+                                    {/*                                    <li key={`settings-type-tab-branding`} className={`tab text-capitalize ${self.state.currentTabType == 'branding' ? 'active' : ''}`}
                                         style={tabStyle('branding')}
                                         onClick={()=>{return this.handleTab('branding')}}><span>Branding</span></li>*/}
                                     {types.map((type) => {
                                         return (
                                             <li key={`settings-type-tab-${type}`} className={`tab text-capitalize ${type == self.state.currentTabType ? 'active' : ''}`}
-                                                style={tabStyle(type)}
+                                                // style={tabStyle(type)}
                                                 onClick={()=>{return this.handleTab(type)}}><span>{type}</span></li>
                                         );
                                     })}
@@ -292,7 +292,7 @@ class SystemSettingsForm extends React.Component {
                                     <div key={`setting_type_${this.state.currentTabType}`}
                                          className={`system-settings-group setting-type-${this.state.currentTabType}`}>
                                         <h4 className="system-settings-group-title text-capitalize">{this.state.currentTabType}</h4>
-                                        {group[this.state.currentTabType].map((group) => {
+                                        {group[this.state.currentTabType] && group[this.state.currentTabType].map((group) => {
                                             if (group.data_type == 'color_picker') {
                                                 return (
                                                     <div key={`option_${group.option}`}>
@@ -354,10 +354,10 @@ class SystemSettingsForm extends React.Component {
 
 let mapDispatch = function(dispatch){
     return {onUpdateSettings : () => {
-        Fetcher("/api/v1/system-options/public").then((options) => {
-            dispatch(setOptions(options));
-        })
-    }
+            Fetcher("/api/v1/system-options/public").then((options) => {
+                dispatch(setOptions(options));
+            })
+        }
     }
 }
 

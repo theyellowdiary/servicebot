@@ -95,11 +95,16 @@ ServiceInstance.prototype.deletePayPlan = async function () {
     let self = this;
     if (self.data.payment_plan.id) {
         //Remove the plan from Stripe
-        await Stripe().connection.plans.del(self.data.payment_plan.id);
+        try {
+            await Stripe().connection.plans.del(self.data.payment_plan.id);
+        }catch(e){
+            console.error("Error deleting payment plan", e);
+        }
         self.data.payment_plan = null;
         return await self.update()
     } else {
-        throw('Service is has no current payment plan!');
+        return self;
+        // throw('Service is has no current payment plan!');
     }
 };
 
@@ -418,7 +423,16 @@ ServiceInstance.prototype.unsubscribe = async function () {
         }
         if (this.data.subscription_id) {
             //Remove the subscription from Stripe
-            await Stripe().connection.subscriptions.del(this.data.subscription_id);
+            try {
+                await Stripe().connection.subscriptions.del(this.data.subscription_id);
+            }catch(e){
+                if(e.code === "resource_missing") {
+                    console.log("Missing stripe subscription to delete, continuing");
+                }else{
+                    console.error(e);
+                    throw e
+                }
+            }
         }
         this.data.subscription_id = null;
         this.data.status = "cancelled";

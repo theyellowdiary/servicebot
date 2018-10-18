@@ -7,7 +7,7 @@ import {change, Field, FieldArray, FormSection, formValueSelector, getFormValues
 import {connect} from "react-redux";
 import {iconToggleField, inputField, priceField, ServicebotBaseForm} from "@eservices/servicebot-base-form";
 import {addAlert, dismissAlert, setHasOffering} from "../../utilities/actions";
-// import ServiceBotBaseForm from "./@eservices/servicebot-base-form2.jsx";
+// import ServiceBotBaseForm from "./servicebot-base-form2.jsx";
 import Load from "../../utilities/load.jsx";
 import {numericality, required} from 'redux-form-validators'
 import {TierBillingForm} from "./tier-billing-form.jsx"
@@ -261,7 +261,18 @@ class ServiceTemplateForm extends React.Component {
     }
 
     submissionPrep(values) {
+        let currency = this.props.currency;
         //remove id's for duplicate template operation
+        values.references.tiers = values.references.tiers.map(tier => {
+            if(tier.references && tier.references.payment_structure_templates){
+                tier.references.payment_structure_templates = tier.references.payment_structure_templates.map(pay => {
+                    pay.currency = currency
+                    return pay;
+                })
+            }
+            return tier;
+        })
+
         if (this.props.params.duplicate) {
             console.log("We have a duplicate and we want to remove id");
             delete values.id;
@@ -409,6 +420,7 @@ function mapStateToProps(state) {
     return {
         alerts: state.alerts,
         company_name: state.options.company_name,
+        currency: state.options.currency && state.options.currency.value,
         fieldState: {
             "options": state.options,
             "serviceTypeValue": selector(state, `type`),

@@ -132,7 +132,7 @@
   "/users/{id}/suspend": {
     "post": {
       "summary": "Suspend a User",
-      "description": "Suspends a User which will cancel all users services in Stripe and in ServiceBot and mark the user as suspended. Users automatically become suspended if there are payment failures (like expired cards). You can also manually suspend users which will trigger a webhook which can notify your application for application access restriction.",
+      "description": "Suspends a User which will cancel all users services in Stripe and in Servicebot and mark the user as suspended. Users automatically become suspended if there are payment failures (like expired cards). You can also manually suspend users which will trigger a webhook which can notify your application for application access restriction.",
       "tags": [
         "users"
       ],
@@ -2502,7 +2502,7 @@
   "/analytics/data": {
     "get": {
       "summary": "Get Analytics Data",
-      "description": "Gets all Analytics Data from ServiceBot instance",
+      "description": "Gets all Analytics Data from Servicebot instance",
       "tags": [
         "analytics"
       ],

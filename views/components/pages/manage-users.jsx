@@ -382,8 +382,8 @@ class ManageUsers extends React.Component {
                                     <ServiceBotTableBase
                                         createItemProps={!this.props.stripe_publishable_key && {disabled : true}}
                                         createItemAction={this.props.stripe_publishable_key ? this.openInviteUserModal : () => {}}
-                                        createItemLabel={this.props.stripe_publishable_key ? "Invite user" : (<Link to="/stripe-settings" data-tip="Setup Incomplete - Click to finish">
-                                            Invite User
+                                        createItemLabel={this.props.stripe_publishable_key ? "New User" : (<Link to="/stripe-settings" data-tip="Setup Incomplete - Click to finish">
+                                            New User
                                             <ReactTooltip place="bottom" type="dark" effect="solid"/>
                                         </Link>)}
                                         rows={this.state.rows}

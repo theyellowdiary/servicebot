@@ -79,7 +79,7 @@
       },
       "client_id": {
         "type": "integer",
-        "description": "ServiceBot User ID, used for requesting a service instance for an existing User"
+        "description": "Servicebot User ID, used for requesting a service instance for an existing User"
       },
       "payment_structure_template_id": {
         "type": "integer",
@@ -104,7 +104,7 @@
       "token": {
         "type": "string",
         "format": "string",
-        "description": "ServiceBot auth token for the user requested."
+        "description": "Servicebot auth token for the user requested."
       },
       "request": {
         "type": "object",
